@@ -1,0 +1,1511 @@
+openapi: 3.1.0
+info:
+  title: Fast admin pipelines API
+  version: 0.1.0
+servers:
+- url: /api
+tags:
+- name: pipelines
+paths:
+  /pipelines/:
+    get:
+      tags:
+      - pipelines
+      summary: List pipelines
+      description: Retrieve a paginated list of pipelines with optional filters for state, search keyword, and team.
+      operationId: pipelines_list_pipelines__get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: state
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/PipelineState'
+          - type: 'null'
+          description: Filter pipelines by state (e.g., BUILDING, PAUSED).
+          title: State
+        description: Filter pipelines by state (e.g., BUILDING, PAUSED).
+      - name: search
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Search term to filter pipelines by name or description.
+          title: Search
+        description: Search term to filter pipelines by name or description.
+      - name: team_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          description: Filter pipelines by the ID of the team they belong to.
+          title: Team Id
+        description: Filter pipelines by the ID of the team they belong to.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Size
+      responses:
+        '200':
+          description: A paginated list of pipelines
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page_PipelineList_'
+        '403':
+          description: Access prohibited
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+              schema:
+                $ref: '#/components/schemas/ResponseModel403'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - pipelines
+      summary: Create a new pipeline
+      description: Register a new pipeline in the system, requires write permissions on the team.
+      operationId: pipelines_register_pipelines__post
+      security:
+      - OAuth2PasswordBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PipelineCreate'
+      responses:
+        '201':
+          description: The created pipeline
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineRead'
+        '403':
+          description: Access prohibited
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+              schema:
+                $ref: '#/components/schemas/ResponseModel403'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pipelines/count-status:
+    get:
+      tags:
+      - pipelines
+      summary: Count pipelines by status
+      description: Return the number of pipelines grouped by their state in the current environment.
+      operationId: pipelines_count_status_pipelines_count_status_get
+      responses:
+        '200':
+          description: The number of pipelines grouped by their state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelinesStatusCounter'
+        '403':
+          description: Access prohibited
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel403'
+              example:
+                detail: Unauthorized.
+      security:
+      - OAuth2PasswordBearer: []
+  /pipelines/{pipeline_id}:
+    patch:
+      tags:
+      - pipelines
+      summary: Update a pipeline
+      description: Update properties of an existing pipeline, requires write permission on the pipeline.
+      operationId: pipelines_update_pipelines__pipeline_id__patch
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: UUID of the pipeline to update
+          title: Pipeline Id
+        description: UUID of the pipeline to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PipelineUpdate'
+      responses:
+        '200':
+          description: The updated pipeline
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineRead'
+        '403':
+          description: Access prohibited
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+              schema:
+                $ref: '#/components/schemas/ResponseModel403'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - pipelines
+      summary: Delete a pipeline
+      description: Delete the specified pipeline, requires delete permission.
+      operationId: pipelines_delete_pipelines__pipeline_id__delete
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: UUID of the pipeline to delete
+          title: Pipeline Id
+        description: UUID of the pipeline to delete
+      responses:
+        '204':
+          description: No content
+        '403':
+          description: Access prohibited
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+              schema:
+                $ref: '#/components/schemas/ResponseModel403'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - pipelines
+      summary: Get pipeline details
+      description: Retrieve detailed information of a pipeline by its ID.
+      operationId: pipelines_get_pipelines__pipeline_id__get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: UUID of the pipeline to get
+          title: Pipeline Id
+        description: UUID of the pipeline to get
+      responses:
+        '200':
+          description: The pipeline details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineRead'
+        '403':
+          description: Access prohibited
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+              schema:
+                $ref: '#/components/schemas/ResponseModel403'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pipelines/{pipeline_id}/start:
+    post:
+      tags:
+      - pipelines
+      summary: Start pipeline execution
+      description: Start the pipeline's worker process, requires write permission on the pipeline's team.
+      operationId: pipelines_start_pipelines__pipeline_id__start_post
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: UUID of the pipeline to start
+          title: Pipeline Id
+        description: UUID of the pipeline to start
+      responses:
+        '200':
+          description: The updated pipeline state (BUILDING)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineState'
+        '403':
+          description: Access prohibited
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+              schema:
+                $ref: '#/components/schemas/ResponseModel403'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pipelines/{pipeline_id}/pause:
+    post:
+      tags:
+      - pipelines
+      summary: Pause pipeline execution
+      description: Pause the running pipeline, requires access permission.
+      operationId: pipelines_pause_pipelines__pipeline_id__pause_post
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: UUID of the pipeline to pause
+          title: Pipeline Id
+        description: UUID of the pipeline to pause
+      responses:
+        '200':
+          description: The updated pipeline state (PAUSED)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineState'
+        '403':
+          description: Access prohibited
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+              schema:
+                $ref: '#/components/schemas/ResponseModel403'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pipelines/{pipeline_id}/logs:
+    get:
+      tags:
+      - pipelines
+      summary: Get pipeline logs
+      description: Retrieve logs of a pipeline execution.
+      operationId: pipelines_logs_pipelines__pipeline_id__logs_get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: UUID of the pipeline to get logs for
+          title: Pipeline Id
+        description: UUID of the pipeline to get logs for
+      responses:
+        '200':
+          description: The pipeline logs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineLogs'
+        '403':
+          description: Access prohibited
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+              schema:
+                $ref: '#/components/schemas/ResponseModel403'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pipelines/{pipeline_id}/status:
+    get:
+      tags:
+      - pipelines
+      summary: Get pipeline status
+      description: Get the current status of the pipeline, refreshing state from worker logs.
+      operationId: pipelines_status_pipelines__pipeline_id__status_get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: UUID of the pipeline to get status for
+          title: Pipeline Id
+        description: UUID of the pipeline to get status for
+      responses:
+        '200':
+          description: The pipeline status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineRead'
+        '403':
+          description: Access prohibited
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+              schema:
+                $ref: '#/components/schemas/ResponseModel403'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pipelines/{pipeline_id}/configuration:
+    get:
+      tags:
+      - pipelines
+      summary: Export pipeline configuration
+      description: Export the JSON configuration of the pipeline.
+      operationId: pipelines_export_config_pipelines__pipeline_id__configuration_get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: UUID of the pipeline to export config for
+          title: Pipeline Id
+        description: UUID of the pipeline to export config for
+      responses:
+        '200':
+          description: The pipeline configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineConfigAsSerializer-Output'
+        '403':
+          description: Access prohibited
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+              schema:
+                $ref: '#/components/schemas/ResponseModel403'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - pipelines
+      summary: Import pipeline configuration
+      description: Update pipeline configuration by importing a new JSON config,requires write permission.
+      operationId: pipelines_import_config_pipelines__pipeline_id__configuration_post
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: pipeline_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: UUID of the pipeline to import config for
+          title: Pipeline Id
+        description: UUID of the pipeline to import config for
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PipelineConfigAsSerializer-Input'
+      responses:
+        '200':
+          description: The imported pipeline configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineConfigAsSerializer-Output'
+        '403':
+          description: Access prohibited
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+              schema:
+                $ref: '#/components/schemas/ResponseModel403'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pipelines/status/all-non-draft:
+    get:
+      tags:
+      - pipelines
+      summary: List status of all non-draft pipelines
+      description: Retrieve a paginated list of all pipelines that are not in DRAFT state. Supports filtering by state (excluding DRAFT by default), team, and search. Returns pipeline status and summary information.
+      operationId: pipelines_status_all_non_draft_pipelines_status_all_non_draft_get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: state
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/PipelineState'
+          - type: 'null'
+          description: Filter pipelines by state (e.g., BUILDING, PAUSED, LIVE, ERROR). If omitted, returns all non-draft pipelines.
+          title: State
+        description: Filter pipelines by state (e.g., BUILDING, PAUSED, LIVE, ERROR). If omitted, returns all non-draft pipelines.
+      - name: search
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Search term to filter pipelines by name or description.
+          title: Search
+        description: Search term to filter pipelines by name or description.
+      - name: team_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          description: Filter pipelines by the ID of the team they belong to.
+          title: Team Id
+        description: Filter pipelines by the ID of the team they belong to.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Size
+      responses:
+        '200':
+          description: A paginated list of non-draft pipelines with their status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page_PipelineStateList_'
+        '403':
+          description: Access prohibited
+          content:
+            application/json:
+              example:
+                detail: Unauthorized.
+              schema:
+                $ref: '#/components/schemas/ResponseModel403'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    PipelineLogs:
+      properties:
+        uuid:
+          type: string
+          title: Uuid
+          description: UUID of the pipeline run or worker
+        status:
+          type: string
+          enum:
+          - Running
+          - NotFound
+          - Pending
+          - Succeeded
+          - Failed
+          - Unknown
+          title: Status
+          description: Status of the current pipeline run
+        count_errors:
+          type: string
+          title: Count Errors
+          description: Number of errors encountered during run
+          example: '3'
+        logs:
+          type: string
+          title: Logs
+          description: Logs produced by the pipeline worker
+      type: object
+      required:
+      - uuid
+      - status
+      - count_errors
+      - logs
+      title: PipelineLogs
+      description: Status and logs for a pipeline worker.
+    PipelineState:
+      type: string
+      enum:
+      - draft
+      - building
+      - paused
+      - error
+      - live
+      title: PipelineState
+      description: Handle pipeline states.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    StringifyFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: stringifykey
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/KeysConfiguration'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: StringifyFunctionConfiguration
+      description: Stringify config.
+    HashFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: hash
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/HashConfig'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: HashFunctionConfiguration
+      description: Hash config.
+    EmptyFunctionConfiguration:
+      properties:
+        function_type:
+          type: 'null'
+          title: Function Type
+        function_config:
+          type: 'null'
+          title: Function Config
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: EmptyFunctionConfiguration
+      description: Empty function config.
+    KeyMoverConfig:
+      properties:
+        key:
+          type: string
+          title: Key
+        key_path:
+          type: string
+          title: Key Path
+      type: object
+      required:
+      - key
+      - key_path
+      title: KeyMoverConfig
+      description: Config for KeyMover function.
+    EncryptFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: encrypt
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/EncryptConfiguration'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: EncryptFunctionConfiguration
+      description: Encrypt function config.
+    PipelineCreate:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the pipeline
+          examples:
+          - data-ingest-pipeline
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+          description: ID of the team that owns the pipeline
+        state:
+          $ref: '#/components/schemas/PipelineState'
+          description: Current state of the pipeline
+        json_configuration:
+          $ref: '#/components/schemas/PipelineConfigAsSerializer-Input'
+          description: Complete configuration of the pipeline
+      type: object
+      required:
+      - name
+      - team_id
+      - state
+      - json_configuration
+      title: PipelineCreate
+      description: Request model for creating a new pipeline.
+    PipelineList:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the pipeline
+        source_name:
+          type: string
+          title: Source Name
+          description: Source connector name
+        source_type:
+          anyOf:
+          - $ref: '#/components/schemas/ConnectorType'
+          - type: 'null'
+          description: Source connector type
+        transform:
+          type: integer
+          title: Transform
+          description: Number of SMT transformations applied
+        target_name:
+          type: string
+          title: Target Name
+          description: Target connector name
+        target_type:
+          anyOf:
+          - $ref: '#/components/schemas/ConnectorType'
+          - type: 'null'
+          description: Target connector type
+        name:
+          type: string
+          title: Name
+          description: Name of the pipeline
+        state:
+          $ref: '#/components/schemas/PipelineState'
+          description: Current state of the pipeline
+        owner:
+          type: string
+          title: Owner
+          description: Name of the pipeline's owner
+      type: object
+      required:
+      - id
+      - source_name
+      - transform
+      - target_name
+      - name
+      - state
+      - owner
+      title: PipelineList
+      description: Lightweight model used to list pipelines.
+    PipelineStateList:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the pipeline
+        name:
+          type: string
+          title: Name
+          description: Name of the pipeline
+        state:
+          $ref: '#/components/schemas/PipelineState'
+          description: Current state of the pipeline
+      type: object
+      required:
+      - id
+      - name
+      - state
+      title: PipelineStateList
+      description: Lightweight model used to list pipelines.
+    KeysConfiguration:
+      properties:
+        keys:
+          items:
+            type: string
+          type: array
+          title: Keys
+      type: object
+      required:
+      - keys
+      title: KeysConfiguration
+      description: Keys config.
+    SplitterFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: splitter
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/SplitterConfiguration'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: SplitterFunctionConfiguration
+      description: Splitter config.
+    FilteringConfiguration:
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUAL
+          - IN
+          - NOT_EQUAL
+          - NOT_IN
+          title: Operator
+        key:
+          type: string
+          title: Key
+        value:
+          type: string
+          title: Value
+      type: object
+      required:
+      - operator
+      - key
+      - value
+      title: FilteringConfiguration
+      description: Filtering config.
+    PipelineConfigAsSerializer-Output:
+      properties:
+        source_name:
+          type: string
+          title: Source Name
+          description: Name of the source connector
+          example: postgres-source
+        source_type:
+          anyOf:
+          - $ref: '#/components/schemas/ConnectorType'
+          - type: 'null'
+          description: Type of the source connector
+        source_config:
+          additionalProperties:
+            anyOf:
+            - type: string
+            - type: integer
+            - type: 'null'
+          type: object
+          title: Source Config
+          description: Configuration parameters for the source connector
+        target_name:
+          type: string
+          title: Target Name
+          description: Name of the target connector
+          example: kafka-target
+        target_type:
+          anyOf:
+          - $ref: '#/components/schemas/ConnectorType'
+          - type: 'null'
+          description: Type of the target connector
+        target_config:
+          additionalProperties:
+            anyOf:
+            - type: string
+            - type: integer
+            - type: 'null'
+          type: object
+          title: Target Config
+          description: Configuration parameters for the target connector
+        smt_name:
+          type: string
+          title: Smt Name
+          description: Name of the SMT (Simple Message Transform) applied
+        smt_config:
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/MapperFunctionConfiguration-Output'
+            - $ref: '#/components/schemas/EmptyFunctionConfiguration'
+            - $ref: '#/components/schemas/FlattenerFunctionConfiguration'
+            - $ref: '#/components/schemas/SplitterFunctionConfiguration'
+            - $ref: '#/components/schemas/StringifyListFunctionConfiguration'
+            - $ref: '#/components/schemas/StringifyFunctionConfiguration'
+            - $ref: '#/components/schemas/UnenvelopeFunctionConfiguration'
+            - $ref: '#/components/schemas/KeyFilterFunctionConfiguration'
+            - $ref: '#/components/schemas/KeyMoverFunctionConfiguration'
+            - $ref: '#/components/schemas/DictMoverFunctionConfiguration'
+            - $ref: '#/components/schemas/KeyNormalizerFunctionConfiguration'
+            - $ref: '#/components/schemas/HashFunctionConfiguration'
+            - $ref: '#/components/schemas/EncryptFunctionConfiguration'
+            - $ref: '#/components/schemas/FilteringFunctionConfiguration'
+          type: array
+          title: Smt Config
+          description: List of transformation configurations
+        draft_step:
+          type: string
+          title: Draft Step
+          description: Current draft step of the pipeline (e.g., 'config', 'review')
+      type: object
+      required:
+      - source_name
+      - source_type
+      - source_config
+      - target_name
+      - target_type
+      - target_config
+      - smt_name
+      - smt_config
+      - draft_step
+      title: PipelineConfigAsSerializer
+      description: 'Configuration structure for a pipeline.
+
+
+        Describes connectors and transformation details.'
+    Page_PipelineList_:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PipelineList'
+          type: array
+          title: Items
+        total:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Total
+        page:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Page
+        size:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Size
+        pages:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Pages
+      type: object
+      required:
+      - items
+      - total
+      - page
+      - size
+      title: Page[PipelineList]
+    KeyMoverFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: keymover
+          title: Function Type
+        function_config:
+          items:
+            $ref: '#/components/schemas/KeyMoverConfig'
+          type: array
+          title: Function Config
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: KeyMoverFunctionConfiguration
+      description: Key mover config.
+    PipelineUpdate:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: Updated name of the pipeline
+        team_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Team Id
+          description: Updated team ID
+        state:
+          anyOf:
+          - $ref: '#/components/schemas/PipelineState'
+          - type: 'null'
+          description: Updated pipeline state
+        json_configuration:
+          anyOf:
+          - $ref: '#/components/schemas/PipelineConfigAsSerializer-Input'
+          - type: 'null'
+          description: Updated configuration
+      type: object
+      title: PipelineUpdate
+      description: Request model for updating an existing pipeline.
+    PipelineRead:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the pipeline
+        state:
+          $ref: '#/components/schemas/PipelineState'
+          description: Current state of the pipeline
+        json_configuration:
+          $ref: '#/components/schemas/PipelineConfigAsSerializer-Output'
+          description: Pipeline configuration structure
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the pipeline
+        team_name:
+          type: string
+          title: Team Name
+          description: Name of the team that owns the pipeline
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+          description: UUID of the owning team
+      type: object
+      required:
+      - name
+      - state
+      - json_configuration
+      - id
+      - team_name
+      - team_id
+      title: PipelineRead
+      description: Response model for reading a pipeline's details.
+    MapperFunctionConfiguration-Input:
+      properties:
+        function_type:
+          type: string
+          const: mapper
+          title: Function Type
+        function_config:
+          items:
+            $ref: '#/components/schemas/MapperTableConfig'
+          type: array
+          title: Function Config
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: MapperFunctionConfiguration
+      description: Mapper config.
+    FilteringFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: filtering
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/FilteringConfiguration'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: FilteringFunctionConfiguration
+      description: Filtering function config.
+    KeyNormalizerFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: sanitizekey
+          title: Function Type
+        function_config:
+          type: 'null'
+          title: Function Config
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: KeyNormalizerFunctionConfiguration
+      description: Sanitize function config.
+    HashConfig:
+      properties:
+        hash_type:
+          type: string
+          enum:
+          - MD5
+          - SHA-256
+          - SHA-512
+          title: Hash Type
+        paths:
+          items:
+            type: string
+          type: array
+          title: Paths
+      type: object
+      required:
+      - hash_type
+      - paths
+      title: HashConfig
+      description: Hash key config.
+    StringifyListFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: stringifylist
+          title: Function Type
+        function_config:
+          type: 'null'
+          title: Function Config
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: StringifyListFunctionConfiguration
+      description: Stringify list function config.
+    ResponseModel403:
+      properties:
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: ResponseModel403
+      description: Response model for 403 Forbidden.
+    Page_PipelineStateList_:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PipelineStateList'
+          type: array
+          title: Items
+        total:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Total
+        page:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Page
+        size:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Size
+        pages:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Pages
+      type: object
+      required:
+      - items
+      - total
+      - page
+      - size
+      title: Page[PipelineStateList]
+    PipelinesStatusCounter:
+      properties:
+        all:
+          type: integer
+          title: All
+          description: Total number of pipelines
+          default: 0
+        draft:
+          type: integer
+          title: Draft
+          description: Number of pipelines in draft state
+          default: 0
+        live:
+          type: integer
+          title: Live
+          description: Number of active (live) pipelines
+          default: 0
+        paused:
+          type: integer
+          title: Paused
+          description: Number of paused pipelines
+          default: 0
+        error:
+          type: integer
+          title: Error
+          description: Number of pipelines with errors
+          default: 0
+        building:
+          type: integer
+          title: Building
+          description: Number of pipelines being built
+          default: 0
+      type: object
+      title: PipelinesStatusCounter
+      description: Counts of pipelines by their status.
+    KeyConfiguration:
+      properties:
+        key:
+          type: string
+          title: Key
+      type: object
+      required:
+      - key
+      title: KeyConfiguration
+      description: Key config.
+    FlattenerFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: flattener
+          title: Function Type
+        function_config:
+          type: 'null'
+          title: Function Config
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: FlattenerFunctionConfiguration
+      description: Flattener function config.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    DictMoverFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: dictmover
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/KeysConfiguration'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: DictMoverFunctionConfiguration
+      description: Dict mover config.
+    MapperTableConfig:
+      properties:
+        table_name:
+          type: string
+          title: Table Name
+        fields:
+          items:
+            $ref: '#/components/schemas/MapperColumnConfig'
+          type: array
+          title: Fields
+      type: object
+      required:
+      - table_name
+      - fields
+      title: MapperTableConfig
+      description: Mapper config.
+    MapperColumnConfig:
+      properties:
+        key:
+          type: string
+          title: Key
+        path:
+          type: string
+          title: Path
+          default: ''
+        static:
+          type: string
+          title: Static
+          default: ''
+        nullable:
+          type: boolean
+          title: Nullable
+          default: true
+      type: object
+      required:
+      - key
+      title: MapperColumnConfig
+      description: Mapper config part.
+    EncryptConfiguration:
+      properties:
+        encrypt_key:
+          type: string
+          title: Encrypt Key
+        paths:
+          items:
+            type: string
+          type: array
+          title: Paths
+      type: object
+      required:
+      - encrypt_key
+      - paths
+      title: EncryptConfiguration
+      description: Encrypt config.
+    ConnectorType:
+      type: string
+      enum:
+      - job_smt
+      - kafka_source
+      - oracle_target
+      title: ConnectorType
+      description: Define the connector type.
+    UnenvelopeFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: unenvelope
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/KeyConfiguration'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: UnenvelopeFunctionConfiguration
+      description: Unenvelope config.
+    SplitterConfiguration:
+      properties:
+        root_table_name:
+          type: string
+          title: Root Table Name
+          default: root
+        popsink_pk:
+          type: string
+          title: Popsink Pk
+        pk:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Pk
+        abbreviate_len:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Abbreviate Len
+      type: object
+      title: SplitterConfiguration
+      description: Splitter config.
+    PipelineConfigAsSerializer-Input:
+      properties:
+        source_name:
+          type: string
+          title: Source Name
+          description: Name of the source connector
+          example: postgres-source
+        source_type:
+          anyOf:
+          - $ref: '#/components/schemas/ConnectorType'
+          - type: 'null'
+          description: Type of the source connector
+        source_config:
+          additionalProperties:
+            anyOf:
+            - type: string
+            - type: integer
+            - type: 'null'
+          type: object
+          title: Source Config
+          description: Configuration parameters for the source connector
+        target_name:
+          type: string
+          title: Target Name
+          description: Name of the target connector
+          example: kafka-target
+        target_type:
+          anyOf:
+          - $ref: '#/components/schemas/ConnectorType'
+          - type: 'null'
+          description: Type of the target connector
+        target_config:
+          additionalProperties:
+            anyOf:
+            - type: string
+            - type: integer
+            - type: 'null'
+          type: object
+          title: Target Config
+          description: Configuration parameters for the target connector
+        smt_name:
+          type: string
+          title: Smt Name
+          description: Name of the SMT (Simple Message Transform) applied
+        smt_config:
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/MapperFunctionConfiguration-Input'
+            - $ref: '#/components/schemas/EmptyFunctionConfiguration'
+            - $ref: '#/components/schemas/FlattenerFunctionConfiguration'
+            - $ref: '#/components/schemas/SplitterFunctionConfiguration'
+            - $ref: '#/components/schemas/StringifyListFunctionConfiguration'
+            - $ref: '#/components/schemas/StringifyFunctionConfiguration'
+            - $ref: '#/components/schemas/UnenvelopeFunctionConfiguration'
+            - $ref: '#/components/schemas/KeyFilterFunctionConfiguration'
+            - $ref: '#/components/schemas/KeyMoverFunctionConfiguration'
+            - $ref: '#/components/schemas/DictMoverFunctionConfiguration'
+            - $ref: '#/components/schemas/KeyNormalizerFunctionConfiguration'
+            - $ref: '#/components/schemas/HashFunctionConfiguration'
+            - $ref: '#/components/schemas/EncryptFunctionConfiguration'
+            - $ref: '#/components/schemas/FilteringFunctionConfiguration'
+          type: array
+          title: Smt Config
+          description: List of transformation configurations
+        draft_step:
+          type: string
+          title: Draft Step
+          description: Current draft step of the pipeline (e.g., 'config', 'review')
+      type: object
+      required:
+      - source_name
+      - source_type
+      - source_config
+      - target_name
+      - target_type
+      - target_config
+      - smt_name
+      - smt_config
+      - draft_step
+      title: PipelineConfigAsSerializer
+      description: 'Configuration structure for a pipeline.
+
+
+        Describes connectors and transformation details.'
+    KeyFilterFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: keyfilter
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/KeysConfiguration'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: KeyFilterFunctionConfiguration
+      description: Key filter config.
+    MapperFunctionConfiguration-Output:
+      properties:
+        function_type:
+          type: string
+          const: mapper
+          title: Function Type
+        function_config:
+          items:
+            $ref: '#/components/schemas/MapperTableConfig'
+          type: array
+          title: Function Config
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: MapperFunctionConfiguration
+      description: Mapper config.
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: auth/jwt/login

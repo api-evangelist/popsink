@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: Fast admin healthchecks API
+  version: 0.1.0
+servers:
+- url: /api
+tags:
+- name: healthchecks
+paths:
+  /healthchecks:
+    get:
+      tags:
+      - healthchecks
+      summary: Healthchecks:Api
+      description: Get the status of the api.
+      operationId: healthchecks_api_healthchecks_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheck'
+  /healthchecks/k8s:
+    get:
+      tags:
+      - healthchecks
+      summary: Healthchecks:K8S
+      description: Get the status of kubernetes.
+      operationId: healthchecks_k8s_healthchecks_k8s_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheck'
+  /healthchecks/db:
+    get:
+      tags:
+      - healthchecks
+      summary: Healthchecks:Db
+      description: Get the status of the database.
+      operationId: healthchecks_db_healthchecks_db_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheck'
+  /healthchecks/debug:
+    get:
+      tags:
+      - healthchecks
+      summary: Healthchecks:Debug
+      description: Display debugs infos.
+      operationId: healthchecks_debug_healthchecks_debug_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Debug'
+components:
+  schemas:
+    HealthCheck:
+      properties:
+        status:
+          type: string
+          title: Status
+      type: object
+      required:
+      - status
+      title: HealthCheck
+      description: Healthcheck pydantic model.
+    Debug:
+      properties:
+        header:
+          type: object
+          title: Header
+      type: object
+      required:
+      - header
+      title: Debug
+      description: Debug model.
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: auth/jwt/login

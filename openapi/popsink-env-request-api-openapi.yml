@@ -1,0 +1,604 @@
+openapi: 3.1.0
+info:
+  title: Fast admin env_request API
+  version: 0.1.0
+servers:
+- url: /api
+tags:
+- name: env_request
+paths:
+  /envs/requests/me:
+    get:
+      tags:
+      - env_request
+      summary: List user env requests with details
+      description: List all requests addressed to the current user with user and env details.
+      operationId: env_request_list_user_requests_envs_requests_me_get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Size
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page_EnvRequestListAsMember_'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /envs/{env_id}/requests:
+    get:
+      tags:
+      - env_request
+      summary: List env requests
+      description: List all requests for a specific environment. Only env admins can access this.
+      operationId: env_request_list_envs__env_id__requests_get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: env_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Env Id
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Size
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page_EnvRequestListAsAdmin_'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - env_request
+      summary: Register an env request
+      description: Register a new env request. Only env admins can send requests.
+      operationId: env_request_register_envs__env_id__requests_post
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: env_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Env Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnvRequestCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvRequestRead'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /envs/requests/{request_id}:
+    get:
+      tags:
+      - env_request
+      summary: Get env request
+      description: Get a specific env request by ID.
+      operationId: env_request_get_envs_requests__request_id__get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: request_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Request Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvRequestRead'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - env_request
+      summary: Update env request
+      description: Update an env request (accept/decline).
+      operationId: env_request_update_envs_requests__request_id__patch
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: request_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Request Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnvRequestUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvRequestRead'
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - env_request
+      summary: Delete env request
+      description: Delete an env request.
+      operationId: env_request_delete_envs_requests__request_id__delete
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: request_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Request Id
+      responses:
+        '204':
+          description: Successful Response
+        '404':
+          description: Not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    EnvRequestCreate:
+      properties:
+        env_id:
+          type: string
+          format: uuid
+          title: Env Id
+          description: ID of the environment to which the user is being invited
+          examples:
+          - e2a1d6c7-d50e-4b97-945c-cd842a4e674f
+        from_user_id:
+          type: string
+          format: uuid
+          title: From User Id
+          description: ID of the user who sends the invitation
+          examples:
+          - 1a5d50a9-b3de-4c63-8d46-1b7ebdee179b
+        to_user_email:
+          type: string
+          title: To User Email
+          description: Email of the user who receives the invitation
+          examples:
+          - user@example.com
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/RequestStatus'
+          - type: 'null'
+          description: Current status of the request
+          default: PENDING
+          examples:
+          - PENDING
+        admin:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Admin
+          description: Whether the invited user will be admin if they accept
+          default: false
+          examples:
+          - false
+      type: object
+      required:
+      - env_id
+      - from_user_id
+      - to_user_email
+      title: EnvRequestCreate
+      description: Request model for creating an env invitation request.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    EnvRequestListAsMember:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: ID of the env request
+        env_id:
+          type: string
+          format: uuid
+          title: Env Id
+          description: ID of the target environment
+        env_name:
+          type: string
+          title: Env Name
+          description: Name of the target environment
+        from_user_id:
+          type: string
+          format: uuid
+          title: From User Id
+          description: ID of the user who created the request
+        from_user_email:
+          type: string
+          title: From User Email
+          description: Email of the user who created the request
+        to_user_id:
+          type: string
+          format: uuid
+          title: To User Id
+          description: ID of the invited user
+        to_user_email:
+          type: string
+          title: To User Email
+          description: Email of the invited user
+        status:
+          $ref: '#/components/schemas/RequestStatus'
+          description: Current request status
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the invited user is granted admin rights
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+          description: Creation timestamp
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+          description: Last update timestamp
+      type: object
+      required:
+      - id
+      - env_id
+      - env_name
+      - from_user_id
+      - from_user_email
+      - to_user_id
+      - to_user_email
+      - status
+      - admin
+      title: EnvRequestListAsMember
+      description: Response model for listing env requests (member view with details).
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    EnvRequestRead:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: ID of the env request
+        env_id:
+          type: string
+          format: uuid
+          title: Env Id
+          description: ID of the target environment
+        from_user_id:
+          type: string
+          format: uuid
+          title: From User Id
+          description: ID of the user who created the request
+        to_user_id:
+          type: string
+          format: uuid
+          title: To User Id
+          description: ID of the invited user
+        status:
+          $ref: '#/components/schemas/RequestStatus'
+          description: Current request status
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the invited user is granted admin rights
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+          description: Creation timestamp
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+          description: Last update timestamp
+      type: object
+      required:
+      - id
+      - env_id
+      - from_user_id
+      - to_user_id
+      - status
+      - admin
+      title: EnvRequestRead
+      description: Response model for reading a single env request.
+    EnvRequestListAsAdmin:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: ID of the env request
+        env_id:
+          type: string
+          format: uuid
+          title: Env Id
+          description: ID of the target environment
+        from_user_id:
+          type: string
+          format: uuid
+          title: From User Id
+          description: ID of the user who created the request
+        to_user_id:
+          type: string
+          format: uuid
+          title: To User Id
+          description: ID of the invited user
+        to_user_email:
+          type: string
+          title: To User Email
+          description: Email of the invited user
+          examples:
+          - user@example.com
+        status:
+          $ref: '#/components/schemas/RequestStatus'
+          description: Current request status
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the invited user is granted admin rights
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+          description: Creation timestamp
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+          description: Last update timestamp
+      type: object
+      required:
+      - id
+      - env_id
+      - from_user_id
+      - to_user_id
+      - to_user_email
+      - status
+      - admin
+      title: EnvRequestListAsAdmin
+      description: Response model for listing env requests (admin view).
+    Page_EnvRequestListAsMember_:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/EnvRequestListAsMember'
+          type: array
+          title: Items
+        total:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Total
+        page:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Page
+        size:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Size
+        pages:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Pages
+      type: object
+      required:
+      - items
+      - total
+      - page
+      - size
+      title: Page[EnvRequestListAsMember]
+    EnvRequestUpdate:
+      properties:
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/RequestStatus'
+          - type: 'null'
+          description: New status for the request
+          examples:
+          - ACCEPTED
+          - DECLINED
+        admin:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Admin
+          description: Whether the invited user will be admin if they accept
+          examples:
+          - true
+      type: object
+      title: EnvRequestUpdate
+      description: Request model for updating an env request.
+    RequestStatus:
+      type: string
+      enum:
+      - PENDING
+      - ACCEPTED
+      - DECLINED
+      title: RequestStatus
+      description: Status for access requests (team, env, etc.).
+    Page_EnvRequestListAsAdmin_:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/EnvRequestListAsAdmin'
+          type: array
+          title: Items
+        total:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Total
+        page:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Page
+        size:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Size
+        pages:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Pages
+      type: object
+      required:
+      - items
+      - total
+      - page
+      - size
+      title: Page[EnvRequestListAsAdmin]
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: auth/jwt/login

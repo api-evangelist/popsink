@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  title: Fast admin schemas API
+  version: 0.1.0
+servers:
+- url: /api
+tags:
+- name: schemas
+paths:
+  /schemas/{subject}:
+    post:
+      tags:
+      - schemas
+      summary: Schemas:Register
+      description: Register a schema.
+      operationId: schemas_register_schemas__subject__post
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: subject
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Subject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchemaCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaRead'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    SchemaRead:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the schema.
+        version:
+          type: integer
+          title: Version
+          description: Version of the schema.
+      type: object
+      required:
+      - id
+      - version
+      title: SchemaRead
+      description: "Serializer for reading a schema record.\n\nAttributes:\n    id (UUID): Unique identifier of the schema.\n    version (int): Schema version number."
+    SchemaCreate:
+      properties:
+        schema:
+          type: string
+          title: Schema
+          description: The raw schema definition, typically in Avro or JSON Schema format.
+          examples:
+          - '{''type'': ''record'', ''name'': ''User'', ''fields'': [{''name'': ''id'', ''type'': ''string''}]}'
+      type: object
+      required:
+      - schema
+      title: SchemaCreate
+      description: "Serializer for creating a new schema.\n\nAttributes:\n    schema_content (str): The raw content of the schema (e.g., Avro, JSON Schema)."
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: auth/jwt/login

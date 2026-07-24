@@ -1,0 +1,284 @@
+openapi: 3.1.0
+info:
+  title: Fast admin connector types API
+  version: 0.1.0
+servers:
+- url: /api
+tags:
+- name: connector types
+paths:
+  /kafka-source/check-credentials:
+    post:
+      tags:
+      - connector types
+      summary: Kafka-Source:Check-Credentials
+      description: Check the kafka source credentials.
+      operationId: kafka_source_check_credentials_kafka_source_check_credentials_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KafkaSourceCredentials'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /kafka-source/fetch-messages:
+    post:
+      tags:
+      - connector types
+      summary: Kafka-Source:Fetch-Messages
+      description: Fetch some messages from the connector configuration.
+      operationId: kafka_source_fetch_messages_kafka_source_fetch_messages_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KafkaSourceCredentials'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Messages'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /oracle-target/check-credentials:
+    post:
+      tags:
+      - connector types
+      summary: Oracle-Target:Check-Credentials
+      description: Check oracle target credentials.
+      operationId: oracle_target_check_credentials_oracle_target_check_credentials_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OracleTargetCredentials'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    KafkaSourceCredentials:
+      properties:
+        topic:
+          type: string
+          title: Topic
+          description: Kafka topic to consume from
+          examples:
+          - user_events
+        consumer_group_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Consumer Group Id
+          description: Optional consumer group ID for Kafka consumption
+          examples:
+          - pipeline-group-1
+        sasl_username:
+          type: string
+          title: Sasl Username
+          description: SASL username for authentication
+          examples:
+          - kafka_user
+        sasl_password:
+          type: string
+          title: Sasl Password
+          description: SASL password for authentication
+          examples:
+          - securePassword123!
+        bootstrap_servers:
+          type: string
+          title: Bootstrap Servers
+          description: Comma-separated list of Kafka bootstrap servers
+          examples:
+          - kafka1:9092,kafka2:9092
+        security_protocol:
+          type: string
+          enum:
+          - PLAINTEXT
+          - SASL_PLAINTEXT
+          - SASL_SSL
+          - SSL
+          title: Security Protocol
+          description: Kafka security protocol to use
+          examples:
+          - SASL_SSL
+        sasl_mechanism:
+          type: string
+          enum:
+          - OAUTHBEARER
+          - PLAIN
+          - SCRAM-SHA-256
+          - SCRAM-SHA-512
+          - GSSAPI
+          title: Sasl Mechanism
+          description: SASL mechanism used for authentication
+          examples:
+          - SCRAM-SHA-512
+        include_metadata:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Include Metadata
+          description: Whether to include Kafka message metadata in the response
+          default: false
+          examples:
+          - false
+      type: object
+      required:
+      - topic
+      - consumer_group_id
+      - sasl_username
+      - sasl_password
+      - bootstrap_servers
+      - security_protocol
+      - sasl_mechanism
+      title: KafkaSourceCredentials
+      description: Credentials and configuration for accessing a Kafka source.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Messages:
+      properties:
+        messages:
+          items:
+            type: object
+          type: array
+          title: Messages
+      type: object
+      required:
+      - messages
+      title: Messages
+      description: Messages.
+    OracleTargetCredentials:
+      properties:
+        database:
+          type: string
+          title: Database
+          description: Oracle database name
+          examples:
+          - ORCL
+        user:
+          type: string
+          title: User
+          description: Username for the Oracle database
+          examples:
+          - admin_user
+        password:
+          type: string
+          title: Password
+          description: Password for the Oracle database
+          examples:
+          - StrongPass123
+        host:
+          type: string
+          title: Host
+          description: Hostname or IP address of the Oracle server
+          examples:
+          - 192.168.1.100
+        port:
+          type: string
+          title: Port
+          description: Port number used to connect to the Oracle server
+          examples:
+          - '1521'
+        server_name:
+          type: string
+          title: Server Name
+          description: Oracle server name (e.g., service name)
+          examples:
+          - XE
+        server_id:
+          type: string
+          title: Server Id
+          description: Oracle server identifier (e.g., SID)
+          examples:
+          - oraclesrv01
+      type: object
+      required:
+      - database
+      - user
+      - password
+      - host
+      - port
+      - server_name
+      - server_id
+      title: OracleTargetCredentials
+      description: Credentials and connection details for writing to an Oracle target.
+    CredentialsResponse:
+      properties:
+        is_success:
+          type: boolean
+          title: Is Success
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - is_success
+      - message
+      title: CredentialsResponse
+      description: Credential response.
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: auth/jwt/login

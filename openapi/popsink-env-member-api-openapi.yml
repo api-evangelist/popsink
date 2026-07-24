@@ -1,0 +1,215 @@
+openapi: 3.1.0
+info:
+  title: Fast admin env_member API
+  version: 0.1.0
+servers:
+- url: /api
+tags:
+- name: env_member
+paths:
+  /envs/members:
+    get:
+      tags:
+      - env_member
+      summary: Env Member:List
+      description: List the environment members of the specified environment.
+      operationId: env_member_list_envs_members_get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Size
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page_EnvMemberList_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /envs/members/me:
+    get:
+      tags:
+      - env_member
+      summary: Env Member:Get Me
+      description: Read the environment member of the current user.
+      operationId: env_member_get_me_envs_members_me_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvMemberRead'
+      security:
+      - OAuth2PasswordBearer: []
+components:
+  schemas:
+    EnvMemberList:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the env member entry
+          examples:
+          - b154b9c4-4b28-4c6b-97c2-fdab3ed37f0e
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: Unique identifier of the user
+          examples:
+          - d290f1ee-6c54-4b01-90e6-d701748f0851
+        email:
+          type: string
+          title: Email
+          description: Email address of the user
+          examples:
+          - user@example.com
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the user is an admin
+          examples:
+          - false
+      type: object
+      required:
+      - id
+      - user_id
+      - email
+      - admin
+      title: EnvMemberList
+      description: Response model for listing env members with additional user info.
+    Page_EnvMemberList_:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/EnvMemberList'
+          type: array
+          title: Items
+        total:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Total
+        page:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Page
+        size:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Size
+        pages:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Pages
+      type: object
+      required:
+      - items
+      - total
+      - page
+      - size
+      title: Page[EnvMemberList]
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    EnvMemberRead:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: Unique identifier of the user being added
+          examples:
+          - d290f1ee-6c54-4b01-90e6-d701748f0851
+        env_id:
+          type: string
+          format: uuid
+          title: Env Id
+          description: Unique identifier of the env
+          examples:
+          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the user has admin privileges in the env
+          examples:
+          - true
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the env member entry
+          examples:
+          - b154b9c4-4b28-4c6b-97c2-fdab3ed37f0e
+      type: object
+      required:
+      - user_id
+      - env_id
+      - admin
+      - id
+      title: EnvMemberRead
+      description: Response model for reading a env member.
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: auth/jwt/login

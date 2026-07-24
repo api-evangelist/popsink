@@ -1,0 +1,56 @@
+openapi: 3.1.0
+info:
+  title: Fast admin probes API
+  version: 0.1.0
+servers:
+- url: /api
+tags:
+- name: probes
+paths:
+  /livez:
+    get:
+      tags:
+      - probes
+      summary: Probes:Livez
+      description: Get the liveness probe.
+      operationId: probes_livez_livez_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheck'
+  /readyz:
+    get:
+      tags:
+      - probes
+      summary: Probes:Livez
+      description: Get the readiness probe.
+      operationId: probes_livez_readyz_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheck'
+components:
+  schemas:
+    HealthCheck:
+      properties:
+        status:
+          type: string
+          title: Status
+      type: object
+      required:
+      - status
+      title: HealthCheck
+      description: Healthcheck pydantic model.
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: auth/jwt/login

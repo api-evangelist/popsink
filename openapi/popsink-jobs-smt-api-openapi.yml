@@ -1,0 +1,731 @@
+openapi: 3.1.0
+info:
+  title: Fast admin jobs-smt API
+  version: 0.1.0
+servers:
+- url: /api
+tags:
+- name: jobs-smt
+paths:
+  /smt/process_mapper:
+    post:
+      tags:
+      - jobs-smt
+      summary: Job-Smt:Process-Mapper
+      description: Process mapper.
+      operationId: job_smt_process_mapper_smt_process_mapper_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_job_smt_process_mapper_smt_process_mapper_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+                title: Response Job Smt Process Mapper Smt Process Mapper Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /smt/process_flattener:
+    post:
+      tags:
+      - jobs-smt
+      summary: Job-Smt:Process-Flattener
+      description: Process flattener.
+      operationId: job_smt_process_flattener_smt_process_flattener_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Message
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    type: object
+                  type: array
+                type: array
+                title: Response Job Smt Process Flattener Smt Process Flattener Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /smt/process_splitter:
+    post:
+      tags:
+      - jobs-smt
+      summary: Job-Smt:Process-Splitter
+      description: Process splitter.
+      operationId: job_smt_process_splitter_smt_process_splitter_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_job_smt_process_splitter_smt_process_splitter_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+                title: Response Job Smt Process Splitter Smt Process Splitter Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /smt/process_stringify_list:
+    post:
+      tags:
+      - jobs-smt
+      summary: Job-Smt:Process-Stringify-List
+      description: Process stringify list.
+      operationId: job_smt_process_stringify_list_smt_process_stringify_list_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Message
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    type: object
+                  type: array
+                type: array
+                title: Response Job Smt Process Stringify List Smt Process Stringify List Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /smt/process_stringify_key:
+    post:
+      tags:
+      - jobs-smt
+      summary: Job-Smt:Process-Stringify-Key
+      description: Process stringify key.
+      operationId: job_smt_process_stringify_key_smt_process_stringify_key_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_job_smt_process_stringify_key_smt_process_stringify_key_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    type: object
+                  type: array
+                type: array
+                title: Response Job Smt Process Stringify Key Smt Process Stringify Key Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /smt/process_unenvelope:
+    post:
+      tags:
+      - jobs-smt
+      summary: Job-Smt:Process-Unenvelope
+      description: Process unenvelope.
+      operationId: job_smt_process_unenvelope_smt_process_unenvelope_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_job_smt_process_unenvelope_smt_process_unenvelope_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    type: object
+                  type: array
+                type: array
+                title: Response Job Smt Process Unenvelope Smt Process Unenvelope Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /smt/process_key_filter:
+    post:
+      tags:
+      - jobs-smt
+      summary: Job-Smt:Process-Key-Filter
+      description: Process key filter.
+      operationId: job_smt_process_key_filter_smt_process_key_filter_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_job_smt_process_key_filter_smt_process_key_filter_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    type: object
+                  type: array
+                type: array
+                title: Response Job Smt Process Key Filter Smt Process Key Filter Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /smt/process_key_mover:
+    post:
+      tags:
+      - jobs-smt
+      summary: Job-Smt:Process-Key-Mover
+      description: Process key mover.
+      operationId: job_smt_process_key_mover_smt_process_key_mover_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_job_smt_process_key_mover_smt_process_key_mover_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    type: object
+                  type: array
+                type: array
+                title: Response Job Smt Process Key Mover Smt Process Key Mover Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /smt/process_dict_mover:
+    post:
+      tags:
+      - jobs-smt
+      summary: Job-Smt:Process-Dict-Mover
+      description: Process dict mover.
+      operationId: job_smt_process_dict_mover_smt_process_dict_mover_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_job_smt_process_dict_mover_smt_process_dict_mover_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    type: object
+                  type: array
+                type: array
+                title: Response Job Smt Process Dict Mover Smt Process Dict Mover Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /smt/process_sanitize_key:
+    post:
+      tags:
+      - jobs-smt
+      summary: Job-Smt:Process-Sanitize-Key
+      description: Process sanitize key.
+      operationId: job_smt_process_sanitize_key_smt_process_sanitize_key_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Message
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    type: object
+                  type: array
+                type: array
+                title: Response Job Smt Process Sanitize Key Smt Process Sanitize Key Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /smt/process_hash:
+    post:
+      tags:
+      - jobs-smt
+      summary: Job-Smt:Process-Hash
+      description: Process hash.
+      operationId: job_smt_process_hash_smt_process_hash_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_job_smt_process_hash_smt_process_hash_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    type: object
+                  type: array
+                type: array
+                title: Response Job Smt Process Hash Smt Process Hash Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /smt/process_encryption:
+    post:
+      tags:
+      - jobs-smt
+      summary: Job-Smt:Process-Encryption
+      description: Process encryption.
+      operationId: job_smt_process_encryption_smt_process_encryption_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_job_smt_process_encryption_smt_process_encryption_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    type: object
+                  type: array
+                type: array
+                title: Response Job Smt Process Encryption Smt Process Encryption Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /smt/process_filtering:
+    post:
+      tags:
+      - jobs-smt
+      summary: Job-Smt:Process-Filtering
+      description: Process filtering.
+      operationId: job_smt_process_filtering_smt_process_filtering_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_job_smt_process_filtering_smt_process_filtering_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    type: object
+                  type: array
+                type: array
+                title: Response Job Smt Process Filtering Smt Process Filtering Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    KeyMoverConfig:
+      properties:
+        key:
+          type: string
+          title: Key
+        key_path:
+          type: string
+          title: Key Path
+      type: object
+      required:
+      - key
+      - key_path
+      title: KeyMoverConfig
+      description: Config for KeyMover function.
+    Body_job_smt_process_filtering_smt_process_filtering_post:
+      properties:
+        config:
+          $ref: '#/components/schemas/FilteringConfiguration'
+        message:
+          type: object
+          title: Message
+      type: object
+      required:
+      - config
+      - message
+      title: Body_job_smt_process_filtering_smt_process_filtering_post
+    Body_job_smt_process_hash_smt_process_hash_post:
+      properties:
+        config:
+          $ref: '#/components/schemas/HashConfig'
+        message:
+          type: object
+          title: Message
+      type: object
+      required:
+      - config
+      - message
+      title: Body_job_smt_process_hash_smt_process_hash_post
+    Body_job_smt_process_dict_mover_smt_process_dict_mover_post:
+      properties:
+        config:
+          $ref: '#/components/schemas/KeysConfiguration'
+        message:
+          type: object
+          title: Message
+      type: object
+      required:
+      - config
+      - message
+      title: Body_job_smt_process_dict_mover_smt_process_dict_mover_post
+    Body_job_smt_process_splitter_smt_process_splitter_post:
+      properties:
+        config:
+          $ref: '#/components/schemas/SplitterConfiguration'
+        message:
+          type: object
+          title: Message
+      type: object
+      required:
+      - config
+      - message
+      title: Body_job_smt_process_splitter_smt_process_splitter_post
+    KeysConfiguration:
+      properties:
+        keys:
+          items:
+            type: string
+          type: array
+          title: Keys
+      type: object
+      required:
+      - keys
+      title: KeysConfiguration
+      description: Keys config.
+    FilteringConfiguration:
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUAL
+          - IN
+          - NOT_EQUAL
+          - NOT_IN
+          title: Operator
+        key:
+          type: string
+          title: Key
+        value:
+          type: string
+          title: Value
+      type: object
+      required:
+      - operator
+      - key
+      - value
+      title: FilteringConfiguration
+      description: Filtering config.
+    Body_job_smt_process_key_mover_smt_process_key_mover_post:
+      properties:
+        config:
+          items:
+            $ref: '#/components/schemas/KeyMoverConfig'
+          type: array
+          title: Config
+        message:
+          type: object
+          title: Message
+      type: object
+      required:
+      - config
+      - message
+      title: Body_job_smt_process_key_mover_smt_process_key_mover_post
+    Body_job_smt_process_stringify_key_smt_process_stringify_key_post:
+      properties:
+        config:
+          $ref: '#/components/schemas/KeysConfiguration'
+        message:
+          type: object
+          title: Message
+      type: object
+      required:
+      - config
+      - message
+      title: Body_job_smt_process_stringify_key_smt_process_stringify_key_post
+    HashConfig:
+      properties:
+        hash_type:
+          type: string
+          enum:
+          - MD5
+          - SHA-256
+          - SHA-512
+          title: Hash Type
+        paths:
+          items:
+            type: string
+          type: array
+          title: Paths
+      type: object
+      required:
+      - hash_type
+      - paths
+      title: HashConfig
+      description: Hash key config.
+    Body_job_smt_process_unenvelope_smt_process_unenvelope_post:
+      properties:
+        config:
+          $ref: '#/components/schemas/KeyConfiguration'
+        message:
+          type: object
+          title: Message
+      type: object
+      required:
+      - config
+      - message
+      title: Body_job_smt_process_unenvelope_smt_process_unenvelope_post
+    Body_job_smt_process_mapper_smt_process_mapper_post:
+      properties:
+        config:
+          items:
+            $ref: '#/components/schemas/MapperTableConfig'
+          type: array
+          title: Config
+        message:
+          type: object
+          title: Message
+      type: object
+      required:
+      - config
+      - message
+      title: Body_job_smt_process_mapper_smt_process_mapper_post
+    KeyConfiguration:
+      properties:
+        key:
+          type: string
+          title: Key
+      type: object
+      required:
+      - key
+      title: KeyConfiguration
+      description: Key config.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    MapperTableConfig:
+      properties:
+        table_name:
+          type: string
+          title: Table Name
+        fields:
+          items:
+            $ref: '#/components/schemas/MapperColumnConfig'
+          type: array
+          title: Fields
+      type: object
+      required:
+      - table_name
+      - fields
+      title: MapperTableConfig
+      description: Mapper config.
+    MapperColumnConfig:
+      properties:
+        key:
+          type: string
+          title: Key
+        path:
+          type: string
+          title: Path
+          default: ''
+        static:
+          type: string
+          title: Static
+          default: ''
+        nullable:
+          type: boolean
+          title: Nullable
+          default: true
+      type: object
+      required:
+      - key
+      title: MapperColumnConfig
+      description: Mapper config part.
+    Body_job_smt_process_encryption_smt_process_encryption_post:
+      properties:
+        config:
+          $ref: '#/components/schemas/EncryptConfiguration'
+        message:
+          type: object
+          title: Message
+      type: object
+      required:
+      - config
+      - message
+      title: Body_job_smt_process_encryption_smt_process_encryption_post
+    EncryptConfiguration:
+      properties:
+        encrypt_key:
+          type: string
+          title: Encrypt Key
+        paths:
+          items:
+            type: string
+          type: array
+          title: Paths
+      type: object
+      required:
+      - encrypt_key
+      - paths
+      title: EncryptConfiguration
+      description: Encrypt config.
+    SplitterConfiguration:
+      properties:
+        root_table_name:
+          type: string
+          title: Root Table Name
+          default: root
+        popsink_pk:
+          type: string
+          title: Popsink Pk
+        pk:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Pk
+        abbreviate_len:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Abbreviate Len
+      type: object
+      title: SplitterConfiguration
+      description: Splitter config.
+    Body_job_smt_process_key_filter_smt_process_key_filter_post:
+      properties:
+        config:
+          $ref: '#/components/schemas/KeysConfiguration'
+        message:
+          type: object
+          title: Message
+      type: object
+      required:
+      - config
+      - message
+      title: Body_job_smt_process_key_filter_smt_process_key_filter_post
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: auth/jwt/login

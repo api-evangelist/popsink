@@ -1,0 +1,370 @@
+openapi: 3.1.0
+info:
+  title: Fast admin envs API
+  version: 0.1.0
+servers:
+- url: /api
+tags:
+- name: envs
+paths:
+  /envs/:
+    post:
+      tags:
+      - envs
+      summary: Envs:Create
+      description: Create env.
+      operationId: envs_create_envs__post
+      security:
+      - OAuth2PasswordBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnvCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvRead'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - envs
+      summary: Envs:List
+      description: Envs for environment members.
+      operationId: envs_list_envs__get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Size
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page_EnvList_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /envs/{env_id}:
+    get:
+      tags:
+      - envs
+      summary: Envs:Get
+      description: Read an env.
+      operationId: envs_get_envs__env_id__get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: env_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Env Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvRead'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - envs
+      summary: Envs:Update
+      description: Update an env. Only env admins can update environments.
+      operationId: envs_update_envs__env_id__patch
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: env_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Env Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnvUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvRead'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    EnvCreate:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the environment
+          examples:
+          - staging
+        use_retention:
+          type: boolean
+          title: Use Retention
+          description: Whether message retention is enabled for this environment
+          examples:
+          - true
+        retention_configuration:
+          anyOf:
+          - $ref: '#/components/schemas/BrokerConfiguration'
+          - type: 'null'
+          description: Retention policy configuration if retention is enabled
+      type: object
+      required:
+      - name
+      - use_retention
+      title: EnvCreate
+      description: 'Model used to create a new Env.
+
+
+        Includes the environment name and optional broker retention configuration.'
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    EnvUpdate:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: Name of the environment
+          examples:
+          - staging
+        use_retention:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Use Retention
+          description: Whether message retention is enabled for this environment
+          examples:
+          - true
+        retention_configuration:
+          anyOf:
+          - $ref: '#/components/schemas/BrokerConfiguration'
+          - type: 'null'
+          description: Retention policy configuration if retention is enabled
+      type: object
+      title: EnvUpdate
+      description: 'Model used to update an existing Env.
+
+
+        All fields are optional to allow partial updates.'
+    BrokerConfiguration:
+      properties:
+        bootstrap_server:
+          type: string
+          title: Bootstrap Server
+        security_protocol:
+          type: string
+          enum:
+          - PLAINTEXT
+          - SASL_PLAINTEXT
+          - SASL_SSL
+          - SSL
+          title: Security Protocol
+        sasl_mechanism:
+          type: string
+          enum:
+          - OAUTHBEARER
+          - PLAIN
+          - SCRAM-SHA-256
+          - SCRAM-SHA-512
+          - GSSAPI
+          title: Sasl Mechanism
+        sasl_username:
+          type: string
+          title: Sasl Username
+        sasl_password:
+          type: string
+          title: Sasl Password
+        ca_cert:
+          type: string
+          title: Ca Cert
+          default: ''
+      type: object
+      required:
+      - bootstrap_server
+      - security_protocol
+      - sasl_mechanism
+      - sasl_username
+      - sasl_password
+      title: BrokerConfiguration
+      description: Broker configuration.
+    EnvRead:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the environment
+          examples:
+          - staging
+        use_retention:
+          type: boolean
+          title: Use Retention
+          description: Whether message retention is enabled for this environment
+          examples:
+          - true
+        retention_configuration:
+          anyOf:
+          - $ref: '#/components/schemas/BrokerConfiguration'
+          - type: 'null'
+          description: Retention policy configuration if retention is enabled
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the environment
+      type: object
+      required:
+      - name
+      - use_retention
+      - id
+      title: EnvRead
+      description: 'Model returned when reading an Env.
+
+
+        Includes all creation fields plus the unique Env identifier.'
+    EnvList:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the environment
+        name:
+          type: string
+          title: Name
+          description: Name of the environment
+      type: object
+      required:
+      - id
+      - name
+      title: EnvList
+      description: 'Lightweight model used to list environments.
+
+
+        Only includes the basic identifying fields.'
+    Page_EnvList_:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/EnvList'
+          type: array
+          title: Items
+        total:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Total
+        page:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Page
+        size:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Size
+        pages:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Pages
+      type: object
+      required:
+      - items
+      - total
+      - page
+      - size
+      title: Page[EnvList]
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: auth/jwt/login

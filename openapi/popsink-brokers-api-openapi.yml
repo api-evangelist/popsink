@@ -1,0 +1,127 @@
+openapi: 3.1.0
+info:
+  title: Fast admin brokers API
+  version: 0.1.0
+servers:
+- url: /api
+tags:
+- name: brokers
+paths:
+  /brokers/:
+    post:
+      tags:
+      - brokers
+      summary: Brokers:Test
+      description: Test the broker credentials.
+      operationId: brokers_test_brokers__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerConfiguration'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerCheckStatus'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - OAuth2PasswordBearer: []
+components:
+  schemas:
+    BrokerCheckStatus:
+      properties:
+        status:
+          type: boolean
+          title: Status
+      type: object
+      required:
+      - status
+      title: BrokerCheckStatus
+      description: Broker check status.
+    BrokerConfiguration:
+      properties:
+        bootstrap_server:
+          type: string
+          title: Bootstrap Server
+        security_protocol:
+          type: string
+          enum:
+          - PLAINTEXT
+          - SASL_PLAINTEXT
+          - SASL_SSL
+          - SSL
+          title: Security Protocol
+        sasl_mechanism:
+          type: string
+          enum:
+          - OAUTHBEARER
+          - PLAIN
+          - SCRAM-SHA-256
+          - SCRAM-SHA-512
+          - GSSAPI
+          title: Sasl Mechanism
+        sasl_username:
+          type: string
+          title: Sasl Username
+        sasl_password:
+          type: string
+          title: Sasl Password
+        ca_cert:
+          type: string
+          title: Ca Cert
+          default: ''
+      type: object
+      required:
+      - bootstrap_server
+      - security_protocol
+      - sasl_mechanism
+      - sasl_username
+      - sasl_password
+      title: BrokerConfiguration
+      description: Broker configuration.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: auth/jwt/login

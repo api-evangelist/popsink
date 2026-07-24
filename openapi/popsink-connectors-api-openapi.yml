@@ -1,0 +1,108 @@
+openapi: 3.1.0
+info:
+  title: Fast admin connectors API
+  version: 0.1.0
+servers:
+- url: /api
+tags:
+- name: connectors
+paths:
+  /connectors/source-config:
+    get:
+      tags:
+      - connectors
+      summary: List Source Config
+      description: List all source configurations.
+      operationId: list_source_config_connectors_source_config_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SourceConfigRead'
+                type: array
+                title: Response List Source Config Connectors Source Config Get
+      security:
+      - OAuth2PasswordBearer: []
+  /connectors/target-config:
+    get:
+      tags:
+      - connectors
+      summary: List Target Config
+      description: List all target configurations.
+      operationId: list_target_config_connectors_target_config_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TargetConfigRead'
+                type: array
+                title: Response List Target Config Connectors Target Config Get
+      security:
+      - OAuth2PasswordBearer: []
+components:
+  schemas:
+    ConnectorType:
+      type: string
+      enum:
+      - job_smt
+      - kafka_source
+      - oracle_target
+      title: ConnectorType
+      description: Define the connector type.
+    SourceConfigRead:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        name:
+          type: string
+          title: Name
+        type:
+          $ref: '#/components/schemas/ConnectorType'
+        config:
+          type: object
+          title: Config
+      type: object
+      required:
+      - id
+      - name
+      - type
+      - config
+      title: SourceConfigRead
+      description: Source configuration read.
+    TargetConfigRead:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        name:
+          type: string
+          title: Name
+        type:
+          $ref: '#/components/schemas/ConnectorType'
+        config:
+          type: object
+          title: Config
+      type: object
+      required:
+      - id
+      - name
+      - type
+      - config
+      title: TargetConfigRead
+      description: Target configuration read.
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: auth/jwt/login

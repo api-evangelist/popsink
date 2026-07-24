@@ -1,0 +1,71 @@
+openapi: 3.1.0
+info:
+  title: Fast admin saml API
+  version: 0.1.0
+servers:
+- url: /api
+tags:
+- name: saml
+paths:
+  /saml/is_activated:
+    get:
+      tags:
+      - saml
+      summary: Is Activated
+      description: Saml is activated route.
+      operationId: is_activated_saml_is_activated_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Is Activated Saml Is Activated Get
+  /saml/login:
+    get:
+      tags:
+      - saml
+      summary: Saml Login
+      description: Saml login route.
+      operationId: saml_login_saml_login_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /saml/metadata:
+    get:
+      tags:
+      - saml
+      summary: Metadata
+      description: Saml metadata route.
+      operationId: metadata_saml_metadata_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /saml/callback:
+    post:
+      tags:
+      - saml
+      summary: Saml Login Callback
+      description: Saml login callback route.
+      operationId: saml_login_callback_saml_callback_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+components:
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: auth/jwt/login

@@ -1,0 +1,254 @@
+openapi: 3.1.0
+info:
+  title: Fast admin user-logs API
+  version: 0.1.0
+servers:
+- url: /api
+tags:
+- name: user-logs
+paths:
+  /user-logs:
+    get:
+      tags:
+      - user-logs
+      summary: User Logs:List
+      description: List user logs with filtering options.
+      operationId: user_logs_list_user_logs_get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: action
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/ActionType'
+          - type: 'null'
+          description: Filter by action type (login, logout, etc.)
+          title: Action
+        description: Filter by action type (login, logout, etc.)
+      - name: user_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          description: Filter logs for a specific user by user ID.
+          title: User Id
+        description: Filter logs for a specific user by user ID.
+      - name: user_type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/UserType'
+          - type: 'null'
+          description: Filter by user type (real_user or system).
+          title: User Type
+        description: Filter by user type (real_user or system).
+      - name: from_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: Start date for filtering logs (ISO 8601 format).
+          title: From Date
+        description: Start date for filtering logs (ISO 8601 format).
+      - name: to_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: End date for filtering logs (ISO 8601 format).
+          title: To Date
+        description: End date for filtering logs (ISO 8601 format).
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Size
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page_UserLogList_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    UserLogList:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier for the user log entry.
+          examples:
+          - b3b7c7e2-8c2e-4e2a-9b2e-2b2e2b2e2b2e
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+          description: Timestamp of the user action.
+          examples:
+          - '2024-06-10T12:34:56Z'
+        user_type:
+          $ref: '#/components/schemas/UserType'
+          description: Type of user (real_user or system).
+          examples:
+          - real_user
+        action:
+          $ref: '#/components/schemas/ActionType'
+          description: Type of action performed (login, logout, etc.)
+          examples:
+          - login
+        user_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: User Id
+          description: ID of the user who performed the action.
+          examples:
+          - b3b7c7e2-8c2e-4e2a-9b2e-2b2e2b2e2b2e
+        user_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Email
+          description: Email of the user who performed the action.
+          examples:
+          - user@example.com
+      type: object
+      required:
+      - id
+      - timestamp
+      - user_type
+      - action
+      title: UserLogList
+      description: User log list serializer.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    UserType:
+      type: string
+      enum:
+      - real_user
+      - system
+      title: UserType
+      description: User types.
+    ActionType:
+      type: string
+      enum:
+      - login
+      - logout
+      - change_password
+      - pipeline_created
+      - pipeline_updated
+      - pipeline_deleted
+      - pipeline_started
+      - environment_created
+      - environment_updated
+      - team_created
+      - team_updated
+      - team_deleted
+      title: ActionType
+      description: Action types.
+    Page_UserLogList_:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/UserLogList'
+          type: array
+          title: Items
+        total:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Total
+        page:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Page
+        size:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Size
+        pages:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Pages
+      type: object
+      required:
+      - items
+      - total
+      - page
+      - size
+      title: Page[UserLogList]
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: auth/jwt/login
