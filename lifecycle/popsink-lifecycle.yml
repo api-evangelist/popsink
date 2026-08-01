@@ -1,0 +1,23 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.popsink.com/llms.txt, https://status.popsink.com, https://docs.popsink.com/roadmap.md
+versioning:
+  scheme: dual
+  notes: >-
+    Control plane uses calendar versioning (e.g. v2026.06.12); data plane uses
+    semver pre-release (e.g. v0.1.0-alpha.113). The on-prem API is mounted at /api;
+    the public API reports info.version 0.0.1.
+  control_plane_current: v2026.06.12
+  data_plane_current: v0.1.0-alpha.113
+  docs: https://docs.popsink.com/llms.txt
+status_page: https://status.popsink.com
+roadmap: https://docs.popsink.com/roadmap.md
+changelog: https://docs.popsink.com/changelog/control-plane/cp-2026-06-12.md
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No formal deprecation policy or RFC 8594 Sunset/Deprecation header support was found.
+sla:
+  url: null
+  notes: No public SLA / uptime commitment found; status page is published at status.popsink.com.
+deprecated_operations: []

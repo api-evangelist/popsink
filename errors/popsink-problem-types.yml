@@ -1,0 +1,30 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/popsink-onprem-api-openapi-original.json
+format: application/json
+envelope: >-
+  FastAPI-style error bodies. Validation errors (422) return
+  {"detail": [{"loc": [...], "msg": "...", "type": "..."}]} (HTTPValidationError).
+  Application errors return {"detail": "..."} (ErrorModel); 403 responses use a
+  ResponseModel403 shape. Not RFC 9457 application/problem+json.
+problems:
+- status: 400
+  title: Bad Request
+  schema: ErrorModel
+  remediation: Correct the malformed request payload or parameters.
+- status: 401
+  title: Unauthorized
+  schema: ErrorModel
+  remediation: Obtain a valid JWT via POST /auth/jwt/login and send it as a Bearer token.
+- status: 403
+  title: Forbidden
+  schema: ResponseModel403
+  remediation: The authenticated user lacks the required role/permission for this resource.
+- status: 404
+  title: Not Found
+  schema: ErrorModel
+  remediation: Verify the resource id (pipeline_id, env_id, team_id, user id) exists.
+- status: 422
+  title: Validation Error
+  schema: HTTPValidationError
+  remediation: Fix the field(s) listed under detail[].loc; check types and required fields.

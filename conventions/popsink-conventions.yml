@@ -1,0 +1,36 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/popsink-onprem-api-openapi-original.json, https://docs.popsink.com
+authentication:
+  style: oauth2-password-jwt-bearer
+  detail: >-
+    Obtain a JWT via POST /auth/jwt/login (OAuth2 password flow), then send it as
+    an Authorization: Bearer <token> header. SAML SSO is available via /saml/login.
+    The public API accepts an Authorization header and a POST /auth/ token exchange.
+  cross_ref: authentication/popsink-authentication.yml
+pagination:
+  style: page-number
+  params: [page, size]
+  response_fields: [items, total, page, size, pages]
+  detail: List endpoints wrap results in Page_* envelopes (fastapi-pagination).
+idempotency:
+  supported: false
+  detail: >-
+    No Idempotency-Key header/param is documented. Exactly-once connector delivery
+    appears on the roadmap but is not yet a request-level idempotency contract.
+metadata:
+  supported: false
+request_tracing:
+  supported: false
+  detail: No documented request-id / correlation-id response header.
+versioning:
+  cross_ref: lifecycle/popsink-lifecycle.yml
+error_envelope:
+  style: fastapi-detail
+  detail: >-
+    {"detail": "..."} for application errors; {"detail": [{loc, msg, type}]} for 422
+    validation errors. See errors/popsink-problem-types.yml.
+  cross_ref: errors/popsink-problem-types.yml
+rate_limiting:
+  signaled: false
+  detail: No rate-limit headers documented in the OpenAPI or docs.

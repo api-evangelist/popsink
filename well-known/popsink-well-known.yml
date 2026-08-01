@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: probed
+source: probe of popsink.com / docs.popsink.com / app.popsink.com
+notes: >-
+  No valid /.well-known discovery documents were found. app.popsink.com returns
+  HTTP 200 for /.well-known/openid-configuration and /.well-known/oauth-authorization-server,
+  but the body is the Nuxt single-page-app HTML shell (a catch-all 200), NOT a real
+  OIDC/OAuth metadata document, so nothing was saved. No security.txt, api-catalog,
+  or ai-plugin.json is published. Absence is valid, recorded data.
+hosts:
+- host: https://popsink.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+- host: https://docs.popsink.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://app.popsink.com
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    valid: false
+    note: SPA HTML shell, not an OIDC metadata JSON document
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    valid: false
+    note: SPA HTML shell, not an RFC 8414 metadata JSON document

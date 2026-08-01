@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Popsink on-prem control-plane API
+  version: 1.0.0
+extends: openapi/popsink-onprem-api-openapi-original.json
+actions:
+- target: $.info
+  update:
+    title: Popsink Control Plane API (on-prem)
+    description: >-
+      Popsink control-plane REST API for managing real-time data replication
+      (CDC) pipelines, source/target connectors, environments, teams, schemas,
+      and single-message-transform (SMT) jobs. FastAPI-generated; OAuth2 password
+      (JWT bearer) auth with optional SAML SSO.
+    x-apievangelist-enriched: '2026-07-20'
+    x-apievangelist-category: [data-replication, cdc, streaming, etl]
+- target: $.servers
+  update:
+  - url: /api
+    description: Base path mounted under the Popsink on-prem deployment host.

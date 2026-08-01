@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/popsink-onprem-api-openapi-original.json, openapi/popsink-public-api-openapi-original.json
+standards:
+- id: oauth2
+  conforms: true
+  evidence: onprem spec declares securityScheme OAuth2PasswordBearer (oauth2 password flow, tokenUrl auth/jwt/login)
+- id: saml2
+  conforms: true
+  evidence: onprem spec exposes /saml/login, /saml/metadata, /saml/callback, /saml/is_activated (SP-initiated SSO)
+- id: oidc
+  conforms: false
+  evidence: no valid /.well-known/openid-configuration published (SPA HTML shell only)
+- id: pagination
+  conforms: true
+  evidence: list endpoints use page/size query params and Page_* envelope schemas (fastapi-pagination)
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: errors use application/json with FastAPI HTTPValidationError / ErrorModel, not application/problem+json
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: no /.well-known/security.txt (404)
+- id: idempotency
+  conforms: false
+  evidence: no Idempotency-Key header/param documented (exactly-once delivery is a roadmap item, not yet shipped)

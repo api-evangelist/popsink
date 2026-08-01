@@ -1,0 +1,50 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/popsink-onprem-api-openapi-original.json, openapi/popsink-public-api-openapi-original.json
+notes: >-
+  No official hosted or remote Popsink MCP server was found in the docs, npm
+  (@modelcontextprotocol), or public MCP registries as of the generated date.
+  The tool list below is a CANDIDATE derived from a curated subset of the
+  Popsink on-prem control-plane and public OpenAPI operations (pipelines,
+  connectors, envs, teams, organizations). Not authoritative.
+server:
+  name: popsink
+  transport: http
+tools:
+- name: list_pipelines
+  description: List data replication pipelines in the environment.
+  source_operation: openapi/popsink-onprem-api-openapi-original.json#pipelines_list_pipelines__get
+- name: create_pipeline
+  description: Register a new CDC replication pipeline (source to target).
+  source_operation: openapi/popsink-onprem-api-openapi-original.json#pipelines_register_pipelines__post
+- name: get_pipeline
+  description: Get a single pipeline by id.
+  source_operation: openapi/popsink-onprem-api-openapi-original.json#pipelines_get_pipelines__pipeline_id__get
+- name: start_pipeline
+  description: Start a pipeline running.
+  source_operation: openapi/popsink-onprem-api-openapi-original.json#pipelines_start_pipelines__pipeline_id__start_post
+- name: pause_pipeline
+  description: Pause a running pipeline.
+  source_operation: openapi/popsink-onprem-api-openapi-original.json#pipelines_pause_pipelines__pipeline_id__pause_post
+- name: get_pipeline_status
+  description: Get the runtime status of a pipeline.
+  source_operation: openapi/popsink-onprem-api-openapi-original.json#pipelines_status_pipelines__pipeline_id__status_get
+- name: get_pipeline_logs
+  description: Retrieve logs for a pipeline.
+  source_operation: openapi/popsink-onprem-api-openapi-original.json#pipelines_logs_pipelines__pipeline_id__logs_get
+- name: list_source_connectors
+  description: List available source connector configurations.
+  source_operation: openapi/popsink-onprem-api-openapi-original.json#list_source_config_connectors_source_config_get
+- name: list_target_connectors
+  description: List available target connector configurations.
+  source_operation: openapi/popsink-onprem-api-openapi-original.json#list_target_config_connectors_target_config_get
+- name: list_environments
+  description: List environments (isolation boundaries for pipelines).
+  source_operation: openapi/popsink-onprem-api-openapi-original.json#envs_list_envs__get
+- name: list_teams
+  description: List teams in the environment.
+  source_operation: openapi/popsink-onprem-api-openapi-original.json#teams_list_teams__get
+- name: list_organizations
+  description: List the organizations of the current user (public API).
+  source_operation: openapi/popsink-public-api-openapi-original.json#get_organizations_organizations__get

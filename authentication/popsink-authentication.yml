@@ -1,0 +1,17 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/popsink-onprem-api-openapi-original.json
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - password
+schemes:
+- name: OAuth2PasswordBearer
+  type: oauth2
+  flows:
+  - flow: password
+    tokenUrl: auth/jwt/login
+    scopes: 0
+  sources:
+  - openapi/popsink-onprem-api-openapi-original.json

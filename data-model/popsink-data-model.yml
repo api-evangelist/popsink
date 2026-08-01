@@ -1,0 +1,82 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/popsink-onprem-api-openapi-original.json
+notes: >-
+  Entity graph derived from OpenAPI component schemas and path structure of the
+  Popsink on-prem control-plane API. Relationships inferred from nested paths and
+  id-reference fields (env_id, team_id, pipeline_id, user id, subject).
+entities:
+- name: User
+  schemas: [UserRead, UserCreate, UserSafeUpdate, UserPasswordChange, UserType, UserExport]
+  path: /users
+- name: Team
+  schemas: [TeamRead, TeamCreate, TeamList, TeamExport]
+  path: /teams
+- name: TeamMember
+  schemas: [TeamMemberRead, TeamMemberList, TeamMemberBulkCreate, TeamMemberExport]
+  path: /teams/{team_id}/members
+- name: TeamRequest
+  schemas: [TeamRequestRead, TeamRequestCreate, TeamRequestUpdate]
+  path: /teams/{team_id}/requests
+- name: Environment
+  schemas: [EnvRead, EnvCreate, EnvUpdate, EnvList, EnvExport]
+  path: /envs
+- name: EnvMember
+  schemas: [EnvMemberRead, EnvMemberList, EnvMemberExport]
+  path: /envs/members
+- name: EnvRequest
+  schemas: [EnvRequestRead, EnvRequestCreate, EnvRequestUpdate]
+  path: /envs/{env_id}/requests
+- name: Pipeline
+  schemas: [PipelineRead, PipelineCreate, PipelineUpdate, PipelineList, PipelineState, PipelineLogs, PipelineConfigAsSerializer-Input]
+  path: /pipelines
+- name: Connector
+  schemas: [SourceConfigRead, TargetConfigRead, ConnectorType, BrokerConfiguration]
+  path: /connectors
+- name: Schema
+  schemas: [SchemaRead, SchemaCreate]
+  path: /schemas/{subject}
+- name: UserLog
+  schemas: [UserLogList]
+  path: /user-logs
+relationships:
+- from: TeamMember
+  to: Team
+  type: belongs_to
+  via: team_id
+- from: TeamMember
+  to: User
+  type: belongs_to
+  via: user
+- from: TeamRequest
+  to: Team
+  type: belongs_to
+  via: team_id
+- from: EnvMember
+  to: Environment
+  type: belongs_to
+  via: env_id
+- from: EnvRequest
+  to: Environment
+  type: belongs_to
+  via: env_id
+- from: Pipeline
+  to: Environment
+  type: belongs_to
+  via: env_id
+- from: Pipeline
+  to: Connector
+  type: has_one
+  via: source_config
+- from: Pipeline
+  to: Connector
+  type: has_one
+  via: target_config
+- from: Team
+  to: TeamMember
+  type: has_many
+  via: members
+- from: Environment
+  to: EnvMember
+  type: has_many
+  via: members

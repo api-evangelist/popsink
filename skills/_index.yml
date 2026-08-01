@@ -1,0 +1,12 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/popsink-onprem-api-openapi-original.json
+skills:
+- file: popsink-create-replication-pipeline.md
+  name: Create a Popsink replication pipeline
+  api: openapi/popsink-onprem-api-openapi-original.json
+  operations: [auth_jwt_login_auth_jwt_login_post, list_source_config_connectors_source_config_get, list_target_config_connectors_target_config_get, pipelines_register_pipelines__post, pipelines_start_pipelines__pipeline_id__start_post, pipelines_status_pipelines__pipeline_id__status_get]
+- file: popsink-operate-pipeline.md
+  name: Operate and monitor a Popsink pipeline
+  api: openapi/popsink-onprem-api-openapi-original.json
+  operations: [pipelines_list_pipelines__get, pipelines_get_pipelines__pipeline_id__get, pipelines_pause_pipelines__pipeline_id__pause_post, pipelines_start_pipelines__pipeline_id__start_post, pipelines_logs_pipelines__pipeline_id__logs_get, pipelines_count_status_pipelines_count_status_get]

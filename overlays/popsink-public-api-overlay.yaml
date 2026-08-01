@@ -1,0 +1,18 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Popsink public API
+  version: 1.0.0
+extends: openapi/popsink-public-api-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-20'
+    x-apievangelist-category: [data-replication, cdc]
+    x-apievangelist-note: >-
+      Public API surface exposes organization and user management plus an /auth/
+      token exchange. Authorization is passed via an Authorization header; no
+      securityScheme is declared in the source spec.
+- target: $.servers
+  update:
+  - url: https://app.popsink.com
+    description: Popsink SaaS application host (base URL inferred; not declared in source spec).

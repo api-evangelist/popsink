@@ -1,8 +1,31 @@
 aid: popsink
 name: Popsink
-description: Popsink is a company surfaced as a portfolio company of seedcamp and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Popsink is a real-time data replication and change data capture (CDC) platform
+  that continuously moves data out of mission-critical and legacy systems into
+  cloud data platforms with low latency and minimal production impact. It offers
+  a broad catalog of source and target connectors (Postgres, MySQL, Oracle, MSSQL,
+  MongoDB, Kafka, IBM Z / IBMi (AS/400), SAP, Salesforce, HubSpot, Snowflake,
+  BigQuery, Databricks, ClickHouse, Iceberg, and more) and flexible deployment
+  options spanning SaaS, bring-your-own-cloud, self-hosted Kubernetes, single-VM,
+  on-premises, and air-gapped installs. Popsink exposes a public REST API and an
+  on-prem control-plane REST API (OAuth2 password / JWT bearer, with SAML SSO) for
+  managing pipelines, connectors, environments, teams, schemas, and transforms.
+  Backed by Seedcamp.
 url: https://raw.githubusercontent.com/api-evangelist/popsink/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://cdn.prod.website-files.com/68c803b0497f18f5503b81d9/68c84fa4ed5fa62ff869c94f_Fav%20Icon%20256x256.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -11,15 +34,291 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Change Data Capture
+- Data Replication
+- CDC
+- Data Integration
+- Real-Time Data
+- Streaming
+- ETL
+- Database
+- Data Platform
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: popsink:popsink-admin-api
+  name: Popsink admin API
+  description: The admin API from Popsink — 2 operation(s) for admin.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - admin
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-admin-api-openapi.yml
+- aid: popsink:popsink-auth-api
+  name: Popsink auth API
+  description: The auth API from Popsink — 8 operation(s) for auth.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - auth
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-auth-api-openapi.yml
+- aid: popsink:popsink-brokers-api
+  name: Popsink brokers API
+  description: The brokers API from Popsink — 1 operation(s) for brokers.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - brokers
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-brokers-api-openapi.yml
+- aid: popsink:popsink-connector-types-api
+  name: Popsink connector types API
+  description: The connector types API from Popsink — 3 operation(s) for connector types.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - connector types
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-connector-types-api-openapi.yml
+- aid: popsink:popsink-connectors-api
+  name: Popsink connectors API
+  description: The connectors API from Popsink — 2 operation(s) for connectors.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - connectors
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-connectors-api-openapi.yml
+- aid: popsink:popsink-env-member-api
+  name: Popsink env_member API
+  description: The env_member API from Popsink — 2 operation(s) for env_member.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - env_member
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-env-member-api-openapi.yml
+- aid: popsink:popsink-env-request-api
+  name: Popsink env_request API
+  description: The env_request API from Popsink — 3 operation(s) for env_request.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - env_request
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-env-request-api-openapi.yml
+- aid: popsink:popsink-envs-api
+  name: Popsink envs API
+  description: The envs API from Popsink — 2 operation(s) for envs.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - envs
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-envs-api-openapi.yml
+- aid: popsink:popsink-healthchecks-api
+  name: Popsink healthchecks API
+  description: The healthchecks API from Popsink — 4 operation(s) for healthchecks.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - healthchecks
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-healthchecks-api-openapi.yml
+- aid: popsink:popsink-jobs-smt-api
+  name: Popsink jobs-smt API
+  description: The jobs-smt API from Popsink — 13 operation(s) for jobs-smt.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - jobs-smt
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-jobs-smt-api-openapi.yml
+- aid: popsink:popsink-organizations-api
+  name: Popsink organizations API
+  description: The organizations API from Popsink — 2 operation(s) for organizations.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-organizations-api-openapi.yml
+- aid: popsink:popsink-pipelines-api
+  name: Popsink pipelines API
+  description: The pipelines API from Popsink — 9 operation(s) for pipelines.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - pipelines
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-pipelines-api-openapi.yml
+- aid: popsink:popsink-popsink-public-api-api
+  name: Popsink Popsink Public API API
+  description: The Popsink Public API API from Popsink — 1 operation(s) for popsink public api.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - Popsink Public API
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-popsink-public-api-api-openapi.yml
+- aid: popsink:popsink-probes-api
+  name: Popsink probes API
+  description: The probes API from Popsink — 2 operation(s) for probes.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - probes
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-probes-api-openapi.yml
+- aid: popsink:popsink-saml-api
+  name: Popsink saml API
+  description: The saml API from Popsink — 4 operation(s) for saml.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - saml
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-saml-api-openapi.yml
+- aid: popsink:popsink-schemas-api
+  name: Popsink schemas API
+  description: The schemas API from Popsink — 1 operation(s) for schemas.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - schemas
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-schemas-api-openapi.yml
+- aid: popsink:popsink-team-member-api
+  name: Popsink team_member API
+  description: The team_member API from Popsink — 3 operation(s) for team_member.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - team_member
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-team-member-api-openapi.yml
+- aid: popsink:popsink-team-request-api
+  name: Popsink team_request API
+  description: The team_request API from Popsink — 3 operation(s) for team_request.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - team_request
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-team-request-api-openapi.yml
+- aid: popsink:popsink-teams-api
+  name: Popsink teams API
+  description: The teams API from Popsink — 2 operation(s) for teams.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - teams
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-teams-api-openapi.yml
+- aid: popsink:popsink-user-logs-api
+  name: Popsink user-logs API
+  description: The user-logs API from Popsink — 1 operation(s) for user-logs.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - user-logs
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-user-logs-api-openapi.yml
+- aid: popsink:popsink-users-api
+  name: Popsink users API
+  description: The users API from Popsink — 7 operation(s) for users.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-users-api-openapi.yml
 common:
 - type: Website
-  url: http://popsink.com
+  url: https://popsink.com
+- type: DeveloperPortal
+  url: https://docs.popsink.com
+- type: Documentation
+  url: https://docs.popsink.com
+- type: APIReference
+  url: https://docs.popsink.com/public/public-api.json
+- type: GettingStarted
+  url: https://docs.popsink.com/quickstart
+- type: Blog
+  url: https://popsink.com/blog
+- type: Pricing
+  url: https://popsink.com/pricing
+- type: SignUp
+  url: https://app.popsink.com
+- type: Login
+  url: https://app.popsink.com
+- type: Support
+  url: https://popsink.com/contact
+- type: TermsOfService
+  url: https://popsink.com/terms-of-use
+- type: PrivacyPolicy
+  url: https://popsink.com/privacy-policy
+- type: Roadmap
+  url: https://docs.popsink.com/roadmap
+- type: StatusPage
+  url: https://status.popsink.com
+- type: ChangeLog
+  url: changelog/popsink-changelog.yml
+- type: Integrations
+  url: https://popsink.com/integrations
+- type: Authentication
+  url: authentication/popsink-authentication.yml
+- type: Conventions
+  url: conventions/popsink-conventions.yml
+- type: ErrorCatalog
+  url: errors/popsink-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/popsink-lifecycle.yml
+- type: DataModel
+  url: data-model/popsink-data-model.yml
+- type: Conformance
+  url: conformance/popsink-conformance.yml
+- type: MCPServer
+  url: mcp/popsink-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/popsink-agentic-access.yml
+- type: LLMsTxt
+  url: llms/popsink-llms.txt
+- type: DomainSecurity
+  url: security/popsink-domain-security.yml
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 19
+  pass: local-v1

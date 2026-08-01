@@ -1,0 +1,35 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.popsink.com/llms.txt (changelog/control-plane and changelog/data-plane)
+scheme:
+  control_plane: calendar (vYYYY.MM.DD)
+  data_plane: semver pre-release (v0.1.0-alpha.N)
+current:
+  control_plane: v2026.06.12
+  data_plane: v0.1.0-alpha.113
+index_url: https://docs.popsink.com/llms.txt
+entries:
+- version: v2026.06.12
+  date: '2026-06-12'
+  track: control-plane
+  url: https://docs.popsink.com/changelog/control-plane/cp-2026-06-12.md
+  highlights:
+  - Removed the metrics exporter and streamlined the provisioner.
+  - Added usage alerts that email when connector replication volume falls below a threshold.
+  - Added generic plug-and-play OAuth for the Google Ads connector.
+- version: v2026.06.08
+  date: '2026-06-08'
+  track: control-plane
+  url: https://docs.popsink.com/changelog/control-plane/cp-2026-06-08.md
+- version: v2026.06.06
+  date: '2026-06-07'
+  track: control-plane
+  url: https://docs.popsink.com/changelog/control-plane/cp-2026-06-06.md
+- version: v0.1.0-alpha.113
+  date: '2026-07-06'
+  track: data-plane
+  url: https://docs.popsink.com/changelog/data-plane/alpha-113.md
+- version: v0.1.0-alpha.112
+  date: '2026-07-02'
+  track: data-plane
+  url: https://docs.popsink.com/changelog/data-plane/alpha-112.md
