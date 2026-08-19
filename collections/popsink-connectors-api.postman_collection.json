@@ -1,0 +1,216 @@
+{
+  "item": [
+    {
+      "id": "58ee89f6-bc9c-4234-ab20-7ce062bdcb0f",
+      "name": "connectors",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7337f526-428b-42a8-8878-fa8a12c3eba1",
+          "name": "List Source Config",
+          "request": {
+            "name": "List Source Config",
+            "description": {
+              "content": "List all source configurations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                "source-config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/jwt/login"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "07a2a37e-d2a5-4104-b4e0-dfdc7cbd919e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "source-config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"9aa4723c-14e6-1f85-891e-d08df6210da9\",\n    \"name\": \"string\",\n    \"type\": \"job_smt\",\n    \"config\": {}\n  },\n  {\n    \"id\": \"9c865ca1-e535-c456-2a3f-7d5dc6b80e7a\",\n    \"name\": \"string\",\n    \"type\": \"oracle_target\",\n    \"config\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfca5a35-30b7-44b1-b844-465792aaf26c",
+          "name": "List Target Config",
+          "request": {
+            "name": "List Target Config",
+            "description": {
+              "content": "List all target configurations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connectors",
+                "target-config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/jwt/login"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7b5a3421-2002-4015-8016-f46719c463d0",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connectors",
+                    "target-config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"f4e7562f-f16a-0bf0-8d90-aeb93c73d347\",\n    \"name\": \"string\",\n    \"type\": \"kafka_source\",\n    \"config\": {}\n  },\n  {\n    \"id\": \"2b80dd58-de8a-0223-b759-aec0d9c2842d\",\n    \"name\": \"string\",\n    \"type\": \"kafka_source\",\n    \"config\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a133904c-f7c2-47a0-a623-017f959e38f8",
+    "name": "Fast admin connectors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

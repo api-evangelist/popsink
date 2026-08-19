@@ -1,0 +1,264 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin users API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Users:List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get all users."
+        },
+        {
+          "info": {
+            "name": "Users:Change Password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/me/change-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Change the current user's password.\n\nArgs:\n    password_data: Password change data\n    user: Current authenticated user\n\nReturns:\n    Updated user information"
+        },
+        {
+          "info": {
+            "name": "Export all users, envs, teams, and their relations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/export-all",
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Export all users, environments, teams, and their relationships as a structured data object. Requires admin privileges."
+        },
+        {
+          "info": {
+            "name": "Import all users, envs, teams, and their relations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/import-all",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Import all users, environments, teams, and their relationships from a structured data object. Requires admin privileges. This will overwrite all existing data."
+        },
+        {
+          "info": {
+            "name": "Users:Current User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/me",
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Users:Current User"
+        },
+        {
+          "info": {
+            "name": "Users:Patch Current User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/api/users/me",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Users:Patch Current User"
+        },
+        {
+          "info": {
+            "name": "Users:User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Users:User"
+        },
+        {
+          "info": {
+            "name": "Users:Patch User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Users:Patch User"
+        },
+        {
+          "info": {
+            "name": "Users:Delete User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Users:Delete User"
+        },
+        {
+          "info": {
+            "name": "Get Me",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/me/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get the current user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

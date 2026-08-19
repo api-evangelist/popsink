@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin envs API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "envs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Envs:List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/envs/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Envs for environment members."
+        },
+        {
+          "info": {
+            "name": "Envs:Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/envs/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create env."
+        },
+        {
+          "info": {
+            "name": "Envs:Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/envs/:env_id",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Read an env."
+        },
+        {
+          "info": {
+            "name": "Envs:Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/api/envs/:env_id",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an env. Only env admins can update environments."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

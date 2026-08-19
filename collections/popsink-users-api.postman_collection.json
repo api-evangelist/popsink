@@ -1,0 +1,2141 @@
+{
+  "item": [
+    {
+      "id": "7c3581a7-5e9c-4614-b649-e49bb44e9f86",
+      "name": "users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2fa05791-3857-4091-bba1-3cab8345796b",
+          "name": "Users:List Users",
+          "request": {
+            "name": "Users:List Users",
+            "description": {
+              "content": "Get all users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/jwt/login"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d3ebda0b-08e4-4168-843e-29ea6eceee01",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"ecca06f7-3629-03e7-1974-78ad5e0a4ed0\",\n      \"email\": \"bABcczRvch@LyOYCYZPpSXobhicfvCNoS.uqs\",\n      \"active_env_id\": \"6a9dad44-09e6-b89e-de9b-190786fbb302\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    },\n    {\n      \"id\": \"66d8a9ef-58e5-95af-08f8-af0f30051b3c\",\n      \"email\": \"M09BXep0BKjpg@KCBUMPZlpw.vi\",\n      \"active_env_id\": \"229032b1-851b-fc43-bdfc-a9fef7ad559c\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    }\n  ],\n  \"total\": 7540,\n  \"page\": 8761,\n  \"size\": 9632,\n  \"pages\": 7567\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2aa4a667-39af-476e-b27b-940ba8de3224",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22e152f7-31e7-4642-909c-339a170b9380",
+          "name": "Users:Change Password",
+          "request": {
+            "name": "Users:Change Password",
+            "description": {
+              "content": "Change the current user's password.\n\nArgs:\n    password_data: Password change data\n    user: Current authenticated user\n\nReturns:\n    Updated user information",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "me",
+                "change-password"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/jwt/login"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"old_password\": \"<string>\",\n  \"new_password\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be68f4b6-a423-430c-84d3-14e6bcf7f677",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "me",
+                    "change-password"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"old_password\": \"<string>\",\n  \"new_password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"824fe24e-08e5-0136-51a1-9b265111a39f\",\n  \"email\": \"fVjtiPMX1@oeIZQjhSJPUYUhRCOUpEc.ipwm\",\n  \"active_env_id\": \"ed3b82aa-8106-4267-ee58-4d05fd98d00e\",\n  \"is_active\": true,\n  \"is_superuser\": false,\n  \"is_verified\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afcb9e22-373b-402b-aab2-357e41e5806b",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "me",
+                    "change-password"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"old_password\": \"<string>\",\n  \"new_password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31683214-f887-4403-821e-330f49be5718",
+          "name": "Export all users, envs, teams, and their relations",
+          "request": {
+            "name": "Export all users, envs, teams, and their relations",
+            "description": {
+              "content": "Export all users, environments, teams, and their relationships as a structured data object. Requires admin privileges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "export-all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/jwt/login"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "80b458b3-a61e-4e93-b5c5-4a300be71116",
+              "name": "A data structure containing users, environments, teams, and their relationships",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "export-all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"users\": [\n    {\n      \"id\": \"5d9efd29-638e-c474-b4d7-f9b8d120775e\",\n      \"email\": \"TDI@BwrJoZspezVSXVYitLsLaRpsXCtlJg.eeqg\",\n      \"active_env_id\": \"4c59ea59-0bc0-5a40-2375-f4acad0615a0\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    },\n    {\n      \"id\": \"3c85653d-7388-8523-d16c-8e27b682be2f\",\n      \"email\": \"TIkkyx@EiZv.txz\",\n      \"active_env_id\": \"77f85e68-61dd-b527-54e8-a86a20e8f791\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    }\n  ],\n  \"envs\": [\n    {\n      \"name\": \"staging\",\n      \"use_retention\": true,\n      \"id\": \"30539e1a-9935-a66e-8ffd-235fa3abdc2f\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"string\",\n        \"security_protocol\": \"SASL_SSL\",\n        \"sasl_mechanism\": \"GSSAPI\",\n        \"sasl_username\": \"string\",\n        \"sasl_password\": \"string\",\n        \"ca_cert\": \"\"\n      }\n    },\n    {\n      \"name\": \"staging\",\n      \"use_retention\": true,\n      \"id\": \"0915bb83-3a64-8cd4-cd35-8062dc1bff4f\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"string\",\n        \"security_protocol\": \"PLAINTEXT\",\n        \"sasl_mechanism\": \"SCRAM-SHA-512\",\n        \"sasl_username\": \"string\",\n        \"sasl_password\": \"string\",\n        \"ca_cert\": \"\"\n      }\n    }\n  ],\n  \"teams\": [\n    {\n      \"name\": \"Data Avengers\",\n      \"description\": \"Team managing data pipelines and infrastructure.\",\n      \"id\": \"8c18a0db-3b10-4f9b-a7d3-6e837bafacb0\",\n      \"env_id\": \"3c673de9-fa07-5c2d-8f09-c64da1b14323\"\n    },\n    {\n      \"name\": \"Data Avengers\",\n      \"description\": \"Team managing data pipelines and infrastructure.\",\n      \"id\": \"8c18a0db-3b10-4f9b-a7d3-6e837bafacb0\",\n      \"env_id\": \"aa0f4081-fb36-81ba-54d7-877a69fd5164\"\n    }\n  ],\n  \"env_members\": [\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"env_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    },\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"env_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    }\n  ],\n  \"team_members\": [\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"team_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    },\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"team_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb2dbc7d-833f-42b7-b083-1d2e44a18952",
+          "name": "Import all users, envs, teams, and their relations",
+          "request": {
+            "name": "Import all users, envs, teams, and their relations",
+            "description": {
+              "content": "Import all users, environments, teams, and their relationships from a structured data object. Requires admin privileges. This will overwrite all existing data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "import-all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/jwt/login"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"users\": [\n    {\n      \"id\": \"<uuid>\",\n      \"email\": \"<email>\",\n      \"active_env_id\": \"<uuid>\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"email\": \"<email>\",\n      \"active_env_id\": \"<uuid>\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    }\n  ],\n  \"envs\": [\n    {\n      \"name\": \"<string>\",\n      \"use_retention\": \"<boolean>\",\n      \"id\": \"<uuid>\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"<string>\",\n        \"security_protocol\": \"<string>\",\n        \"sasl_mechanism\": \"<string>\",\n        \"sasl_username\": \"<string>\",\n        \"sasl_password\": \"<string>\",\n        \"ca_cert\": \"\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"use_retention\": \"<boolean>\",\n      \"id\": \"<uuid>\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"<string>\",\n        \"security_protocol\": \"<string>\",\n        \"sasl_mechanism\": \"<string>\",\n        \"sasl_username\": \"<string>\",\n        \"sasl_password\": \"<string>\",\n        \"ca_cert\": \"\"\n      }\n    }\n  ],\n  \"teams\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"env_id\": \"<uuid>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"env_id\": \"<uuid>\"\n    }\n  ],\n  \"env_members\": [\n    {\n      \"user_id\": \"<uuid>\",\n      \"env_id\": \"<uuid>\",\n      \"admin\": \"<boolean>\"\n    },\n    {\n      \"user_id\": \"<uuid>\",\n      \"env_id\": \"<uuid>\",\n      \"admin\": \"<boolean>\"\n    }\n  ],\n  \"team_members\": [\n    {\n      \"user_id\": \"<uuid>\",\n      \"team_id\": \"<uuid>\",\n      \"admin\": \"<boolean>\"\n    },\n    {\n      \"user_id\": \"<uuid>\",\n      \"team_id\": \"<uuid>\",\n      \"admin\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "055e5763-e8eb-4520-8fc0-f5661225b64a",
+              "name": "Import completed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "import-all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"id\": \"dc58e752-91f9-7fe6-eaa3-0edaef3fadb3\",\n      \"email\": \"1Hev960ePFb@HiEHEiEtYGatgWZyfMDcU.nwgp\",\n      \"active_env_id\": \"2350be3d-ef88-b45c-cca8-c0fa416fe953\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    },\n    {\n      \"id\": \"ce78fa33-bb59-24f2-eaf6-1374f68fe5f6\",\n      \"email\": \"25JfVpj3ePCE@ShGzWIptLDNSeoVlUYZSSmKtgfGWl.fh\",\n      \"active_env_id\": \"b5804a5d-7181-b7e4-3b80-3ee8537afd57\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    }\n  ],\n  \"envs\": [\n    {\n      \"name\": \"staging\",\n      \"use_retention\": true,\n      \"id\": \"f36e45dd-cad5-6795-067e-053008bfb615\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"string\",\n        \"security_protocol\": \"SASL_PLAINTEXT\",\n        \"sasl_mechanism\": \"PLAIN\",\n        \"sasl_username\": \"string\",\n        \"sasl_password\": \"string\",\n        \"ca_cert\": \"\"\n      }\n    },\n    {\n      \"name\": \"staging\",\n      \"use_retention\": true,\n      \"id\": \"0b471afe-230c-4204-49f9-656e41e29faa\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"string\",\n        \"security_protocol\": \"SASL_SSL\",\n        \"sasl_mechanism\": \"PLAIN\",\n        \"sasl_username\": \"string\",\n        \"sasl_password\": \"string\",\n        \"ca_cert\": \"\"\n      }\n    }\n  ],\n  \"teams\": [\n    {\n      \"name\": \"Data Avengers\",\n      \"description\": \"Team managing data pipelines and infrastructure.\",\n      \"id\": \"8c18a0db-3b10-4f9b-a7d3-6e837bafacb0\",\n      \"env_id\": \"90df2d43-33bd-b09f-083d-8148c8e905c3\"\n    },\n    {\n      \"name\": \"Data Avengers\",\n      \"description\": \"Team managing data pipelines and infrastructure.\",\n      \"id\": \"8c18a0db-3b10-4f9b-a7d3-6e837bafacb0\",\n      \"env_id\": \"a8030095-e083-b242-d6bb-b448535f10cd\"\n    }\n  ],\n  \"env_members\": [\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"env_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    },\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"env_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    }\n  ],\n  \"team_members\": [\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"team_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    },\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"team_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "805ab1dd-3978-49ee-adb8-13f270e6c0a8",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "import-all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"id\": \"dc58e752-91f9-7fe6-eaa3-0edaef3fadb3\",\n      \"email\": \"1Hev960ePFb@HiEHEiEtYGatgWZyfMDcU.nwgp\",\n      \"active_env_id\": \"2350be3d-ef88-b45c-cca8-c0fa416fe953\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    },\n    {\n      \"id\": \"ce78fa33-bb59-24f2-eaf6-1374f68fe5f6\",\n      \"email\": \"25JfVpj3ePCE@ShGzWIptLDNSeoVlUYZSSmKtgfGWl.fh\",\n      \"active_env_id\": \"b5804a5d-7181-b7e4-3b80-3ee8537afd57\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    }\n  ],\n  \"envs\": [\n    {\n      \"name\": \"staging\",\n      \"use_retention\": true,\n      \"id\": \"f36e45dd-cad5-6795-067e-053008bfb615\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"string\",\n        \"security_protocol\": \"SASL_PLAINTEXT\",\n        \"sasl_mechanism\": \"PLAIN\",\n        \"sasl_username\": \"string\",\n        \"sasl_password\": \"string\",\n        \"ca_cert\": \"\"\n      }\n    },\n    {\n      \"name\": \"staging\",\n      \"use_retention\": true,\n      \"id\": \"0b471afe-230c-4204-49f9-656e41e29faa\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"string\",\n        \"security_protocol\": \"SASL_SSL\",\n        \"sasl_mechanism\": \"PLAIN\",\n        \"sasl_username\": \"string\",\n        \"sasl_password\": \"string\",\n        \"ca_cert\": \"\"\n      }\n    }\n  ],\n  \"teams\": [\n    {\n      \"name\": \"Data Avengers\",\n      \"description\": \"Team managing data pipelines and infrastructure.\",\n      \"id\": \"8c18a0db-3b10-4f9b-a7d3-6e837bafacb0\",\n      \"env_id\": \"90df2d43-33bd-b09f-083d-8148c8e905c3\"\n    },\n    {\n      \"name\": \"Data Avengers\",\n      \"description\": \"Team managing data pipelines and infrastructure.\",\n      \"id\": \"8c18a0db-3b10-4f9b-a7d3-6e837bafacb0\",\n      \"env_id\": \"a8030095-e083-b242-d6bb-b448535f10cd\"\n    }\n  ],\n  \"env_members\": [\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"env_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    },\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"env_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    }\n  ],\n  \"team_members\": [\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"team_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    },\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"team_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b23e037a-d6b4-4272-bf0e-f5bb444e1be1",
+          "name": "Users:Current User",
+          "request": {
+            "name": "Users:Current User",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                "me"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/jwt/login"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7709ab08-a2f0-43cd-a4a2-59b67cd33f5a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"824fe24e-08e5-0136-51a1-9b265111a39f\",\n  \"email\": \"fVjtiPMX1@oeIZQjhSJPUYUhRCOUpEc.ipwm\",\n  \"active_env_id\": \"ed3b82aa-8106-4267-ee58-4d05fd98d00e\",\n  \"is_active\": true,\n  \"is_superuser\": false,\n  \"is_verified\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14396d25-5508-45fb-a728-e3b516c20156",
+              "name": "Missing token or inactive user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4506b173-bc77-4fb7-8aa9-96f20b1c3605",
+          "name": "Users:Patch Current User",
+          "request": {
+            "name": "Users:Patch Current User",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                "me"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/jwt/login"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\",\n  \"is_superuser\": \"<boolean>\",\n  \"is_verified\": \"<boolean>\",\n  \"active_env_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "18485638-e945-438c-bb2b-252f170e4218",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\",\n  \"is_superuser\": \"<boolean>\",\n  \"is_verified\": \"<boolean>\",\n  \"active_env_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"824fe24e-08e5-0136-51a1-9b265111a39f\",\n  \"email\": \"fVjtiPMX1@oeIZQjhSJPUYUhRCOUpEc.ipwm\",\n  \"active_env_id\": \"ed3b82aa-8106-4267-ee58-4d05fd98d00e\",\n  \"is_active\": true,\n  \"is_superuser\": false,\n  \"is_verified\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8becb3d9-8c49-42f2-8f01-cc4af44e1507",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\",\n  \"is_superuser\": \"<boolean>\",\n  \"is_verified\": \"<boolean>\",\n  \"active_env_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"UPDATE_USER_EMAIL_ALREADY_EXISTS\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8173dce9-27c6-4763-950c-c1eda9147316",
+              "name": "Missing token or inactive user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\",\n  \"is_superuser\": \"<boolean>\",\n  \"is_verified\": \"<boolean>\",\n  \"active_env_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "74026fd7-4165-4163-a3c1-31f05bb26b3a",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\",\n  \"is_superuser\": \"<boolean>\",\n  \"is_verified\": \"<boolean>\",\n  \"active_env_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32f9185e-57c4-4f91-a0ce-115945355ff0",
+          "name": "Users:User",
+          "request": {
+            "name": "Users:User",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/jwt/login"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "232964c6-037d-46ea-aaf0-01d7cc6ac087",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"824fe24e-08e5-0136-51a1-9b265111a39f\",\n  \"email\": \"fVjtiPMX1@oeIZQjhSJPUYUhRCOUpEc.ipwm\",\n  \"active_env_id\": \"ed3b82aa-8106-4267-ee58-4d05fd98d00e\",\n  \"is_active\": true,\n  \"is_superuser\": false,\n  \"is_verified\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "416b38ea-d98b-4731-b16f-660ba113ad64",
+              "name": "Missing token or inactive user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "95a06fdf-8ec1-415e-890f-705bf839b79a",
+              "name": "Not a superuser.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "60939917-b612-4873-b087-d768fe9a2394",
+              "name": "The user does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "12a5a389-8c62-4d2f-acbe-7a6085221f5a",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ab41d99-efc5-4349-9c77-498d968e6b52",
+          "name": "Users:Patch User",
+          "request": {
+            "name": "Users:Patch User",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/jwt/login"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\",\n  \"is_superuser\": \"<boolean>\",\n  \"is_verified\": \"<boolean>\",\n  \"active_env_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e5c8e36-2241-47e5-8c54-92cbeaf31a22",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\",\n  \"is_superuser\": \"<boolean>\",\n  \"is_verified\": \"<boolean>\",\n  \"active_env_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"824fe24e-08e5-0136-51a1-9b265111a39f\",\n  \"email\": \"fVjtiPMX1@oeIZQjhSJPUYUhRCOUpEc.ipwm\",\n  \"active_env_id\": \"ed3b82aa-8106-4267-ee58-4d05fd98d00e\",\n  \"is_active\": true,\n  \"is_superuser\": false,\n  \"is_verified\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56122459-3b91-4da9-b51d-6364a97d10d3",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\",\n  \"is_superuser\": \"<boolean>\",\n  \"is_verified\": \"<boolean>\",\n  \"active_env_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"UPDATE_USER_EMAIL_ALREADY_EXISTS\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed973d77-32ae-4074-ab14-8f3eee913f47",
+              "name": "Missing token or inactive user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\",\n  \"is_superuser\": \"<boolean>\",\n  \"is_verified\": \"<boolean>\",\n  \"active_env_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6fd00e91-3b92-4a96-ac1e-6411051e0a46",
+              "name": "Not a superuser.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\",\n  \"is_superuser\": \"<boolean>\",\n  \"is_verified\": \"<boolean>\",\n  \"active_env_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "368a8547-193f-470f-93f0-23adc00c0a56",
+              "name": "The user does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\",\n  \"is_superuser\": \"<boolean>\",\n  \"is_verified\": \"<boolean>\",\n  \"active_env_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c98b1ec6-e0ef-434c-ac16-823a51453250",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"email\": \"<email>\",\n  \"is_active\": \"<boolean>\",\n  \"is_superuser\": \"<boolean>\",\n  \"is_verified\": \"<boolean>\",\n  \"active_env_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29cedebc-b187-4f06-8589-5016cf81a2f2",
+          "name": "Users:Delete User",
+          "request": {
+            "name": "Users:Delete User",
+            "description": {},
+            "url": {
+              "path": [
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/jwt/login"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "03280138-0072-4c9f-8826-6be414cb9957",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3fd8c887-a49a-4252-afe7-52d61860ecc3",
+              "name": "Missing token or inactive user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ad18d46c-82b5-4224-b99b-95fd585056ce",
+              "name": "Not a superuser.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98b000cb-ca9c-46ac-af7f-ee43995f46a2",
+              "name": "The user does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ae75bde2-22be-4f20-891f-a9922a399ebb",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1c965fa-72d6-4b93-a9a4-5e7898e59677",
+          "name": "Get Me",
+          "request": {
+            "name": "Get Me",
+            "description": {
+              "content": "Get the current user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "me",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4d2ef4b-8e17-44d0-948d-81533e580c8f",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "me",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "authorization",
+                    "value": "",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1ae4db7-dabc-48d5-a960-c817d9df68e8",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "me",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "authorization",
+                    "value": "",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "afd6a1dd-cbc8-40d7-83ae-8815a6b515ec",
+    "name": "Fast admin users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

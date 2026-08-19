@@ -1,0 +1,181 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin team_request API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "team_request",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List user team requests with details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/teams/requests/me",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List all requests addressed to the current user with user and team details."
+        },
+        {
+          "info": {
+            "name": "List team requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/teams/:team_id/requests",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List all requests for a given team."
+        },
+        {
+          "info": {
+            "name": "Register a team request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/teams/:team_id/requests",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Register a new team request. Only team admins can send requests."
+        },
+        {
+          "info": {
+            "name": "Get a team request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/teams/:team_id/requests/:request_id",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a team request by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Update a team request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/api/teams/:team_id/requests/:request_id",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update a team request by its unique ID. Users can only accept their own requests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

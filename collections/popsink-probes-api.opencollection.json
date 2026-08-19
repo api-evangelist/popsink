@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin probes API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "probes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Probes:Livez",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/livez"
+          },
+          "docs": "Get the liveness probe."
+        },
+        {
+          "info": {
+            "name": "Probes:Livez",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/readyz"
+          },
+          "docs": "Get the readiness probe."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

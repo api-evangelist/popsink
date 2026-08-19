@@ -1,0 +1,213 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin jobs-smt API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "jobs-smt",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Job-Smt:Process-Mapper",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/smt/process_mapper",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process mapper."
+        },
+        {
+          "info": {
+            "name": "Job-Smt:Process-Flattener",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/smt/process_flattener",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process flattener."
+        },
+        {
+          "info": {
+            "name": "Job-Smt:Process-Splitter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/smt/process_splitter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process splitter."
+        },
+        {
+          "info": {
+            "name": "Job-Smt:Process-Stringify-List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/smt/process_stringify_list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process stringify list."
+        },
+        {
+          "info": {
+            "name": "Job-Smt:Process-Stringify-Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/smt/process_stringify_key",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process stringify key."
+        },
+        {
+          "info": {
+            "name": "Job-Smt:Process-Unenvelope",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/smt/process_unenvelope",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process unenvelope."
+        },
+        {
+          "info": {
+            "name": "Job-Smt:Process-Key-Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/smt/process_key_filter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process key filter."
+        },
+        {
+          "info": {
+            "name": "Job-Smt:Process-Key-Mover",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/smt/process_key_mover",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process key mover."
+        },
+        {
+          "info": {
+            "name": "Job-Smt:Process-Dict-Mover",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/smt/process_dict_mover",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process dict mover."
+        },
+        {
+          "info": {
+            "name": "Job-Smt:Process-Sanitize-Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/smt/process_sanitize_key",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process sanitize key."
+        },
+        {
+          "info": {
+            "name": "Job-Smt:Process-Hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/smt/process_hash",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process hash."
+        },
+        {
+          "info": {
+            "name": "Job-Smt:Process-Encryption",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/smt/process_encryption",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process encryption."
+        },
+        {
+          "info": {
+            "name": "Job-Smt:Process-Filtering",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/smt/process_filtering",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process filtering."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

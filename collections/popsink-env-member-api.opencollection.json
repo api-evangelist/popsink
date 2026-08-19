@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin env_member API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "env_member",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Env Member:List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/envs/members",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List the environment members of the specified environment."
+        },
+        {
+          "info": {
+            "name": "Env Member:Get Me",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/envs/members/me",
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Read the environment member of the current user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

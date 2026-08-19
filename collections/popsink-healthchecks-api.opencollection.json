@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin healthchecks API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "healthchecks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Healthchecks:Api",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/healthchecks"
+          },
+          "docs": "Get the status of the api."
+        },
+        {
+          "info": {
+            "name": "Healthchecks:K8S",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/healthchecks/k8s"
+          },
+          "docs": "Get the status of kubernetes."
+        },
+        {
+          "info": {
+            "name": "Healthchecks:Db",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/healthchecks/db"
+          },
+          "docs": "Get the status of the database."
+        },
+        {
+          "info": {
+            "name": "Healthchecks:Debug",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/healthchecks/debug"
+          },
+          "docs": "Display debugs infos."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

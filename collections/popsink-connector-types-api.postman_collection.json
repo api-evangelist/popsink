@@ -1,0 +1,443 @@
+{
+  "item": [
+    {
+      "id": "92991ee6-d8e4-47bc-b3b4-85e646112cc8",
+      "name": "connector types",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ff125bd7-8ee1-4ff9-abcb-abd26ed95d13",
+          "name": "Kafka-Source:Check-Credentials",
+          "request": {
+            "name": "Kafka-Source:Check-Credentials",
+            "description": {
+              "content": "Check the kafka source credentials.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "kafka-source",
+                "check-credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"topic\": \"<string>\",\n  \"consumer_group_id\": \"<string>\",\n  \"sasl_username\": \"<string>\",\n  \"sasl_password\": \"<string>\",\n  \"bootstrap_servers\": \"<string>\",\n  \"security_protocol\": \"<string>\",\n  \"sasl_mechanism\": \"<string>\",\n  \"include_metadata\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0fd50f47-83b5-497e-8d8e-0255ecdc136e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kafka-source",
+                    "check-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"topic\": \"user_events\",\n  \"consumer_group_id\": \"<string>\",\n  \"sasl_username\": \"kafka_user\",\n  \"sasl_password\": \"securePassword123!\",\n  \"bootstrap_servers\": \"kafka1:9092,kafka2:9092\",\n  \"security_protocol\": \"SASL_SSL\",\n  \"sasl_mechanism\": \"SCRAM-SHA-512\",\n  \"include_metadata\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"is_success\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd1d2fbd-0ce2-4d46-ad99-8b5116568ce7",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kafka-source",
+                    "check-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"topic\": \"user_events\",\n  \"consumer_group_id\": \"<string>\",\n  \"sasl_username\": \"kafka_user\",\n  \"sasl_password\": \"securePassword123!\",\n  \"bootstrap_servers\": \"kafka1:9092,kafka2:9092\",\n  \"security_protocol\": \"SASL_SSL\",\n  \"sasl_mechanism\": \"SCRAM-SHA-512\",\n  \"include_metadata\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6cc07d2e-30f8-4308-ae54-ada407c1abd2",
+          "name": "Kafka-Source:Fetch-Messages",
+          "request": {
+            "name": "Kafka-Source:Fetch-Messages",
+            "description": {
+              "content": "Fetch some messages from the connector configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "kafka-source",
+                "fetch-messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"topic\": \"<string>\",\n  \"consumer_group_id\": \"<string>\",\n  \"sasl_username\": \"<string>\",\n  \"sasl_password\": \"<string>\",\n  \"bootstrap_servers\": \"<string>\",\n  \"security_protocol\": \"<string>\",\n  \"sasl_mechanism\": \"<string>\",\n  \"include_metadata\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f251345-d3db-4836-8b7f-25ab17e21958",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kafka-source",
+                    "fetch-messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"topic\": \"user_events\",\n  \"consumer_group_id\": \"<string>\",\n  \"sasl_username\": \"kafka_user\",\n  \"sasl_password\": \"securePassword123!\",\n  \"bootstrap_servers\": \"kafka1:9092,kafka2:9092\",\n  \"security_protocol\": \"SASL_SSL\",\n  \"sasl_mechanism\": \"SCRAM-SHA-512\",\n  \"include_metadata\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3194ee8-9e37-48a2-9840-b506c6f83a3d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kafka-source",
+                    "fetch-messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"topic\": \"user_events\",\n  \"consumer_group_id\": \"<string>\",\n  \"sasl_username\": \"kafka_user\",\n  \"sasl_password\": \"securePassword123!\",\n  \"bootstrap_servers\": \"kafka1:9092,kafka2:9092\",\n  \"security_protocol\": \"SASL_SSL\",\n  \"sasl_mechanism\": \"SCRAM-SHA-512\",\n  \"include_metadata\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5f600ee-2749-4ae3-a281-4c05f3d648ac",
+          "name": "Oracle-Target:Check-Credentials",
+          "request": {
+            "name": "Oracle-Target:Check-Credentials",
+            "description": {
+              "content": "Check oracle target credentials.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oracle-target",
+                "check-credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"database\": \"<string>\",\n  \"user\": \"<string>\",\n  \"password\": \"<string>\",\n  \"host\": \"<string>\",\n  \"port\": \"<string>\",\n  \"server_name\": \"<string>\",\n  \"server_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4b0c6de8-4542-4bad-8904-1b5e71bb7037",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oracle-target",
+                    "check-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"database\": \"ORCL\",\n  \"user\": \"admin_user\",\n  \"password\": \"StrongPass123\",\n  \"host\": \"192.168.1.100\",\n  \"port\": \"1521\",\n  \"server_name\": \"XE\",\n  \"server_id\": \"oraclesrv01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"is_success\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c19479d-7166-4ee7-a957-bf2a307f3d3e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oracle-target",
+                    "check-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"database\": \"ORCL\",\n  \"user\": \"admin_user\",\n  \"password\": \"StrongPass123\",\n  \"host\": \"192.168.1.100\",\n  \"port\": \"1521\",\n  \"server_name\": \"XE\",\n  \"server_id\": \"oraclesrv01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "51780f1e-4e76-4c04-a46b-d6cf155a7fa0",
+    "name": "Fast admin connector types API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

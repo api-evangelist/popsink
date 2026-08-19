@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin connectors API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "connectors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Source Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/connectors/source-config",
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List all source configurations."
+        },
+        {
+          "info": {
+            "name": "List Target Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/connectors/target-config",
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List all target configurations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

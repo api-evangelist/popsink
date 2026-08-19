@@ -1,0 +1,203 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin env_request API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "env_request",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List user env requests with details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/envs/requests/me",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List all requests addressed to the current user with user and env details."
+        },
+        {
+          "info": {
+            "name": "List env requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/envs/:env_id/requests",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List all requests for a specific environment. Only env admins can access this."
+        },
+        {
+          "info": {
+            "name": "Register an env request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/envs/:env_id/requests",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Register a new env request. Only env admins can send requests."
+        },
+        {
+          "info": {
+            "name": "Get env request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/envs/requests/:request_id",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a specific env request by ID."
+        },
+        {
+          "info": {
+            "name": "Update env request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/api/envs/requests/:request_id",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update an env request (accept/decline)."
+        },
+        {
+          "info": {
+            "name": "Delete env request",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/envs/requests/:request_id",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete an env request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

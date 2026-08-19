@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin schemas API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "schemas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Schemas:Register",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/schemas/:subject",
+            "params": [
+              {
+                "name": "subject",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Register a schema."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

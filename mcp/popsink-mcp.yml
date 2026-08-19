@@ -2,12 +2,10 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/popsink-onprem-api-openapi-original.json, openapi/popsink-public-api-openapi-original.json
-notes: >-
-  No official hosted or remote Popsink MCP server was found in the docs, npm
-  (@modelcontextprotocol), or public MCP registries as of the generated date.
-  The tool list below is a CANDIDATE derived from a curated subset of the
-  Popsink on-prem control-plane and public OpenAPI operations (pipelines,
-  connectors, envs, teams, organizations). Not authoritative.
+notes: No official hosted or remote Popsink MCP server was found in the docs, npm (@modelcontextprotocol),
+  or public MCP registries as of the generated date. The tool list below is a CANDIDATE derived from a
+  curated subset of the Popsink on-prem control-plane and public OpenAPI operations (pipelines, connectors,
+  envs, teams, organizations). Not authoritative.
 server:
   name: popsink
   transport: http
@@ -48,3 +46,9 @@ tools:
 - name: list_organizations
   description: List the organizations of the current user (public API).
   source_operation: openapi/popsink-public-api-openapi-original.json#get_organizations_organizations__get
+deployment:
+  mode: none
+  verified: derived
+  tools: 12
+  checked: '2026-08-12'
+  source: catalog MCP census

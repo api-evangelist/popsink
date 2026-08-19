@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin user-logs API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "user-logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "User Logs:List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/user-logs",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Filter by action type (login, logout, etc.)"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter logs for a specific user by user ID."
+              },
+              {
+                "name": "user_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user type (real_user or system)."
+              },
+              {
+                "name": "from_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date for filtering logs (ISO 8601 format)."
+              },
+              {
+                "name": "to_date",
+                "value": "",
+                "type": "query",
+                "description": "End date for filtering logs (ISO 8601 format)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List user logs with filtering options."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin team_member API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "team_member",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Team Member:Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/teams/:team_id/members/bulk",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Bulk create team members.\n\nAdd multiple users to a team as either members or owners.\nReturns 204 No Content on success.\nUsers who are already team members will be skipped."
+        },
+        {
+          "info": {
+            "name": "Team Member:List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/teams/:team_id/members",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List the team members of the specified team."
+        },
+        {
+          "info": {
+            "name": "Team Member:Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/teams/:team_id/members/me",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get the team member details of the current user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

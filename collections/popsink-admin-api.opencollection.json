@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export all users, envs, teams, and their relations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/export-all",
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Export all users, environments, teams, and their relationships as a structured data object. Requires admin privileges."
+        },
+        {
+          "info": {
+            "name": "Import all users, envs, teams, and their relations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/import-all",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Import all users, environments, teams, and their relationships from a structured data object. Requires admin privileges. This will overwrite all existing data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

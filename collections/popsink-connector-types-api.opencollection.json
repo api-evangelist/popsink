@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin connector types API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "connector types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kafka-Source:Check-Credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/kafka-source/check-credentials",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Check the kafka source credentials."
+        },
+        {
+          "info": {
+            "name": "Kafka-Source:Fetch-Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/kafka-source/fetch-messages",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch some messages from the connector configuration."
+        },
+        {
+          "info": {
+            "name": "Oracle-Target:Check-Credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/oracle-target/check-credentials",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Check oracle target credentials."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

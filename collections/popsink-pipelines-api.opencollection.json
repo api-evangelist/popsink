@@ -1,0 +1,422 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin pipelines API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "pipelines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List pipelines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/pipelines/",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter pipelines by state (e.g., BUILDING, PAUSED)."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search term to filter pipelines by name or description."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter pipelines by the ID of the team they belong to."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a paginated list of pipelines with optional filters for state, search keyword, and team."
+        },
+        {
+          "info": {
+            "name": "Create a new pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/pipelines/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Register a new pipeline in the system, requires write permissions on the team."
+        },
+        {
+          "info": {
+            "name": "Count pipelines by status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/pipelines/count-status",
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Return the number of pipelines grouped by their state in the current environment."
+        },
+        {
+          "info": {
+            "name": "Get pipeline details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/pipelines/:pipeline_id",
+            "params": [
+              {
+                "name": "pipeline_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the pipeline to get"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve detailed information of a pipeline by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/api/pipelines/:pipeline_id",
+            "params": [
+              {
+                "name": "pipeline_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the pipeline to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update properties of an existing pipeline, requires write permission on the pipeline."
+        },
+        {
+          "info": {
+            "name": "Delete a pipeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/pipelines/:pipeline_id",
+            "params": [
+              {
+                "name": "pipeline_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the pipeline to delete"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete the specified pipeline, requires delete permission."
+        },
+        {
+          "info": {
+            "name": "Start pipeline execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/pipelines/:pipeline_id/start",
+            "params": [
+              {
+                "name": "pipeline_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the pipeline to start"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Start the pipeline's worker process, requires write permission on the pipeline's team."
+        },
+        {
+          "info": {
+            "name": "Pause pipeline execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/pipelines/:pipeline_id/pause",
+            "params": [
+              {
+                "name": "pipeline_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the pipeline to pause"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Pause the running pipeline, requires access permission."
+        },
+        {
+          "info": {
+            "name": "Get pipeline logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/pipelines/:pipeline_id/logs",
+            "params": [
+              {
+                "name": "pipeline_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the pipeline to get logs for"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve logs of a pipeline execution."
+        },
+        {
+          "info": {
+            "name": "Get pipeline status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/pipelines/:pipeline_id/status",
+            "params": [
+              {
+                "name": "pipeline_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the pipeline to get status for"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get the current status of the pipeline, refreshing state from worker logs."
+        },
+        {
+          "info": {
+            "name": "Export pipeline configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/pipelines/:pipeline_id/configuration",
+            "params": [
+              {
+                "name": "pipeline_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the pipeline to export config for"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Export the JSON configuration of the pipeline."
+        },
+        {
+          "info": {
+            "name": "Import pipeline configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/pipelines/:pipeline_id/configuration",
+            "params": [
+              {
+                "name": "pipeline_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the pipeline to import config for"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update pipeline configuration by importing a new JSON config,requires write permission."
+        },
+        {
+          "info": {
+            "name": "List status of all non-draft pipelines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/pipelines/status/all-non-draft",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter pipelines by state (e.g., BUILDING, PAUSED, LIVE, ERROR). If omitted, returns all non-draft pipelines."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search term to filter pipelines by name or description."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter pipelines by the ID of the team they belong to."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a paginated list of all pipelines that are not in DRAFT state. Supports filtering by state (excluding DRAFT by default), team, and search. Returns pipeline status and summary information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

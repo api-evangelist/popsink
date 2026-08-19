@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin auth API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Auth:Jwt.Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/auth/jwt/login",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Auth:Jwt.Login"
+        },
+        {
+          "info": {
+            "name": "Auth:Jwt.Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/auth/jwt/logout",
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Auth:Jwt.Logout"
+        },
+        {
+          "info": {
+            "name": "Register:Register",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/auth/register",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register:Register"
+        },
+        {
+          "info": {
+            "name": "Reset:Forgot Password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/auth/forgot-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reset:Forgot Password"
+        },
+        {
+          "info": {
+            "name": "Reset:Reset Password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/auth/reset-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reset:Reset Password"
+        },
+        {
+          "info": {
+            "name": "Verify:Request-Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/auth/request-verify-token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify:Request-Token"
+        },
+        {
+          "info": {
+            "name": "Verify:Verify",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/auth/verify",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify:Verify"
+        },
+        {
+          "info": {
+            "name": "Auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/auth/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticate the user from Auth0.\n\nAuth0 response is like:\n{\n    \"access_token\": \"eyJ...Ggg\",\n    \"expires_in\": 86400,\n    \"scope\": \"read:clients create:clients read:client_keys\",\n    \"token_type\": \"Bearer\"\n}"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

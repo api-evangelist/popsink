@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fast admin brokers API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "brokers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Brokers:Test",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/brokers/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "auth/jwt/login",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Test the broker credentials."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

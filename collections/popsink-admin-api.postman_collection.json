@@ -1,0 +1,285 @@
+{
+  "item": [
+    {
+      "id": "a4bcd64b-e558-47a0-addd-77cee9eba1dd",
+      "name": "admin",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "351d18a0-f46d-40de-b8df-6894f3c6ce5e",
+          "name": "Export all users, envs, teams, and their relations",
+          "request": {
+            "name": "Export all users, envs, teams, and their relations",
+            "description": {
+              "content": "Export all users, environments, teams, and their relationships as a structured data object. Requires admin privileges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "export-all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/jwt/login"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bcbb746d-8e0d-45cf-827f-c2ddd3a40e1c",
+              "name": "A data structure containing users, environments, teams, and their relationships",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "export-all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"users\": [\n    {\n      \"id\": \"90d298cd-d001-9986-74b7-77a03d7a4cf6\",\n      \"email\": \"pbVtsKNWQeQUkf@Ro.oiqe\",\n      \"active_env_id\": \"40e75a64-b5fb-b298-0751-476ab5be0528\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    },\n    {\n      \"id\": \"b8a23a2f-f9d4-232d-11ad-7a17a2f332c2\",\n      \"email\": \"S7XYVtzSQl8GN67@RbBKNMVEfqbcRcrKEVmND.uh\",\n      \"active_env_id\": \"596d329e-cf06-dda2-444e-9a6799717c2a\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    }\n  ],\n  \"envs\": [\n    {\n      \"name\": \"staging\",\n      \"use_retention\": true,\n      \"id\": \"cc5b466a-feb8-5155-03d1-29e058fc63d8\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"string\",\n        \"security_protocol\": \"SASL_PLAINTEXT\",\n        \"sasl_mechanism\": \"SCRAM-SHA-256\",\n        \"sasl_username\": \"string\",\n        \"sasl_password\": \"string\",\n        \"ca_cert\": \"\"\n      }\n    },\n    {\n      \"name\": \"staging\",\n      \"use_retention\": true,\n      \"id\": \"73ba69b4-d7c4-06bd-a9da-23e3566ae474\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"string\",\n        \"security_protocol\": \"SASL_SSL\",\n        \"sasl_mechanism\": \"SCRAM-SHA-256\",\n        \"sasl_username\": \"string\",\n        \"sasl_password\": \"string\",\n        \"ca_cert\": \"\"\n      }\n    }\n  ],\n  \"teams\": [\n    {\n      \"name\": \"Data Avengers\",\n      \"description\": \"Team managing data pipelines and infrastructure.\",\n      \"id\": \"8c18a0db-3b10-4f9b-a7d3-6e837bafacb0\",\n      \"env_id\": \"4a906aed-b51c-3061-e9b4-c699dee2ea1c\"\n    },\n    {\n      \"name\": \"Data Avengers\",\n      \"description\": \"Team managing data pipelines and infrastructure.\",\n      \"id\": \"8c18a0db-3b10-4f9b-a7d3-6e837bafacb0\",\n      \"env_id\": \"7af6903a-b1cf-7ecf-9137-86b6ccc73daa\"\n    }\n  ],\n  \"env_members\": [\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"env_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    },\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"env_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    }\n  ],\n  \"team_members\": [\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"team_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    },\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"team_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4091fee-63dd-4b53-847b-25fae099f4c1",
+          "name": "Import all users, envs, teams, and their relations",
+          "request": {
+            "name": "Import all users, envs, teams, and their relations",
+            "description": {
+              "content": "Import all users, environments, teams, and their relationships from a structured data object. Requires admin privileges. This will overwrite all existing data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "import-all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/jwt/login"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"users\": [\n    {\n      \"id\": \"<uuid>\",\n      \"email\": \"<email>\",\n      \"active_env_id\": \"<uuid>\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"email\": \"<email>\",\n      \"active_env_id\": \"<uuid>\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    }\n  ],\n  \"envs\": [\n    {\n      \"name\": \"<string>\",\n      \"use_retention\": \"<boolean>\",\n      \"id\": \"<uuid>\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"<string>\",\n        \"security_protocol\": \"<string>\",\n        \"sasl_mechanism\": \"<string>\",\n        \"sasl_username\": \"<string>\",\n        \"sasl_password\": \"<string>\",\n        \"ca_cert\": \"\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"use_retention\": \"<boolean>\",\n      \"id\": \"<uuid>\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"<string>\",\n        \"security_protocol\": \"<string>\",\n        \"sasl_mechanism\": \"<string>\",\n        \"sasl_username\": \"<string>\",\n        \"sasl_password\": \"<string>\",\n        \"ca_cert\": \"\"\n      }\n    }\n  ],\n  \"teams\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"env_id\": \"<uuid>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"env_id\": \"<uuid>\"\n    }\n  ],\n  \"env_members\": [\n    {\n      \"user_id\": \"<uuid>\",\n      \"env_id\": \"<uuid>\",\n      \"admin\": \"<boolean>\"\n    },\n    {\n      \"user_id\": \"<uuid>\",\n      \"env_id\": \"<uuid>\",\n      \"admin\": \"<boolean>\"\n    }\n  ],\n  \"team_members\": [\n    {\n      \"user_id\": \"<uuid>\",\n      \"team_id\": \"<uuid>\",\n      \"admin\": \"<boolean>\"\n    },\n    {\n      \"user_id\": \"<uuid>\",\n      \"team_id\": \"<uuid>\",\n      \"admin\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "235409c7-be58-486c-80d5-70e030bec695",
+              "name": "Import completed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "import-all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"id\": \"b19eae0a-df34-72a4-26e8-e43bf8ae18fc\",\n      \"email\": \"trvQRAhKg@SXOxPQizZVzVsijUdsMuBJcXur.hdo\",\n      \"active_env_id\": \"8ccf1275-7dba-b6c2-d6ed-47dca8f63dea\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    },\n    {\n      \"id\": \"5ac7c597-6fda-9ddb-edbd-de00804c6c62\",\n      \"email\": \"6EF@vex.olg\",\n      \"active_env_id\": \"f8a9f145-06e7-ee8f-8edb-eb7d1364fb43\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    }\n  ],\n  \"envs\": [\n    {\n      \"name\": \"staging\",\n      \"use_retention\": true,\n      \"id\": \"2e2cd636-2774-0799-dffe-35a24172f9de\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"string\",\n        \"security_protocol\": \"PLAINTEXT\",\n        \"sasl_mechanism\": \"SCRAM-SHA-512\",\n        \"sasl_username\": \"string\",\n        \"sasl_password\": \"string\",\n        \"ca_cert\": \"\"\n      }\n    },\n    {\n      \"name\": \"staging\",\n      \"use_retention\": true,\n      \"id\": \"71a0ae61-4708-1c36-716c-3ebda0d480f0\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"string\",\n        \"security_protocol\": \"SSL\",\n        \"sasl_mechanism\": \"PLAIN\",\n        \"sasl_username\": \"string\",\n        \"sasl_password\": \"string\",\n        \"ca_cert\": \"\"\n      }\n    }\n  ],\n  \"teams\": [\n    {\n      \"name\": \"Data Avengers\",\n      \"description\": \"Team managing data pipelines and infrastructure.\",\n      \"id\": \"8c18a0db-3b10-4f9b-a7d3-6e837bafacb0\",\n      \"env_id\": \"e51b3cd1-8494-606d-7620-429510435e1d\"\n    },\n    {\n      \"name\": \"Data Avengers\",\n      \"description\": \"Team managing data pipelines and infrastructure.\",\n      \"id\": \"8c18a0db-3b10-4f9b-a7d3-6e837bafacb0\",\n      \"env_id\": \"6d5120a8-ce07-f1aa-9302-09882504e764\"\n    }\n  ],\n  \"env_members\": [\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"env_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    },\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"env_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    }\n  ],\n  \"team_members\": [\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"team_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    },\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"team_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a3b24122-473d-4cf1-b221-7943271a8c8c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "import-all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"id\": \"b19eae0a-df34-72a4-26e8-e43bf8ae18fc\",\n      \"email\": \"trvQRAhKg@SXOxPQizZVzVsijUdsMuBJcXur.hdo\",\n      \"active_env_id\": \"8ccf1275-7dba-b6c2-d6ed-47dca8f63dea\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    },\n    {\n      \"id\": \"5ac7c597-6fda-9ddb-edbd-de00804c6c62\",\n      \"email\": \"6EF@vex.olg\",\n      \"active_env_id\": \"f8a9f145-06e7-ee8f-8edb-eb7d1364fb43\",\n      \"is_active\": true,\n      \"is_superuser\": false,\n      \"is_verified\": false\n    }\n  ],\n  \"envs\": [\n    {\n      \"name\": \"staging\",\n      \"use_retention\": true,\n      \"id\": \"2e2cd636-2774-0799-dffe-35a24172f9de\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"string\",\n        \"security_protocol\": \"PLAINTEXT\",\n        \"sasl_mechanism\": \"SCRAM-SHA-512\",\n        \"sasl_username\": \"string\",\n        \"sasl_password\": \"string\",\n        \"ca_cert\": \"\"\n      }\n    },\n    {\n      \"name\": \"staging\",\n      \"use_retention\": true,\n      \"id\": \"71a0ae61-4708-1c36-716c-3ebda0d480f0\",\n      \"retention_configuration\": {\n        \"bootstrap_server\": \"string\",\n        \"security_protocol\": \"SSL\",\n        \"sasl_mechanism\": \"PLAIN\",\n        \"sasl_username\": \"string\",\n        \"sasl_password\": \"string\",\n        \"ca_cert\": \"\"\n      }\n    }\n  ],\n  \"teams\": [\n    {\n      \"name\": \"Data Avengers\",\n      \"description\": \"Team managing data pipelines and infrastructure.\",\n      \"id\": \"8c18a0db-3b10-4f9b-a7d3-6e837bafacb0\",\n      \"env_id\": \"e51b3cd1-8494-606d-7620-429510435e1d\"\n    },\n    {\n      \"name\": \"Data Avengers\",\n      \"description\": \"Team managing data pipelines and infrastructure.\",\n      \"id\": \"8c18a0db-3b10-4f9b-a7d3-6e837bafacb0\",\n      \"env_id\": \"6d5120a8-ce07-f1aa-9302-09882504e764\"\n    }\n  ],\n  \"env_members\": [\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"env_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    },\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"env_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    }\n  ],\n  \"team_members\": [\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"team_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    },\n    {\n      \"user_id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"team_id\": \"a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3\",\n      \"admin\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9c5922e9-20b5-41da-abfc-cf633500d2ee",
+    "name": "Fast admin API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
