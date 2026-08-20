@@ -58,6 +58,8 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
+  - Admin
+  tags_raw:
   - admin
   properties:
   - type: OpenAPI
@@ -68,6 +70,8 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
+  - Authentication
+  tags_raw:
   - auth
   properties:
   - type: OpenAPI
@@ -78,6 +82,8 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
+  - Brokers
+  tags_raw:
   - brokers
   properties:
   - type: OpenAPI
@@ -88,6 +94,8 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
+  - Connector Types
+  tags_raw:
   - connector types
   properties:
   - type: OpenAPI
@@ -98,6 +106,8 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
+  - Connectors
+  tags_raw:
   - connectors
   properties:
   - type: OpenAPI
@@ -107,7 +117,8 @@ apis:
   description: The env_member API from Popsink — 2 operation(s) for env_member.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
-  tags:
+  tags: []
+  tags_raw:
   - env_member
   properties:
   - type: OpenAPI
@@ -117,7 +128,8 @@ apis:
   description: The env_request API from Popsink — 3 operation(s) for env_request.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
-  tags:
+  tags: []
+  tags_raw:
   - env_request
   properties:
   - type: OpenAPI
@@ -138,6 +150,8 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
+  - Health Checks
+  tags_raw:
   - healthchecks
   properties:
   - type: OpenAPI
@@ -158,6 +172,8 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
+  - Organization
+  tags_raw:
   - organizations
   properties:
   - type: OpenAPI
@@ -168,6 +184,8 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
+  - Pipelines
+  tags_raw:
   - pipelines
   properties:
   - type: OpenAPI
@@ -198,6 +216,8 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
+  - SAML
+  tags_raw:
   - saml
   properties:
   - type: OpenAPI
@@ -208,6 +228,8 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
+  - Schemas
+  tags_raw:
   - schemas
   properties:
   - type: OpenAPI
@@ -217,7 +239,8 @@ apis:
   description: The team_member API from Popsink — 3 operation(s) for team_member.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
-  tags:
+  tags: []
+  tags_raw:
   - team_member
   properties:
   - type: OpenAPI
@@ -227,7 +250,8 @@ apis:
   description: The team_request API from Popsink — 3 operation(s) for team_request.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
-  tags:
+  tags: []
+  tags_raw:
   - team_request
   properties:
   - type: OpenAPI
@@ -238,6 +262,8 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
+  - Team
+  tags_raw:
   - teams
   properties:
   - type: OpenAPI
@@ -258,6 +284,8 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
