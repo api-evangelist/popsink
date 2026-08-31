@@ -94,7 +94,7 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
-  - Brokers
+  - brokers
   tags_raw:
   - brokers
   properties:
@@ -106,7 +106,7 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
-  - Connector Types
+  - connector types
   tags_raw:
   - connector types
   properties:
@@ -162,7 +162,7 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
-  - Health Checks
+  - healthchecks
   tags_raw:
   - healthchecks
   properties:
