@@ -94,7 +94,7 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
-  - brokers
+  - Brokers
   tags_raw:
   - brokers
   properties:
@@ -106,7 +106,7 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
-  - connector types
+  - Connector Types
   tags_raw:
   - connector types
   properties:
@@ -162,7 +162,7 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
-  - healthchecks
+  - Health Checks
   tags_raw:
   - healthchecks
   properties:
@@ -251,7 +251,8 @@ apis:
   description: The team_member API from Popsink — 3 operation(s) for team_member.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
-  tags: []
+  tags:
+  - Team Member
   tags_raw:
   - team_member
   properties:
