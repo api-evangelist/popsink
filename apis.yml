@@ -1,17 +1,13 @@
 aid: popsink
 name: Popsink
-description: >-
-  Popsink is a real-time data replication and change data capture (CDC) platform
-  that continuously moves data out of mission-critical and legacy systems into
-  cloud data platforms with low latency and minimal production impact. It offers
-  a broad catalog of source and target connectors (Postgres, MySQL, Oracle, MSSQL,
-  MongoDB, Kafka, IBM Z / IBMi (AS/400), SAP, Salesforce, HubSpot, Snowflake,
-  BigQuery, Databricks, ClickHouse, Iceberg, and more) and flexible deployment
-  options spanning SaaS, bring-your-own-cloud, self-hosted Kubernetes, single-VM,
-  on-premises, and air-gapped installs. Popsink exposes a public REST API and an
-  on-prem control-plane REST API (OAuth2 password / JWT bearer, with SAML SSO) for
-  managing pipelines, connectors, environments, teams, schemas, and transforms.
-  Backed by Seedcamp.
+description: Popsink is a real-time data replication and change data capture (CDC) platform that continuously
+  moves data out of mission-critical and legacy systems into cloud data platforms with low latency and
+  minimal production impact. It offers a broad catalog of source and target connectors (Postgres, MySQL,
+  Oracle, MSSQL, MongoDB, Kafka, IBM Z / IBMi (AS/400), SAP, Salesforce, HubSpot, Snowflake, BigQuery,
+  Databricks, ClickHouse, Iceberg, and more) and flexible deployment options spanning SaaS, bring-your-own-cloud,
+  self-hosted Kubernetes, single-VM, on-premises, and air-gapped installs. Popsink exposes a public REST
+  API and an on-prem control-plane REST API (OAuth2 password / JWT bearer, with SAML SSO) for managing
+  pipelines, connectors, environments, teams, schemas, and transforms. Backed by Seedcamp.
 url: https://raw.githubusercontent.com/api-evangelist/popsink/refs/heads/main/apis.yml
 deliveryModel:
   model: saas
@@ -46,7 +42,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-09-16'
 tags:
 - Company
 - Change Data Capture
@@ -213,7 +209,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-pipelines-api-openapi.yml
 - aid: popsink:popsink-popsink-public-api-api
-  name: Popsink Popsink Public API API
+  name: Popsink Public API
   description: The Popsink Public API API from Popsink — 1 operation(s) for popsink public api.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -362,7 +358,10 @@ common:
   url: conformance/popsink-conformance.yml
 - type: X-MCPServerCandidate
   url: mcp/popsink-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: AgentSkill
   url: skills/_index.yml
 - type: AgenticAccess
