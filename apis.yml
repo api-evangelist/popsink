@@ -162,18 +162,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/popsink-envs-api-openapi.yml
-- aid: popsink:popsink-healthchecks-api
-  name: Popsink healthchecks API
-  description: The healthchecks API from Popsink — 4 operation(s) for healthchecks.
-  humanURL: https://docs.popsink.com/public/public-api.json
-  baseURL: https://app.popsink.com
-  tags:
-  - Health Checks
-  tags_raw:
-  - healthchecks
-  properties:
-  - type: OpenAPI
-    url: openapi/popsink-healthchecks-api-openapi.yml
 - aid: popsink:popsink-jobs-smt-api
   name: Popsink jobs-smt API
   description: The jobs-smt API from Popsink — 13 operation(s) for jobs-smt.
@@ -309,6 +297,16 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/popsink-users-api-openapi.yml
+- aid: popsink:popsink-health-checks-api
+  name: Popsink Health Checks API
+  description: The Health Checks API from Popsink — 4 operation(s) for health checks.
+  humanURL: https://docs.popsink.com/public/public-api.json
+  baseURL: https://app.popsink.com
+  tags:
+  - Health Checks
+  properties:
+  - type: OpenAPI
+    url: openapi/popsink-health-checks-api-openapi.yml
 common:
 - type: Overlay
   url: overlays/popsink-onprem-api-overlay.yaml
