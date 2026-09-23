@@ -1,16 +1,16 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fast admin team_member API
+  title: Fast Team Member API
   version: 0.1.0
 servers:
 - url: /api
 tags:
-- name: team_member
+- name: Team Member
 paths:
   /teams/{team_id}/members/bulk:
     post:
       tags:
-      - team_member
+      - Team Member
       summary: Team Member:Bulk Create
       description: 'Bulk create team members.
 
@@ -49,7 +49,7 @@ paths:
   /teams/{team_id}/members:
     get:
       tags:
-      - team_member
+      - Team Member
       summary: Team Member:List
       description: List the team members of the specified team.
       operationId: team_member_list_teams__team_id__members_get
@@ -96,7 +96,7 @@ paths:
   /teams/{team_id}/members/me:
     get:
       tags:
-      - team_member
+      - Team Member
       summary: Team Member:Get
       description: Get the team member details of the current user.
       operationId: team_member_get_teams__team_id__members_me_get
@@ -125,15 +125,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -218,43 +209,15 @@ components:
       - admin
       title: TeamMemberList
       description: Response model for listing team members with additional user info.
-    TeamMemberRead:
+    HTTPValidationError:
       properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier of the team member entry
-          examples:
-          - b154b9c4-4b28-4c6b-97c2-fdab3ed37f0e
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-          description: Unique identifier of the user being added
-          examples:
-          - d290f1ee-6c54-4b01-90e6-d701748f0851
-        team_id:
-          type: string
-          format: uuid
-          title: Team Id
-          description: Unique identifier of the team
-          examples:
-          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
-        admin:
-          type: boolean
-          title: Admin
-          description: Whether the user has admin privileges in the team
-          examples:
-          - true
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - id
-      - user_id
-      - team_id
-      - admin
-      title: TeamMemberRead
-      description: Response model for reading a team member.
+      title: HTTPValidationError
     Page_TeamMemberList_:
       properties:
         items:
@@ -293,6 +256,43 @@ components:
       - page
       - size
       title: Page[TeamMemberList]
+    TeamMemberRead:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the team member entry
+          examples:
+          - b154b9c4-4b28-4c6b-97c2-fdab3ed37f0e
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: Unique identifier of the user being added
+          examples:
+          - d290f1ee-6c54-4b01-90e6-d701748f0851
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+          description: Unique identifier of the team
+          examples:
+          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the user has admin privileges in the team
+          examples:
+          - true
+      type: object
+      required:
+      - id
+      - user_id
+      - team_id
+      - admin
+      title: TeamMemberRead
+      description: Response model for reading a team member.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

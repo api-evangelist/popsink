@@ -1,16 +1,16 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fast admin saml API
+  title: Fast Saml API
   version: 0.1.0
 servers:
 - url: /api
 tags:
-- name: saml
+- name: SAML
 paths:
   /saml/is_activated:
     get:
       tags:
-      - saml
+      - SAML
       summary: Is Activated
       description: Saml is activated route.
       operationId: is_activated_saml_is_activated_get
@@ -25,7 +25,7 @@ paths:
   /saml/login:
     get:
       tags:
-      - saml
+      - SAML
       summary: Saml Login
       description: Saml login route.
       operationId: saml_login_saml_login_get
@@ -38,7 +38,7 @@ paths:
   /saml/metadata:
     get:
       tags:
-      - saml
+      - SAML
       summary: Metadata
       description: Saml metadata route.
       operationId: metadata_saml_metadata_get
@@ -51,7 +51,7 @@ paths:
   /saml/callback:
     post:
       tags:
-      - saml
+      - SAML
       summary: Saml Login Callback
       description: Saml login callback route.
       operationId: saml_login_callback_saml_callback_post

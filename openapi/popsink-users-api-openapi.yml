@@ -1,16 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fast admin users API
-  version: 0.1.0
+  title: Popsink Users API
+  version: '1.0'
+  description: 'Operations tagged users across 2 of this provider''s published API definitions: popsink-onprem-api-openapi-original.json, popsink-public-api-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: /api
 tags:
-- name: users
+- name: Users
 paths:
   /users:
     get:
       tags:
-      - users
+      - Users
       summary: Users:List Users
       description: Get all users.
       operationId: users_list_users_users_get
@@ -47,12 +48,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: /api
   /users/me/change-password:
     post:
       tags:
-      - users
+      - Users
       summary: Users:Change Password
-      description: "Change the current user's password.\n\nArgs:\n    password_data: Password change data\n    user: Current authenticated user\n\nReturns:\n    Updated user information"
+      description: 'Change the current user''s password.
+
+
+        Args:
+
+        password_data: Password change data
+
+        user: Current authenticated user
+
+
+        Returns:
+
+        Updated user information'
       operationId: users_change_password_users_me_change_password_post
       requestBody:
         content:
@@ -75,10 +90,12 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
       - OAuth2PasswordBearer: []
+    servers:
+    - url: /api
   /users/export-all:
     get:
       tags:
-      - users
+      - Users
       summary: Export all users, envs, teams, and their relations
       description: Export all users, environments, teams, and their relationships as a structured data object. Requires admin privileges.
       operationId: export_all_data_users_export_all_get
@@ -91,10 +108,12 @@ paths:
                 $ref: '#/components/schemas/ExportData-Output'
       security:
       - OAuth2PasswordBearer: []
+    servers:
+    - url: /api
   /users/import-all:
     post:
       tags:
-      - users
+      - Users
       summary: Import all users, envs, teams, and their relations
       description: Import all users, environments, teams, and their relationships from a structured data object. Requires admin privileges. This will overwrite all existing data.
       operationId: import_all_data_users_import_all_post
@@ -116,10 +135,12 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
       - OAuth2PasswordBearer: []
+    servers:
+    - url: /api
   /users/me:
     get:
       tags:
-      - users
+      - Users
       summary: Users:Current User
       operationId: users_current_user_users_me_get
       responses:
@@ -135,7 +156,7 @@ paths:
       - OAuth2PasswordBearer: []
     patch:
       tags:
-      - users
+      - Users
       summary: Users:Patch Current User
       operationId: users_patch_current_user_users_me_patch
       requestBody:
@@ -178,10 +199,12 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
       - OAuth2PasswordBearer: []
+    servers:
+    - url: /api
   /users/{id}:
     get:
       tags:
-      - users
+      - Users
       summary: Users:User
       operationId: users_user_users__id__get
       security:
@@ -214,7 +237,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     patch:
       tags:
-      - users
+      - Users
       summary: Users:Patch User
       operationId: users_patch_user_users__id__patch
       security:
@@ -270,7 +293,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - users
+      - Users
       summary: Users:Delete User
       operationId: users_delete_user_users__id__delete
       security:
@@ -297,6 +320,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: /api
   /users/me/:
     get:
       summary: Get Me
@@ -323,9 +348,68 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - users
+      - Users
 components:
   schemas:
+    Page_UserRead_:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/UserRead'
+          type: array
+          title: Items
+        total:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Total
+        page:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Page
+        size:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Size
+        pages:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Pages
+      type: object
+      required:
+      - items
+      - total
+      - page
+      - size
+      title: Page[UserRead]
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     UserRead:
       properties:
         id:
@@ -361,36 +445,6 @@ components:
       - active_env_id
       title: UserRead
       description: Read a user.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     BrokerConfiguration:
       properties:
         bootstrap_server:
@@ -432,37 +486,93 @@ components:
       - sasl_password
       title: BrokerConfiguration
       description: Broker configuration.
-    EnvExport:
+    UserExport:
       properties:
-        name:
-          type: string
-          title: Name
-          description: Name of the environment
-          examples:
-          - staging
-        use_retention:
-          type: boolean
-          title: Use Retention
-          description: Whether message retention is enabled for this environment
-          examples:
-          - true
-        retention_configuration:
-          anyOf:
-          - $ref: '#/components/schemas/BrokerConfiguration'
-          - type: 'null'
-          description: Retention policy configuration if retention is enabled
         id:
           type: string
           format: uuid
           title: Id
-          description: Unique identifier of the environment
+        email:
+          type: string
+          format: email
+          title: Email
+        is_active:
+          type: boolean
+          title: Is Active
+          default: true
+        is_superuser:
+          type: boolean
+          title: Is Superuser
+          default: false
+        is_verified:
+          type: boolean
+          title: Is Verified
+          default: false
+        active_env_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Active Env Id
       type: object
       required:
-      - name
-      - use_retention
       - id
-      title: EnvExport
-      description: Environment export data model.
+      - email
+      - active_env_id
+      title: UserExport
+      description: User export data model.
+    UserPasswordChange:
+      properties:
+        old_password:
+          type: string
+          title: Old Password
+        new_password:
+          type: string
+          title: New Password
+      type: object
+      required:
+      - old_password
+      - new_password
+      title: UserPasswordChange
+      description: Change user password.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    TeamMemberExport:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: Unique identifier of the user being added
+          examples:
+          - d290f1ee-6c54-4b01-90e6-d701748f0851
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+          description: Unique identifier of the team
+          examples:
+          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the user has admin privileges in the team
+          examples:
+          - true
+      type: object
+      required:
+      - user_id
+      - team_id
+      - admin
+      title: TeamMemberExport
+      description: Team member export data model.
     ExportData-Input:
       properties:
         users:
@@ -504,73 +614,6 @@ components:
       - team_members
       title: ExportData
       description: Complete data export model containing all system entities and their relationships.
-    EnvMemberExport:
-      properties:
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-          description: Unique identifier of the user being added
-          examples:
-          - d290f1ee-6c54-4b01-90e6-d701748f0851
-        env_id:
-          type: string
-          format: uuid
-          title: Env Id
-          description: Unique identifier of the env
-          examples:
-          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
-        admin:
-          type: boolean
-          title: Admin
-          description: Whether the user has admin privileges in the env
-          examples:
-          - true
-      type: object
-      required:
-      - user_id
-      - env_id
-      - admin
-      title: EnvMemberExport
-      description: Environment member export data model.
-    Page_UserRead_:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/UserRead'
-          type: array
-          title: Items
-        total:
-          anyOf:
-          - type: integer
-            minimum: 0
-          - type: 'null'
-          title: Total
-        page:
-          anyOf:
-          - type: integer
-            minimum: 1
-          - type: 'null'
-          title: Page
-        size:
-          anyOf:
-          - type: integer
-            minimum: 1
-          - type: 'null'
-          title: Size
-        pages:
-          anyOf:
-          - type: integer
-            minimum: 0
-          - type: 'null'
-          title: Pages
-      type: object
-      required:
-      - items
-      - total
-      - page
-      - size
-      title: Page[UserRead]
     ExportData-Output:
       properties:
         users:
@@ -612,121 +655,19 @@ components:
       - team_members
       title: ExportData
       description: Complete data export model containing all system entities and their relationships.
-    UserSafeUpdate:
+    ErrorModel:
       properties:
-        password:
+        detail:
           anyOf:
           - type: string
-          - type: 'null'
-          title: Password
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        is_active:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Active
-        is_superuser:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Superuser
-        is_verified:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Verified
-        active_env_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Active Env Id
-      type: object
-      title: UserSafeUpdate
-      description: Update a user without password.
-    UserExport:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        email:
-          type: string
-          format: email
-          title: Email
-        is_active:
-          type: boolean
-          title: Is Active
-          default: true
-        is_superuser:
-          type: boolean
-          title: Is Superuser
-          default: false
-        is_verified:
-          type: boolean
-          title: Is Verified
-          default: false
-        active_env_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Active Env Id
+          - additionalProperties:
+              type: string
+            type: object
+          title: Detail
       type: object
       required:
-      - id
-      - email
-      - active_env_id
-      title: UserExport
-      description: User export data model.
-    TeamMemberExport:
-      properties:
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-          description: Unique identifier of the user being added
-          examples:
-          - d290f1ee-6c54-4b01-90e6-d701748f0851
-        team_id:
-          type: string
-          format: uuid
-          title: Team Id
-          description: Unique identifier of the team
-          examples:
-          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
-        admin:
-          type: boolean
-          title: Admin
-          description: Whether the user has admin privileges in the team
-          examples:
-          - true
-      type: object
-      required:
-      - user_id
-      - team_id
-      - admin
-      title: TeamMemberExport
-      description: Team member export data model.
-    UserPasswordChange:
-      properties:
-        old_password:
-          type: string
-          title: Old Password
-        new_password:
-          type: string
-          title: New Password
-      type: object
-      required:
-      - old_password
-      - new_password
-      title: UserPasswordChange
-      description: Change user password.
+      - detail
+      title: ErrorModel
     TeamExport:
       properties:
         name:
@@ -764,19 +705,103 @@ components:
       - id
       title: TeamExport
       description: Team export data model.
-    ErrorModel:
+    EnvExport:
       properties:
-        detail:
+        name:
+          type: string
+          title: Name
+          description: Name of the environment
+          examples:
+          - staging
+        use_retention:
+          type: boolean
+          title: Use Retention
+          description: Whether message retention is enabled for this environment
+          examples:
+          - true
+        retention_configuration:
           anyOf:
-          - type: string
-          - additionalProperties:
-              type: string
-            type: object
-          title: Detail
+          - $ref: '#/components/schemas/BrokerConfiguration'
+          - type: 'null'
+          description: Retention policy configuration if retention is enabled
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the environment
       type: object
       required:
-      - detail
-      title: ErrorModel
+      - name
+      - use_retention
+      - id
+      title: EnvExport
+      description: Environment export data model.
+    EnvMemberExport:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: Unique identifier of the user being added
+          examples:
+          - d290f1ee-6c54-4b01-90e6-d701748f0851
+        env_id:
+          type: string
+          format: uuid
+          title: Env Id
+          description: Unique identifier of the env
+          examples:
+          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the user has admin privileges in the env
+          examples:
+          - true
+      type: object
+      required:
+      - user_id
+      - env_id
+      - admin
+      title: EnvMemberExport
+      description: Environment member export data model.
+    UserSafeUpdate:
+      properties:
+        password:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Password
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        is_active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Active
+        is_superuser:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Superuser
+        is_verified:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Verified
+        active_env_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Active Env Id
+      type: object
+      title: UserSafeUpdate
+      description: Update a user without password.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2
@@ -784,3 +809,6 @@ components:
         password:
           scopes: {}
           tokenUrl: auth/jwt/login
+x-refined-from:
+- popsink-onprem-api-openapi-original.json
+- popsink-public-api-openapi-original.json

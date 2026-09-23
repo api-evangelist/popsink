@@ -1,9 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fast admin Popsink Public API API
-  version: 0.1.0
-servers:
-- url: /api
+  title: Popsink Public API
+  description: Welcome to Popsink, your go-to SaaS solution for seamless programmatic interaction!
+  version: 0.0.1
 tags:
 - name: Popsink Public API
 paths:
@@ -20,11 +19,3 @@ paths:
               schema: {}
       tags:
       - Popsink Public API
-components:
-  securitySchemes:
-    OAuth2PasswordBearer:
-      type: oauth2
-      flows:
-        password:
-          scopes: {}
-          tokenUrl: auth/jwt/login

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fast admin user-logs API
+  title: Fast User Logs API
   version: 0.1.0
 servers:
 - url: /api
@@ -102,6 +102,44 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ActionType:
+      type: string
+      enum:
+      - login
+      - logout
+      - change_password
+      - pipeline_created
+      - pipeline_updated
+      - pipeline_deleted
+      - pipeline_started
+      - environment_created
+      - environment_updated
+      - team_created
+      - team_updated
+      - team_deleted
+      title: ActionType
+      description: Action types.
     UserLogList:
       properties:
         id:
@@ -153,60 +191,6 @@ components:
       - action
       title: UserLogList
       description: User log list serializer.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    UserType:
-      type: string
-      enum:
-      - real_user
-      - system
-      title: UserType
-      description: User types.
-    ActionType:
-      type: string
-      enum:
-      - login
-      - logout
-      - change_password
-      - pipeline_created
-      - pipeline_updated
-      - pipeline_deleted
-      - pipeline_started
-      - environment_created
-      - environment_updated
-      - team_created
-      - team_updated
-      - team_deleted
-      title: ActionType
-      description: Action types.
     Page_UserLogList_:
       properties:
         items:
@@ -245,6 +229,22 @@ components:
       - page
       - size
       title: Page[UserLogList]
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    UserType:
+      type: string
+      enum:
+      - real_user
+      - system
+      title: UserType
+      description: User types.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

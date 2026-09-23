@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fast admin envs API
+  title: Fast Envs API
   version: 0.1.0
 servers:
 - url: /api
@@ -141,43 +141,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    EnvCreate:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: Name of the environment
-          examples:
-          - staging
-        use_retention:
-          type: boolean
-          title: Use Retention
-          description: Whether message retention is enabled for this environment
-          examples:
-          - true
-        retention_configuration:
-          anyOf:
-          - $ref: '#/components/schemas/BrokerConfiguration'
-          - type: 'null'
-          description: Retention policy configuration if retention is enabled
-      type: object
-      required:
-      - name
-      - use_retention
-      title: EnvCreate
-      description: 'Model used to create a new Env.
-
-
-        Includes the environment name and optional broker retention configuration.'
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -199,35 +162,26 @@ components:
       - msg
       - type
       title: ValidationError
-    EnvUpdate:
+    EnvList:
       properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the environment
         name:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Name
           description: Name of the environment
-          examples:
-          - staging
-        use_retention:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Use Retention
-          description: Whether message retention is enabled for this environment
-          examples:
-          - true
-        retention_configuration:
-          anyOf:
-          - $ref: '#/components/schemas/BrokerConfiguration'
-          - type: 'null'
-          description: Retention policy configuration if retention is enabled
       type: object
-      title: EnvUpdate
-      description: 'Model used to update an existing Env.
+      required:
+      - id
+      - name
+      title: EnvList
+      description: 'Lightweight model used to list environments.
 
 
-        All fields are optional to allow partial updates.'
+        Only includes the basic identifying fields.'
     BrokerConfiguration:
       properties:
         bootstrap_server:
@@ -303,26 +257,15 @@ components:
 
 
         Includes all creation fields plus the unique Env identifier.'
-    EnvList:
+    HTTPValidationError:
       properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier of the environment
-        name:
-          type: string
-          title: Name
-          description: Name of the environment
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - id
-      - name
-      title: EnvList
-      description: 'Lightweight model used to list environments.
-
-
-        Only includes the basic identifying fields.'
+      title: HTTPValidationError
     Page_EnvList_:
       properties:
         items:
@@ -361,6 +304,63 @@ components:
       - page
       - size
       title: Page[EnvList]
+    EnvCreate:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the environment
+          examples:
+          - staging
+        use_retention:
+          type: boolean
+          title: Use Retention
+          description: Whether message retention is enabled for this environment
+          examples:
+          - true
+        retention_configuration:
+          anyOf:
+          - $ref: '#/components/schemas/BrokerConfiguration'
+          - type: 'null'
+          description: Retention policy configuration if retention is enabled
+      type: object
+      required:
+      - name
+      - use_retention
+      title: EnvCreate
+      description: 'Model used to create a new Env.
+
+
+        Includes the environment name and optional broker retention configuration.'
+    EnvUpdate:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: Name of the environment
+          examples:
+          - staging
+        use_retention:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Use Retention
+          description: Whether message retention is enabled for this environment
+          examples:
+          - true
+        retention_configuration:
+          anyOf:
+          - $ref: '#/components/schemas/BrokerConfiguration'
+          - type: 'null'
+          description: Retention policy configuration if retention is enabled
+      type: object
+      title: EnvUpdate
+      description: 'Model used to update an existing Env.
+
+
+        All fields are optional to allow partial updates.'
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

@@ -1,16 +1,16 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fast admin connector types API
+  title: Fast connector types API
   version: 0.1.0
 servers:
 - url: /api
 tags:
-- name: connector types
+- name: Connector Types
 paths:
   /kafka-source/check-credentials:
     post:
       tags:
-      - connector types
+      - Connector Types
       summary: Kafka-Source:Check-Credentials
       description: Check the kafka source credentials.
       operationId: kafka_source_check_credentials_kafka_source_check_credentials_post
@@ -36,7 +36,7 @@ paths:
   /kafka-source/fetch-messages:
     post:
       tags:
-      - connector types
+      - Connector Types
       summary: Kafka-Source:Fetch-Messages
       description: Fetch some messages from the connector configuration.
       operationId: kafka_source_fetch_messages_kafka_source_fetch_messages_post
@@ -62,7 +62,7 @@ paths:
   /oracle-target/check-credentials:
     post:
       tags:
-      - connector types
+      - Connector Types
       summary: Oracle-Target:Check-Credentials
       description: Check oracle target credentials.
       operationId: oracle_target_check_credentials_oracle_target_check_credentials_post
@@ -87,92 +87,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    KafkaSourceCredentials:
-      properties:
-        topic:
-          type: string
-          title: Topic
-          description: Kafka topic to consume from
-          examples:
-          - user_events
-        consumer_group_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Consumer Group Id
-          description: Optional consumer group ID for Kafka consumption
-          examples:
-          - pipeline-group-1
-        sasl_username:
-          type: string
-          title: Sasl Username
-          description: SASL username for authentication
-          examples:
-          - kafka_user
-        sasl_password:
-          type: string
-          title: Sasl Password
-          description: SASL password for authentication
-          examples:
-          - securePassword123!
-        bootstrap_servers:
-          type: string
-          title: Bootstrap Servers
-          description: Comma-separated list of Kafka bootstrap servers
-          examples:
-          - kafka1:9092,kafka2:9092
-        security_protocol:
-          type: string
-          enum:
-          - PLAINTEXT
-          - SASL_PLAINTEXT
-          - SASL_SSL
-          - SSL
-          title: Security Protocol
-          description: Kafka security protocol to use
-          examples:
-          - SASL_SSL
-        sasl_mechanism:
-          type: string
-          enum:
-          - OAUTHBEARER
-          - PLAIN
-          - SCRAM-SHA-256
-          - SCRAM-SHA-512
-          - GSSAPI
-          title: Sasl Mechanism
-          description: SASL mechanism used for authentication
-          examples:
-          - SCRAM-SHA-512
-        include_metadata:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Include Metadata
-          description: Whether to include Kafka message metadata in the response
-          default: false
-          examples:
-          - false
-      type: object
-      required:
-      - topic
-      - consumer_group_id
-      - sasl_username
-      - sasl_password
-      - bootstrap_servers
-      - security_protocol
-      - sasl_mechanism
-      title: KafkaSourceCredentials
-      description: Credentials and configuration for accessing a Kafka source.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -275,6 +189,92 @@ components:
       - message
       title: CredentialsResponse
       description: Credential response.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    KafkaSourceCredentials:
+      properties:
+        topic:
+          type: string
+          title: Topic
+          description: Kafka topic to consume from
+          examples:
+          - user_events
+        consumer_group_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Consumer Group Id
+          description: Optional consumer group ID for Kafka consumption
+          examples:
+          - pipeline-group-1
+        sasl_username:
+          type: string
+          title: Sasl Username
+          description: SASL username for authentication
+          examples:
+          - kafka_user
+        sasl_password:
+          type: string
+          title: Sasl Password
+          description: SASL password for authentication
+          examples:
+          - securePassword123!
+        bootstrap_servers:
+          type: string
+          title: Bootstrap Servers
+          description: Comma-separated list of Kafka bootstrap servers
+          examples:
+          - kafka1:9092,kafka2:9092
+        security_protocol:
+          type: string
+          enum:
+          - PLAINTEXT
+          - SASL_PLAINTEXT
+          - SASL_SSL
+          - SSL
+          title: Security Protocol
+          description: Kafka security protocol to use
+          examples:
+          - SASL_SSL
+        sasl_mechanism:
+          type: string
+          enum:
+          - OAUTHBEARER
+          - PLAIN
+          - SCRAM-SHA-256
+          - SCRAM-SHA-512
+          - GSSAPI
+          title: Sasl Mechanism
+          description: SASL mechanism used for authentication
+          examples:
+          - SCRAM-SHA-512
+        include_metadata:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Include Metadata
+          description: Whether to include Kafka message metadata in the response
+          default: false
+          examples:
+          - false
+      type: object
+      required:
+      - topic
+      - consumer_group_id
+      - sasl_username
+      - sasl_password
+      - bootstrap_servers
+      - security_protocol
+      - sasl_mechanism
+      title: KafkaSourceCredentials
+      description: Credentials and configuration for accessing a Kafka source.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

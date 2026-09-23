@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fast admin env_member API
+  title: Fast Env Member API
   version: 0.1.0
 servers:
 - url: /api
@@ -65,42 +65,27 @@ paths:
       - OAuth2PasswordBearer: []
 components:
   schemas:
-    EnvMemberList:
+    ValidationError:
       properties:
-        id:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
-          format: uuid
-          title: Id
-          description: Unique identifier of the env member entry
-          examples:
-          - b154b9c4-4b28-4c6b-97c2-fdab3ed37f0e
-        user_id:
+          title: Message
+        type:
           type: string
-          format: uuid
-          title: User Id
-          description: Unique identifier of the user
-          examples:
-          - d290f1ee-6c54-4b01-90e6-d701748f0851
-        email:
-          type: string
-          title: Email
-          description: Email address of the user
-          examples:
-          - user@example.com
-        admin:
-          type: boolean
-          title: Admin
-          description: Whether the user is an admin
-          examples:
-          - false
+          title: Error Type
       type: object
       required:
-      - id
-      - user_id
-      - email
-      - admin
-      title: EnvMemberList
-      description: Response model for listing env members with additional user info.
+      - loc
+      - msg
+      - type
+      title: ValidationError
     Page_EnvMemberList_:
       properties:
         items:
@@ -139,36 +124,6 @@ components:
       - page
       - size
       title: Page[EnvMemberList]
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     EnvMemberRead:
       properties:
         user_id:
@@ -206,6 +161,51 @@ components:
       - id
       title: EnvMemberRead
       description: Response model for reading a env member.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    EnvMemberList:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the env member entry
+          examples:
+          - b154b9c4-4b28-4c6b-97c2-fdab3ed37f0e
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: Unique identifier of the user
+          examples:
+          - d290f1ee-6c54-4b01-90e6-d701748f0851
+        email:
+          type: string
+          title: Email
+          description: Email address of the user
+          examples:
+          - user@example.com
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the user is an admin
+          examples:
+          - false
+      type: object
+      required:
+      - id
+      - user_id
+      - email
+      - admin
+      title: EnvMemberList
+      description: Response model for listing env members with additional user info.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

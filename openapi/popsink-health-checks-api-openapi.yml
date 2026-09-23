@@ -1,16 +1,16 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fast admin healthchecks API
+  title: Fast Healthchecks API
   version: 0.1.0
 servers:
 - url: /api
 tags:
-- name: healthchecks
+- name: Health Checks
 paths:
   /healthchecks:
     get:
       tags:
-      - healthchecks
+      - Health Checks
       summary: Healthchecks:Api
       description: Get the status of the api.
       operationId: healthchecks_api_healthchecks_get
@@ -24,7 +24,7 @@ paths:
   /healthchecks/k8s:
     get:
       tags:
-      - healthchecks
+      - Health Checks
       summary: Healthchecks:K8S
       description: Get the status of kubernetes.
       operationId: healthchecks_k8s_healthchecks_k8s_get
@@ -38,7 +38,7 @@ paths:
   /healthchecks/db:
     get:
       tags:
-      - healthchecks
+      - Health Checks
       summary: Healthchecks:Db
       description: Get the status of the database.
       operationId: healthchecks_db_healthchecks_db_get
@@ -52,7 +52,7 @@ paths:
   /healthchecks/debug:
     get:
       tags:
-      - healthchecks
+      - Health Checks
       summary: Healthchecks:Debug
       description: Display debugs infos.
       operationId: healthchecks_debug_healthchecks_debug_get
