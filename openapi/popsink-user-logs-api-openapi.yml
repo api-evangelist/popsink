@@ -102,6 +102,13 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    UserType:
+      type: string
+      enum:
+      - real_user
+      - system
+      title: UserType
+      description: User types.
     ValidationError:
       properties:
         loc:
@@ -191,6 +198,15 @@ components:
       - action
       title: UserLogList
       description: User log list serializer.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     Page_UserLogList_:
       properties:
         items:
@@ -229,22 +245,6 @@ components:
       - page
       - size
       title: Page[UserLogList]
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    UserType:
-      type: string
-      enum:
-      - real_user
-      - system
-      title: UserType
-      description: User types.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

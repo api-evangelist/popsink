@@ -162,110 +162,6 @@ components:
       - msg
       - type
       title: ValidationError
-    EnvList:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier of the environment
-        name:
-          type: string
-          title: Name
-          description: Name of the environment
-      type: object
-      required:
-      - id
-      - name
-      title: EnvList
-      description: 'Lightweight model used to list environments.
-
-
-        Only includes the basic identifying fields.'
-    BrokerConfiguration:
-      properties:
-        bootstrap_server:
-          type: string
-          title: Bootstrap Server
-        security_protocol:
-          type: string
-          enum:
-          - PLAINTEXT
-          - SASL_PLAINTEXT
-          - SASL_SSL
-          - SSL
-          title: Security Protocol
-        sasl_mechanism:
-          type: string
-          enum:
-          - OAUTHBEARER
-          - PLAIN
-          - SCRAM-SHA-256
-          - SCRAM-SHA-512
-          - GSSAPI
-          title: Sasl Mechanism
-        sasl_username:
-          type: string
-          title: Sasl Username
-        sasl_password:
-          type: string
-          title: Sasl Password
-        ca_cert:
-          type: string
-          title: Ca Cert
-          default: ''
-      type: object
-      required:
-      - bootstrap_server
-      - security_protocol
-      - sasl_mechanism
-      - sasl_username
-      - sasl_password
-      title: BrokerConfiguration
-      description: Broker configuration.
-    EnvRead:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: Name of the environment
-          examples:
-          - staging
-        use_retention:
-          type: boolean
-          title: Use Retention
-          description: Whether message retention is enabled for this environment
-          examples:
-          - true
-        retention_configuration:
-          anyOf:
-          - $ref: '#/components/schemas/BrokerConfiguration'
-          - type: 'null'
-          description: Retention policy configuration if retention is enabled
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier of the environment
-      type: object
-      required:
-      - name
-      - use_retention
-      - id
-      title: EnvRead
-      description: 'Model returned when reading an Env.
-
-
-        Includes all creation fields plus the unique Env identifier.'
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     Page_EnvList_:
       properties:
         items:
@@ -361,6 +257,110 @@ components:
 
 
         All fields are optional to allow partial updates.'
+    EnvRead:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the environment
+          examples:
+          - staging
+        use_retention:
+          type: boolean
+          title: Use Retention
+          description: Whether message retention is enabled for this environment
+          examples:
+          - true
+        retention_configuration:
+          anyOf:
+          - $ref: '#/components/schemas/BrokerConfiguration'
+          - type: 'null'
+          description: Retention policy configuration if retention is enabled
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the environment
+      type: object
+      required:
+      - name
+      - use_retention
+      - id
+      title: EnvRead
+      description: 'Model returned when reading an Env.
+
+
+        Includes all creation fields plus the unique Env identifier.'
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    EnvList:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the environment
+        name:
+          type: string
+          title: Name
+          description: Name of the environment
+      type: object
+      required:
+      - id
+      - name
+      title: EnvList
+      description: 'Lightweight model used to list environments.
+
+
+        Only includes the basic identifying fields.'
+    BrokerConfiguration:
+      properties:
+        bootstrap_server:
+          type: string
+          title: Bootstrap Server
+        security_protocol:
+          type: string
+          enum:
+          - PLAINTEXT
+          - SASL_PLAINTEXT
+          - SASL_SSL
+          - SSL
+          title: Security Protocol
+        sasl_mechanism:
+          type: string
+          enum:
+          - OAUTHBEARER
+          - PLAIN
+          - SCRAM-SHA-256
+          - SCRAM-SHA-512
+          - GSSAPI
+          title: Sasl Mechanism
+        sasl_username:
+          type: string
+          title: Sasl Username
+        sasl_password:
+          type: string
+          title: Sasl Password
+        ca_cert:
+          type: string
+          title: Ca Cert
+          default: ''
+      type: object
+      required:
+      - bootstrap_server
+      - security_protocol
+      - sasl_mechanism
+      - sasl_username
+      - sasl_password
+      title: BrokerConfiguration
+      description: Broker configuration.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

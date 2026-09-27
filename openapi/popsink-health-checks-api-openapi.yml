@@ -65,16 +65,6 @@ paths:
                 $ref: '#/components/schemas/Debug'
 components:
   schemas:
-    HealthCheck:
-      properties:
-        status:
-          type: string
-          title: Status
-      type: object
-      required:
-      - status
-      title: HealthCheck
-      description: Healthcheck pydantic model.
     Debug:
       properties:
         header:
@@ -85,6 +75,16 @@ components:
       - header
       title: Debug
       description: Debug model.
+    HealthCheck:
+      properties:
+        status:
+          type: string
+          title: Status
+      type: object
+      required:
+      - status
+      title: HealthCheck
+      description: Healthcheck pydantic model.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

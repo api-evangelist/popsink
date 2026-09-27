@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Fast Saml API
+  title: Fast SAML API
   version: 0.1.0
 servers:
 - url: /api

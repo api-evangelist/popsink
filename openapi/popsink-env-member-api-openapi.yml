@@ -86,6 +86,79 @@ components:
       - msg
       - type
       title: ValidationError
+    EnvMemberList:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the env member entry
+          examples:
+          - b154b9c4-4b28-4c6b-97c2-fdab3ed37f0e
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: Unique identifier of the user
+          examples:
+          - d290f1ee-6c54-4b01-90e6-d701748f0851
+        email:
+          type: string
+          title: Email
+          description: Email address of the user
+          examples:
+          - user@example.com
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the user is an admin
+          examples:
+          - false
+      type: object
+      required:
+      - id
+      - user_id
+      - email
+      - admin
+      title: EnvMemberList
+      description: Response model for listing env members with additional user info.
+    EnvMemberRead:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: Unique identifier of the user being added
+          examples:
+          - d290f1ee-6c54-4b01-90e6-d701748f0851
+        env_id:
+          type: string
+          format: uuid
+          title: Env Id
+          description: Unique identifier of the env
+          examples:
+          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the user has admin privileges in the env
+          examples:
+          - true
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the env member entry
+          examples:
+          - b154b9c4-4b28-4c6b-97c2-fdab3ed37f0e
+      type: object
+      required:
+      - user_id
+      - env_id
+      - admin
+      - id
+      title: EnvMemberRead
+      description: Response model for reading a env member.
     Page_EnvMemberList_:
       properties:
         items:
@@ -124,43 +197,6 @@ components:
       - page
       - size
       title: Page[EnvMemberList]
-    EnvMemberRead:
-      properties:
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-          description: Unique identifier of the user being added
-          examples:
-          - d290f1ee-6c54-4b01-90e6-d701748f0851
-        env_id:
-          type: string
-          format: uuid
-          title: Env Id
-          description: Unique identifier of the env
-          examples:
-          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
-        admin:
-          type: boolean
-          title: Admin
-          description: Whether the user has admin privileges in the env
-          examples:
-          - true
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier of the env member entry
-          examples:
-          - b154b9c4-4b28-4c6b-97c2-fdab3ed37f0e
-      type: object
-      required:
-      - user_id
-      - env_id
-      - admin
-      - id
-      title: EnvMemberRead
-      description: Response model for reading a env member.
     HTTPValidationError:
       properties:
         detail:
@@ -170,42 +206,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    EnvMemberList:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier of the env member entry
-          examples:
-          - b154b9c4-4b28-4c6b-97c2-fdab3ed37f0e
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-          description: Unique identifier of the user
-          examples:
-          - d290f1ee-6c54-4b01-90e6-d701748f0851
-        email:
-          type: string
-          title: Email
-          description: Email address of the user
-          examples:
-          - user@example.com
-        admin:
-          type: boolean
-          title: Admin
-          description: Whether the user is an admin
-          examples:
-          - false
-      type: object
-      required:
-      - id
-      - user_id
-      - email
-      - admin
-      title: EnvMemberList
-      description: Response model for listing env members with additional user info.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

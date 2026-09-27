@@ -294,6 +294,19 @@ paths:
       - Auth
 components:
   schemas:
+    ErrorModel:
+      properties:
+        detail:
+          anyOf:
+          - type: string
+          - additionalProperties:
+              type: string
+            type: object
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: ErrorModel
     ValidationError:
       properties:
         loc:
@@ -315,6 +328,38 @@ components:
       - msg
       - type
       title: ValidationError
+    Body_verify_request_token_auth_request_verify_token_post:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+      type: object
+      required:
+      - email
+      title: Body_verify_request_token_auth_request_verify_token_post
+    Body_verify_verify_auth_verify_post:
+      properties:
+        token:
+          type: string
+          title: Token
+      type: object
+      required:
+      - token
+      title: Body_verify_verify_auth_verify_post
+    Body_reset_reset_password_auth_reset_password_post:
+      properties:
+        token:
+          type: string
+          title: Token
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+      - token
+      - password
+      title: Body_reset_reset_password_auth_reset_password_post
     UserRead:
       properties:
         id:
@@ -396,16 +441,7 @@ components:
       - username
       - password
       title: Body_auth_jwt_login_auth_jwt_login_post
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Body_verify_request_token_auth_request_verify_token_post:
+    Body_reset_forgot_password_auth_forgot_password_post:
       properties:
         email:
           type: string
@@ -414,20 +450,7 @@ components:
       type: object
       required:
       - email
-      title: Body_verify_request_token_auth_request_verify_token_post
-    ErrorModel:
-      properties:
-        detail:
-          anyOf:
-          - type: string
-          - additionalProperties:
-              type: string
-            type: object
-          title: Detail
-      type: object
-      required:
-      - detail
-      title: ErrorModel
+      title: Body_reset_forgot_password_auth_forgot_password_post
     UserCreate:
       properties:
         email:
@@ -459,38 +482,15 @@ components:
       - password
       title: UserCreate
       description: Create a user.
-    Body_verify_verify_auth_verify_post:
+    HTTPValidationError:
       properties:
-        token:
-          type: string
-          title: Token
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - token
-      title: Body_verify_verify_auth_verify_post
-    Body_reset_reset_password_auth_reset_password_post:
-      properties:
-        token:
-          type: string
-          title: Token
-        password:
-          type: string
-          title: Password
-      type: object
-      required:
-      - token
-      - password
-      title: Body_reset_reset_password_auth_reset_password_post
-    Body_reset_forgot_password_auth_forgot_password_post:
-      properties:
-        email:
-          type: string
-          format: email
-          title: Email
-      type: object
-      required:
-      - email
-      title: Body_reset_forgot_password_auth_forgot_password_post
+      title: HTTPValidationError
     Credentials:
       title: Credentials
       required:

@@ -65,19 +65,6 @@ components:
       - msg
       - type
       title: ValidationError
-    SchemaCreate:
-      properties:
-        schema:
-          type: string
-          title: Schema
-          description: The raw schema definition, typically in Avro or JSON Schema format.
-          examples:
-          - '{''type'': ''record'', ''name'': ''User'', ''fields'': [{''name'': ''id'', ''type'': ''string''}]}'
-      type: object
-      required:
-      - schema
-      title: SchemaCreate
-      description: "Serializer for creating a new schema.\n\nAttributes:\n    schema_content (str): The raw content of the schema (e.g., Avro, JSON Schema)."
     SchemaRead:
       properties:
         id:
@@ -104,6 +91,19 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    SchemaCreate:
+      properties:
+        schema:
+          type: string
+          title: Schema
+          description: The raw schema definition, typically in Avro or JSON Schema format.
+          examples:
+          - '{''type'': ''record'', ''name'': ''User'', ''fields'': [{''name'': ''id'', ''type'': ''string''}]}'
+      type: object
+      required:
+      - schema
+      title: SchemaCreate
+      description: "Serializer for creating a new schema.\n\nAttributes:\n    schema_content (str): The raw content of the schema (e.g., Avro, JSON Schema)."
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

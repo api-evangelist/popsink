@@ -57,7 +57,6 @@ tags_raw:
 - Company
 - Change Data Capture
 - Data Replication
-- CDC
 - Data Integration
 - Real-Time Data
 - Streaming
@@ -71,7 +70,7 @@ maintainers:
   email: info@apis.io
 apis:
 - aid: popsink:popsink-admin-api
-  name: Popsink admin API
+  name: Popsink Admin API
   description: The admin API from Popsink — 2 operation(s) for admin.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -83,7 +82,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-admin-api-openapi.yml
 - aid: popsink:popsink-auth-api
-  name: Popsink auth API
+  name: Popsink Auth API
   description: The auth API from Popsink — 8 operation(s) for auth.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -95,7 +94,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-auth-api-openapi.yml
 - aid: popsink:popsink-brokers-api
-  name: Popsink brokers API
+  name: Popsink Brokers API
   description: The brokers API from Popsink — 1 operation(s) for brokers.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -119,7 +118,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-connector-types-api-openapi.yml
 - aid: popsink:popsink-connectors-api
-  name: Popsink connectors API
+  name: Popsink Connectors API
   description: The connectors API from Popsink — 2 operation(s) for connectors.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -131,7 +130,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-connectors-api-openapi.yml
 - aid: popsink:popsink-env-member-api
-  name: Popsink env_member API
+  name: Popsink Env Member API
   description: The env_member API from Popsink — 2 operation(s) for env_member.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -142,7 +141,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-env-member-api-openapi.yml
 - aid: popsink:popsink-env-request-api
-  name: Popsink env_request API
+  name: Popsink Env Request API
   description: The env_request API from Popsink — 3 operation(s) for env_request.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -153,7 +152,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-env-request-api-openapi.yml
 - aid: popsink:popsink-envs-api
-  name: Popsink envs API
+  name: Popsink Envs API
   description: The envs API from Popsink — 2 operation(s) for envs.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -163,7 +162,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-envs-api-openapi.yml
 - aid: popsink:popsink-jobs-smt-api
-  name: Popsink jobs-smt API
+  name: Popsink Jobs Smt API
   description: The jobs-smt API from Popsink — 13 operation(s) for jobs-smt.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -173,7 +172,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-jobs-smt-api-openapi.yml
 - aid: popsink:popsink-organizations-api
-  name: Popsink organizations API
+  name: Popsink Organizations API
   description: The organizations API from Popsink — 2 operation(s) for organizations.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -185,7 +184,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-organizations-api-openapi.yml
 - aid: popsink:popsink-pipelines-api
-  name: Popsink pipelines API
+  name: Popsink Pipelines API
   description: The pipelines API from Popsink — 9 operation(s) for pipelines.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -207,7 +206,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-popsink-public-api-api-openapi.yml
 - aid: popsink:popsink-probes-api
-  name: Popsink probes API
+  name: Popsink Probes API
   description: The probes API from Popsink — 2 operation(s) for probes.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -219,7 +218,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-probes-api-openapi.yml
 - aid: popsink:popsink-saml-api
-  name: Popsink saml API
+  name: Popsink Saml API
   description: The saml API from Popsink — 4 operation(s) for saml.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -231,7 +230,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-saml-api-openapi.yml
 - aid: popsink:popsink-schemas-api
-  name: Popsink schemas API
+  name: Popsink Schemas API
   description: The schemas API from Popsink — 1 operation(s) for schemas.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -243,7 +242,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-schemas-api-openapi.yml
 - aid: popsink:popsink-team-member-api
-  name: Popsink team_member API
+  name: Popsink Team Member API
   description: The team_member API from Popsink — 3 operation(s) for team_member.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -255,7 +254,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-team-member-api-openapi.yml
 - aid: popsink:popsink-team-request-api
-  name: Popsink team_request API
+  name: Popsink Team Request API
   description: The team_request API from Popsink — 3 operation(s) for team_request.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -266,7 +265,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-team-request-api-openapi.yml
 - aid: popsink:popsink-teams-api
-  name: Popsink teams API
+  name: Popsink Teams API
   description: The teams API from Popsink — 2 operation(s) for teams.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -278,7 +277,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-teams-api-openapi.yml
 - aid: popsink:popsink-user-logs-api
-  name: Popsink user-logs API
+  name: Popsink User Logs API
   description: The user-logs API from Popsink — 1 operation(s) for user-logs.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
@@ -288,7 +287,7 @@ apis:
   - type: OpenAPI
     url: openapi/popsink-user-logs-api-openapi.yml
 - aid: popsink:popsink-users-api
-  name: Popsink users API
+  name: Popsink Users API
   description: The users API from Popsink — 7 operation(s) for users.
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com

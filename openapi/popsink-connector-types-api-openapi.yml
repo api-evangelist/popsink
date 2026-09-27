@@ -108,18 +108,6 @@ components:
       - msg
       - type
       title: ValidationError
-    Messages:
-      properties:
-        messages:
-          items:
-            type: object
-          type: array
-          title: Messages
-      type: object
-      required:
-      - messages
-      title: Messages
-      description: Messages.
     OracleTargetCredentials:
       properties:
         database:
@@ -189,15 +177,6 @@ components:
       - message
       title: CredentialsResponse
       description: Credential response.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     KafkaSourceCredentials:
       properties:
         topic:
@@ -275,6 +254,27 @@ components:
       - sasl_mechanism
       title: KafkaSourceCredentials
       description: Credentials and configuration for accessing a Kafka source.
+    Messages:
+      properties:
+        messages:
+          items:
+            type: object
+          type: array
+          title: Messages
+      type: object
+      required:
+      - messages
+      title: Messages
+      description: Messages.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

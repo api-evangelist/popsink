@@ -47,36 +47,6 @@ paths:
       - OAuth2PasswordBearer: []
 components:
   schemas:
-    TargetConfigRead:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        name:
-          type: string
-          title: Name
-        type:
-          $ref: '#/components/schemas/ConnectorType'
-        config:
-          type: object
-          title: Config
-      type: object
-      required:
-      - id
-      - name
-      - type
-      - config
-      title: TargetConfigRead
-      description: Target configuration read.
-    ConnectorType:
-      type: string
-      enum:
-      - job_smt
-      - kafka_source
-      - oracle_target
-      title: ConnectorType
-      description: Define the connector type.
     SourceConfigRead:
       properties:
         id:
@@ -99,6 +69,36 @@ components:
       - config
       title: SourceConfigRead
       description: Source configuration read.
+    ConnectorType:
+      type: string
+      enum:
+      - job_smt
+      - kafka_source
+      - oracle_target
+      title: ConnectorType
+      description: Define the connector type.
+    TargetConfigRead:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        name:
+          type: string
+          title: Name
+        type:
+          $ref: '#/components/schemas/ConnectorType'
+        config:
+          type: object
+          title: Config
+      type: object
+      required:
+      - id
+      - name
+      - type
+      - config
+      title: TargetConfigRead
+      description: Target configuration read.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2
