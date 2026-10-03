@@ -162,90 +162,6 @@ components:
       - admin
       title: TeamMemberRead
       description: Response model for reading a team member.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    TeamMemberList:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier of the team member entry
-          examples:
-          - b154b9c4-4b28-4c6b-97c2-fdab3ed37f0e
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-          description: Unique identifier of the user
-          examples:
-          - d290f1ee-6c54-4b01-90e6-d701748f0851
-        email:
-          type: string
-          title: Email
-          description: Email address of the user
-          examples:
-          - user@example.com
-        admin:
-          type: boolean
-          title: Admin
-          description: Whether the user is an admin
-          examples:
-          - false
-      type: object
-      required:
-      - id
-      - user_id
-      - email
-      - admin
-      title: TeamMemberList
-      description: Response model for listing team members with additional user info.
-    TeamMemberBulkCreate:
-      properties:
-        owners:
-          items:
-            type: string
-            format: uuid
-          type: array
-          title: Owners
-          description: List of user IDs to add as team owners (admin=true)
-          default: []
-          examples:
-          - - d290f1ee-6c54-4b01-90e6-d701748f0851
-            - e391f2fc-7e92-4dcd-b1f6-4200e4e9f1f4
-        members:
-          items:
-            type: string
-            format: uuid
-          type: array
-          title: Members
-          description: List of user IDs to add as team members (admin=false)
-          default: []
-          examples:
-          - - f492f3fd-8f93-4ede-c2f7-5301f5ea0f5
-            - g593f4fe-9g94-4fef-d3g8-6412g6fb1g6
-      type: object
-      title: TeamMemberBulkCreate
-      description: Request model for creating team members with separate owner and member lists.
     Page_TeamMemberList_:
       properties:
         items:
@@ -293,6 +209,90 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    TeamMemberBulkCreate:
+      properties:
+        owners:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: Owners
+          description: List of user IDs to add as team owners (admin=true)
+          default: []
+          examples:
+          - - d290f1ee-6c54-4b01-90e6-d701748f0851
+            - e391f2fc-7e92-4dcd-b1f6-4200e4e9f1f4
+        members:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: Members
+          description: List of user IDs to add as team members (admin=false)
+          default: []
+          examples:
+          - - f492f3fd-8f93-4ede-c2f7-5301f5ea0f5
+            - g593f4fe-9g94-4fef-d3g8-6412g6fb1g6
+      type: object
+      title: TeamMemberBulkCreate
+      description: Request model for creating team members with separate owner and member lists.
+    TeamMemberList:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the team member entry
+          examples:
+          - b154b9c4-4b28-4c6b-97c2-fdab3ed37f0e
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: Unique identifier of the user
+          examples:
+          - d290f1ee-6c54-4b01-90e6-d701748f0851
+        email:
+          type: string
+          title: Email
+          description: Email address of the user
+          examples:
+          - user@example.com
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the user is an admin
+          examples:
+          - false
+      type: object
+      required:
+      - id
+      - user_id
+      - email
+      - admin
+      title: TeamMemberList
+      description: Response model for listing team members with additional user info.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

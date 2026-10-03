@@ -65,6 +65,90 @@ paths:
       - OAuth2PasswordBearer: []
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Page_EnvMemberList_:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/EnvMemberList'
+          type: array
+          title: Items
+        total:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Total
+        page:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Page
+        size:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Size
+        pages:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Pages
+      type: object
+      required:
+      - items
+      - total
+      - page
+      - size
+      title: Page[EnvMemberList]
+    EnvMemberRead:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: Unique identifier of the user being added
+          examples:
+          - d290f1ee-6c54-4b01-90e6-d701748f0851
+        env_id:
+          type: string
+          format: uuid
+          title: Env Id
+          description: Unique identifier of the env
+          examples:
+          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the user has admin privileges in the env
+          examples:
+          - true
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the env member entry
+          examples:
+          - b154b9c4-4b28-4c6b-97c2-fdab3ed37f0e
+      type: object
+      required:
+      - user_id
+      - env_id
+      - admin
+      - id
+      title: EnvMemberRead
+      description: Response model for reading a env member.
     ValidationError:
       properties:
         loc:
@@ -122,90 +206,6 @@ components:
       - admin
       title: EnvMemberList
       description: Response model for listing env members with additional user info.
-    EnvMemberRead:
-      properties:
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-          description: Unique identifier of the user being added
-          examples:
-          - d290f1ee-6c54-4b01-90e6-d701748f0851
-        env_id:
-          type: string
-          format: uuid
-          title: Env Id
-          description: Unique identifier of the env
-          examples:
-          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
-        admin:
-          type: boolean
-          title: Admin
-          description: Whether the user has admin privileges in the env
-          examples:
-          - true
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier of the env member entry
-          examples:
-          - b154b9c4-4b28-4c6b-97c2-fdab3ed37f0e
-      type: object
-      required:
-      - user_id
-      - env_id
-      - admin
-      - id
-      title: EnvMemberRead
-      description: Response model for reading a env member.
-    Page_EnvMemberList_:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/EnvMemberList'
-          type: array
-          title: Items
-        total:
-          anyOf:
-          - type: integer
-            minimum: 0
-          - type: 'null'
-          title: Total
-        page:
-          anyOf:
-          - type: integer
-            minimum: 1
-          - type: 'null'
-          title: Page
-        size:
-          anyOf:
-          - type: integer
-            minimum: 1
-          - type: 'null'
-          title: Size
-        pages:
-          anyOf:
-          - type: integer
-            minimum: 0
-          - type: 'null'
-          title: Pages
-      type: object
-      required:
-      - items
-      - total
-      - page
-      - size
-      title: Page[EnvMemberList]
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

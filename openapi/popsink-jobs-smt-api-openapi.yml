@@ -411,117 +411,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    KeysConfiguration:
-      properties:
-        keys:
-          items:
-            type: string
-          type: array
-          title: Keys
-      type: object
-      required:
-      - keys
-      title: KeysConfiguration
-      description: Keys config.
-    Body_job_smt_process_encryption_smt_process_encryption_post:
-      properties:
-        config:
-          $ref: '#/components/schemas/EncryptConfiguration'
-        message:
-          type: object
-          title: Message
-      type: object
-      required:
-      - config
-      - message
-      title: Body_job_smt_process_encryption_smt_process_encryption_post
-    MapperTableConfig:
-      properties:
-        table_name:
-          type: string
-          title: Table Name
-        fields:
-          items:
-            $ref: '#/components/schemas/MapperColumnConfig'
-          type: array
-          title: Fields
-      type: object
-      required:
-      - table_name
-      - fields
-      title: MapperTableConfig
-      description: Mapper config.
-    Body_job_smt_process_stringify_key_smt_process_stringify_key_post:
-      properties:
-        config:
-          $ref: '#/components/schemas/KeysConfiguration'
-        message:
-          type: object
-          title: Message
-      type: object
-      required:
-      - config
-      - message
-      title: Body_job_smt_process_stringify_key_smt_process_stringify_key_post
-    Body_job_smt_process_unenvelope_smt_process_unenvelope_post:
-      properties:
-        config:
-          $ref: '#/components/schemas/KeyConfiguration'
-        message:
-          type: object
-          title: Message
-      type: object
-      required:
-      - config
-      - message
-      title: Body_job_smt_process_unenvelope_smt_process_unenvelope_post
-    KeyMoverConfig:
-      properties:
-        key:
-          type: string
-          title: Key
-        key_path:
-          type: string
-          title: Key Path
-      type: object
-      required:
-      - key
-      - key_path
-      title: KeyMoverConfig
-      description: Config for KeyMover function.
-    Body_job_smt_process_filtering_smt_process_filtering_post:
-      properties:
-        config:
-          $ref: '#/components/schemas/FilteringConfiguration'
-        message:
-          type: object
-          title: Message
-      type: object
-      required:
-      - config
-      - message
-      title: Body_job_smt_process_filtering_smt_process_filtering_post
     Body_job_smt_process_key_mover_smt_process_key_mover_post:
       properties:
         config:
@@ -537,6 +426,42 @@ components:
       - config
       - message
       title: Body_job_smt_process_key_mover_smt_process_key_mover_post
+    Body_job_smt_process_unenvelope_smt_process_unenvelope_post:
+      properties:
+        config:
+          $ref: '#/components/schemas/KeyConfiguration'
+        message:
+          type: object
+          title: Message
+      type: object
+      required:
+      - config
+      - message
+      title: Body_job_smt_process_unenvelope_smt_process_unenvelope_post
+    Body_job_smt_process_hash_smt_process_hash_post:
+      properties:
+        config:
+          $ref: '#/components/schemas/HashConfig'
+        message:
+          type: object
+          title: Message
+      type: object
+      required:
+      - config
+      - message
+      title: Body_job_smt_process_hash_smt_process_hash_post
+    KeysConfiguration:
+      properties:
+        keys:
+          items:
+            type: string
+          type: array
+          title: Keys
+      type: object
+      required:
+      - keys
+      title: KeysConfiguration
+      description: Keys config.
     SplitterConfiguration:
       properties:
         root_table_name:
@@ -571,7 +496,7 @@ components:
       - config
       - message
       title: Body_job_smt_process_splitter_smt_process_splitter_post
-    Body_job_smt_process_key_filter_smt_process_key_filter_post:
+    Body_job_smt_process_dict_mover_smt_process_dict_mover_post:
       properties:
         config:
           $ref: '#/components/schemas/KeysConfiguration'
@@ -582,21 +507,50 @@ components:
       required:
       - config
       - message
-      title: Body_job_smt_process_key_filter_smt_process_key_filter_post
-    KeyConfiguration:
+      title: Body_job_smt_process_dict_mover_smt_process_dict_mover_post
+    EncryptConfiguration:
+      properties:
+        encrypt_key:
+          type: string
+          title: Encrypt Key
+        paths:
+          items:
+            type: string
+          type: array
+          title: Paths
+      type: object
+      required:
+      - encrypt_key
+      - paths
+      title: EncryptConfiguration
+      description: Encrypt config.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    KeyMoverConfig:
       properties:
         key:
           type: string
           title: Key
+        key_path:
+          type: string
+          title: Key Path
       type: object
       required:
       - key
-      title: KeyConfiguration
-      description: Key config.
-    Body_job_smt_process_hash_smt_process_hash_post:
+      - key_path
+      title: KeyMoverConfig
+      description: Config for KeyMover function.
+    Body_job_smt_process_filtering_smt_process_filtering_post:
       properties:
         config:
-          $ref: '#/components/schemas/HashConfig'
+          $ref: '#/components/schemas/FilteringConfiguration'
         message:
           type: object
           title: Message
@@ -604,29 +558,7 @@ components:
       required:
       - config
       - message
-      title: Body_job_smt_process_hash_smt_process_hash_post
-    MapperColumnConfig:
-      properties:
-        key:
-          type: string
-          title: Key
-        path:
-          type: string
-          title: Path
-          default: ''
-        static:
-          type: string
-          title: Static
-          default: ''
-        nullable:
-          type: boolean
-          title: Nullable
-          default: true
-      type: object
-      required:
-      - key
-      title: MapperColumnConfig
-      description: Mapper config part.
+      title: Body_job_smt_process_filtering_smt_process_filtering_post
     FilteringConfiguration:
       properties:
         operator:
@@ -650,32 +582,22 @@ components:
       - value
       title: FilteringConfiguration
       description: Filtering config.
-    HTTPValidationError:
+    Body_job_smt_process_mapper_smt_process_mapper_post:
       properties:
-        detail:
+        config:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/MapperTableConfig'
           type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    EncryptConfiguration:
-      properties:
-        encrypt_key:
-          type: string
-          title: Encrypt Key
-        paths:
-          items:
-            type: string
-          type: array
-          title: Paths
+          title: Config
+        message:
+          type: object
+          title: Message
       type: object
       required:
-      - encrypt_key
-      - paths
-      title: EncryptConfiguration
-      description: Encrypt config.
-    Body_job_smt_process_dict_mover_smt_process_dict_mover_post:
+      - config
+      - message
+      title: Body_job_smt_process_mapper_smt_process_mapper_post
+    Body_job_smt_process_stringify_key_smt_process_stringify_key_post:
       properties:
         config:
           $ref: '#/components/schemas/KeysConfiguration'
@@ -686,7 +608,69 @@ components:
       required:
       - config
       - message
-      title: Body_job_smt_process_dict_mover_smt_process_dict_mover_post
+      title: Body_job_smt_process_stringify_key_smt_process_stringify_key_post
+    Body_job_smt_process_encryption_smt_process_encryption_post:
+      properties:
+        config:
+          $ref: '#/components/schemas/EncryptConfiguration'
+        message:
+          type: object
+          title: Message
+      type: object
+      required:
+      - config
+      - message
+      title: Body_job_smt_process_encryption_smt_process_encryption_post
+    Body_job_smt_process_key_filter_smt_process_key_filter_post:
+      properties:
+        config:
+          $ref: '#/components/schemas/KeysConfiguration'
+        message:
+          type: object
+          title: Message
+      type: object
+      required:
+      - config
+      - message
+      title: Body_job_smt_process_key_filter_smt_process_key_filter_post
+    MapperColumnConfig:
+      properties:
+        key:
+          type: string
+          title: Key
+        path:
+          type: string
+          title: Path
+          default: ''
+        static:
+          type: string
+          title: Static
+          default: ''
+        nullable:
+          type: boolean
+          title: Nullable
+          default: true
+      type: object
+      required:
+      - key
+      title: MapperColumnConfig
+      description: Mapper config part.
+    MapperTableConfig:
+      properties:
+        table_name:
+          type: string
+          title: Table Name
+        fields:
+          items:
+            $ref: '#/components/schemas/MapperColumnConfig'
+          type: array
+          title: Fields
+      type: object
+      required:
+      - table_name
+      - fields
+      title: MapperTableConfig
+      description: Mapper config.
     HashConfig:
       properties:
         hash_type:
@@ -707,21 +691,37 @@ components:
       - paths
       title: HashConfig
       description: Hash key config.
-    Body_job_smt_process_mapper_smt_process_mapper_post:
+    ValidationError:
       properties:
-        config:
+        loc:
           items:
-            $ref: '#/components/schemas/MapperTableConfig'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Config
-        message:
-          type: object
+          title: Location
+        msg:
+          type: string
           title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - config
-      - message
-      title: Body_job_smt_process_mapper_smt_process_mapper_post
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    KeyConfiguration:
+      properties:
+        key:
+          type: string
+          title: Key
+      type: object
+      required:
+      - key
+      title: KeyConfiguration
+      description: Key config.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

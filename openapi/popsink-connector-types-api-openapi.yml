@@ -108,61 +108,6 @@ components:
       - msg
       - type
       title: ValidationError
-    OracleTargetCredentials:
-      properties:
-        database:
-          type: string
-          title: Database
-          description: Oracle database name
-          examples:
-          - ORCL
-        user:
-          type: string
-          title: User
-          description: Username for the Oracle database
-          examples:
-          - admin_user
-        password:
-          type: string
-          title: Password
-          description: Password for the Oracle database
-          examples:
-          - StrongPass123
-        host:
-          type: string
-          title: Host
-          description: Hostname or IP address of the Oracle server
-          examples:
-          - 192.168.1.100
-        port:
-          type: string
-          title: Port
-          description: Port number used to connect to the Oracle server
-          examples:
-          - '1521'
-        server_name:
-          type: string
-          title: Server Name
-          description: Oracle server name (e.g., service name)
-          examples:
-          - XE
-        server_id:
-          type: string
-          title: Server Id
-          description: Oracle server identifier (e.g., SID)
-          examples:
-          - oraclesrv01
-      type: object
-      required:
-      - database
-      - user
-      - password
-      - host
-      - port
-      - server_name
-      - server_id
-      title: OracleTargetCredentials
-      description: Credentials and connection details for writing to an Oracle target.
     CredentialsResponse:
       properties:
         is_success:
@@ -177,6 +122,27 @@ components:
       - message
       title: CredentialsResponse
       description: Credential response.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Messages:
+      properties:
+        messages:
+          items:
+            type: object
+          type: array
+          title: Messages
+      type: object
+      required:
+      - messages
+      title: Messages
+      description: Messages.
     KafkaSourceCredentials:
       properties:
         topic:
@@ -254,27 +220,61 @@ components:
       - sasl_mechanism
       title: KafkaSourceCredentials
       description: Credentials and configuration for accessing a Kafka source.
-    Messages:
+    OracleTargetCredentials:
       properties:
-        messages:
-          items:
-            type: object
-          type: array
-          title: Messages
+        database:
+          type: string
+          title: Database
+          description: Oracle database name
+          examples:
+          - ORCL
+        user:
+          type: string
+          title: User
+          description: Username for the Oracle database
+          examples:
+          - admin_user
+        password:
+          type: string
+          title: Password
+          description: Password for the Oracle database
+          examples:
+          - StrongPass123
+        host:
+          type: string
+          title: Host
+          description: Hostname or IP address of the Oracle server
+          examples:
+          - 192.168.1.100
+        port:
+          type: string
+          title: Port
+          description: Port number used to connect to the Oracle server
+          examples:
+          - '1521'
+        server_name:
+          type: string
+          title: Server Name
+          description: Oracle server name (e.g., service name)
+          examples:
+          - XE
+        server_id:
+          type: string
+          title: Server Id
+          description: Oracle server identifier (e.g., SID)
+          examples:
+          - oraclesrv01
       type: object
       required:
-      - messages
-      title: Messages
-      description: Messages.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      - database
+      - user
+      - password
+      - host
+      - port
+      - server_name
+      - server_id
+      title: OracleTargetCredentials
+      description: Credentials and connection details for writing to an Oracle target.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

@@ -102,34 +102,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    UserType:
-      type: string
-      enum:
-      - real_user
-      - system
-      title: UserType
-      description: User types.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     ActionType:
       type: string
       enum:
@@ -147,6 +119,44 @@ components:
       - team_deleted
       title: ActionType
       description: Action types.
+    Page_UserLogList_:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/UserLogList'
+          type: array
+          title: Items
+        total:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Total
+        page:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Page
+        size:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Size
+        pages:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Pages
+      type: object
+      required:
+      - items
+      - total
+      - page
+      - size
+      title: Page[UserLogList]
     UserLogList:
       properties:
         id:
@@ -207,44 +217,34 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    Page_UserLogList_:
+    ValidationError:
       properties:
-        items:
+        loc:
           items:
-            $ref: '#/components/schemas/UserLogList'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Items
-        total:
-          anyOf:
-          - type: integer
-            minimum: 0
-          - type: 'null'
-          title: Total
-        page:
-          anyOf:
-          - type: integer
-            minimum: 1
-          - type: 'null'
-          title: Page
-        size:
-          anyOf:
-          - type: integer
-            minimum: 1
-          - type: 'null'
-          title: Size
-        pages:
-          anyOf:
-          - type: integer
-            minimum: 0
-          - type: 'null'
-          title: Pages
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - items
-      - total
-      - page
-      - size
-      title: Page[UserLogList]
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    UserType:
+      type: string
+      enum:
+      - real_user
+      - system
+      title: UserType
+      description: User types.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

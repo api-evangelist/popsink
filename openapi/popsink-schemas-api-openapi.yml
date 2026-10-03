@@ -65,6 +65,15 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     SchemaRead:
       properties:
         id:
@@ -82,15 +91,6 @@ components:
       - version
       title: SchemaRead
       description: "Serializer for reading a schema record.\n\nAttributes:\n    id (UUID): Unique identifier of the schema.\n    version (int): Schema version number."
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     SchemaCreate:
       properties:
         schema:

@@ -47,6 +47,14 @@ paths:
       - OAuth2PasswordBearer: []
 components:
   schemas:
+    ConnectorType:
+      type: string
+      enum:
+      - job_smt
+      - kafka_source
+      - oracle_target
+      title: ConnectorType
+      description: Define the connector type.
     SourceConfigRead:
       properties:
         id:
@@ -69,14 +77,6 @@ components:
       - config
       title: SourceConfigRead
       description: Source configuration read.
-    ConnectorType:
-      type: string
-      enum:
-      - job_smt
-      - kafka_source
-      - oracle_target
-      title: ConnectorType
-      description: Define the connector type.
     TargetConfigRead:
       properties:
         id:

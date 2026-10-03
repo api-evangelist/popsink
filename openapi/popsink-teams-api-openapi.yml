@@ -127,27 +127,35 @@ components:
       - msg
       - type
       title: ValidationError
-    TeamList:
+    TeamCreate:
       properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier of the team
-          examples:
-          - 8c18a0db-3b10-4f9b-a7d3-6e837bafacb0
         name:
           type: string
           title: Name
           description: Name of the team
           examples:
           - Data Avengers
+        description:
+          type: string
+          title: Description
+          description: Short description of the team
+          examples:
+          - Team managing data pipelines and infrastructure.
+        env_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Env Id
+          description: Optional environment ID the team is associated with
+          examples:
+          - bfe91314-1234-4c6f-bb0c-01867487cc23
       type: object
       required:
-      - id
       - name
-      title: TeamList
-      description: Response model for listing teams (brief format).
+      - description
+      title: TeamCreate
+      description: Request model for creating a new team.
     TeamRead:
       properties:
         name:
@@ -185,6 +193,15 @@ components:
       - id
       title: TeamRead
       description: Response model for reading a team.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     Page_TeamList_:
       properties:
         items:
@@ -223,44 +240,27 @@ components:
       - page
       - size
       title: Page[TeamList]
-    TeamCreate:
+    TeamList:
       properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the team
+          examples:
+          - 8c18a0db-3b10-4f9b-a7d3-6e837bafacb0
         name:
           type: string
           title: Name
           description: Name of the team
           examples:
           - Data Avengers
-        description:
-          type: string
-          title: Description
-          description: Short description of the team
-          examples:
-          - Team managing data pipelines and infrastructure.
-        env_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Env Id
-          description: Optional environment ID the team is associated with
-          examples:
-          - bfe91314-1234-4c6f-bb0c-01867487cc23
       type: object
       required:
+      - id
       - name
-      - description
-      title: TeamCreate
-      description: Request model for creating a new team.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      title: TeamList
+      description: Response model for listing teams (brief format).
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

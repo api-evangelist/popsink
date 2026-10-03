@@ -213,26 +213,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    TeamRequestUpdate:
-      properties:
-        status:
-          anyOf:
-          - $ref: '#/components/schemas/RequestStatus'
-          - type: 'null'
-          description: Updated status of the request
-          examples:
-          - ACCEPTED
-        admin:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Admin
-          description: Change the admin privilege of the invited user
-          examples:
-          - true
-      type: object
-      title: TeamRequestUpdate
-      description: Request model for updating a team request's status or admin role.
     ValidationError:
       properties:
         loc:
@@ -254,53 +234,6 @@ components:
       - msg
       - type
       title: ValidationError
-    TeamRequestCreate:
-      properties:
-        team_id:
-          type: string
-          format: uuid
-          title: Team Id
-          description: ID of the team to which the user is being invited
-          examples:
-          - e2a1d6c7-d50e-4b97-945c-cd842a4e674f
-        from_user_id:
-          type: string
-          format: uuid
-          title: From User Id
-          description: ID of the user who sends the invitation
-          examples:
-          - 1a5d50a9-b3de-4c63-8d46-1b7ebdee179b
-        to_user_id:
-          type: string
-          format: uuid
-          title: To User Id
-          description: ID of the user who receives the invitation
-          examples:
-          - 3f9bfe97-2f1e-4c6d-9d60-83665e3d8be0
-        status:
-          anyOf:
-          - $ref: '#/components/schemas/RequestStatus'
-          - type: 'null'
-          description: Current status of the request
-          default: PENDING
-          examples:
-          - PENDING
-        admin:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Admin
-          description: Whether the invited user will be admin if they accept
-          default: false
-          examples:
-          - false
-      type: object
-      required:
-      - team_id
-      - from_user_id
-      - to_user_id
-      title: TeamRequestCreate
-      description: Request model for creating a team invitation request.
     TeamRequestListAsAdmin:
       properties:
         id:
@@ -361,6 +294,35 @@ components:
       - admin
       title: TeamRequestListAsAdmin
       description: Response model for listing team requests (admin view).
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    TeamRequestUpdate:
+      properties:
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/RequestStatus'
+          - type: 'null'
+          description: Updated status of the request
+          examples:
+          - ACCEPTED
+        admin:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Admin
+          description: Change the admin privilege of the invited user
+          examples:
+          - true
+      type: object
+      title: TeamRequestUpdate
+      description: Request model for updating a team request's status or admin role.
     Page_TeamRequestListAsAdmin_:
       properties:
         items:
@@ -399,79 +361,6 @@ components:
       - page
       - size
       title: Page[TeamRequestListAsAdmin]
-    TeamRequestRead:
-      properties:
-        team_id:
-          type: string
-          format: uuid
-          title: Team Id
-          description: ID of the team to which the user is being invited
-          examples:
-          - e2a1d6c7-d50e-4b97-945c-cd842a4e674f
-        from_user_id:
-          type: string
-          format: uuid
-          title: From User Id
-          description: ID of the user who sends the invitation
-          examples:
-          - 1a5d50a9-b3de-4c63-8d46-1b7ebdee179b
-        to_user_id:
-          type: string
-          format: uuid
-          title: To User Id
-          description: ID of the user who receives the invitation
-          examples:
-          - 3f9bfe97-2f1e-4c6d-9d60-83665e3d8be0
-        status:
-          anyOf:
-          - $ref: '#/components/schemas/RequestStatus'
-          - type: 'null'
-          description: Current status of the request
-          default: PENDING
-          examples:
-          - PENDING
-        admin:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Admin
-          description: Whether the invited user will be admin if they accept
-          default: false
-          examples:
-          - false
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier for the team request
-          examples:
-          - 84f8e7cd-e040-4bfb-a2dc-16d65b8d5c16
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-          description: Timestamp when the request was created
-          examples:
-          - '2025-06-12T09:23:45'
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-          description: Timestamp when the request was last updated
-          examples:
-          - '2025-06-12T10:00:00'
-      type: object
-      required:
-      - team_id
-      - from_user_id
-      - to_user_id
-      - id
-      title: TeamRequestRead
-      description: Response model for reading a team request.
     RequestStatus:
       type: string
       enum:
@@ -585,15 +474,126 @@ components:
       - page
       - size
       title: Page[TeamRequestListAsMember]
-    HTTPValidationError:
+    TeamRequestCreate:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+          description: ID of the team to which the user is being invited
+          examples:
+          - e2a1d6c7-d50e-4b97-945c-cd842a4e674f
+        from_user_id:
+          type: string
+          format: uuid
+          title: From User Id
+          description: ID of the user who sends the invitation
+          examples:
+          - 1a5d50a9-b3de-4c63-8d46-1b7ebdee179b
+        to_user_id:
+          type: string
+          format: uuid
+          title: To User Id
+          description: ID of the user who receives the invitation
+          examples:
+          - 3f9bfe97-2f1e-4c6d-9d60-83665e3d8be0
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/RequestStatus'
+          - type: 'null'
+          description: Current status of the request
+          default: PENDING
+          examples:
+          - PENDING
+        admin:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Admin
+          description: Whether the invited user will be admin if they accept
+          default: false
+          examples:
+          - false
       type: object
-      title: HTTPValidationError
+      required:
+      - team_id
+      - from_user_id
+      - to_user_id
+      title: TeamRequestCreate
+      description: Request model for creating a team invitation request.
+    TeamRequestRead:
+      properties:
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+          description: ID of the team to which the user is being invited
+          examples:
+          - e2a1d6c7-d50e-4b97-945c-cd842a4e674f
+        from_user_id:
+          type: string
+          format: uuid
+          title: From User Id
+          description: ID of the user who sends the invitation
+          examples:
+          - 1a5d50a9-b3de-4c63-8d46-1b7ebdee179b
+        to_user_id:
+          type: string
+          format: uuid
+          title: To User Id
+          description: ID of the user who receives the invitation
+          examples:
+          - 3f9bfe97-2f1e-4c6d-9d60-83665e3d8be0
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/RequestStatus'
+          - type: 'null'
+          description: Current status of the request
+          default: PENDING
+          examples:
+          - PENDING
+        admin:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Admin
+          description: Whether the invited user will be admin if they accept
+          default: false
+          examples:
+          - false
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier for the team request
+          examples:
+          - 84f8e7cd-e040-4bfb-a2dc-16d65b8d5c16
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+          description: Timestamp when the request was created
+          examples:
+          - '2025-06-12T09:23:45'
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+          description: Timestamp when the request was last updated
+          examples:
+          - '2025-06-12T10:00:00'
+      type: object
+      required:
+      - team_id
+      - from_user_id
+      - to_user_id
+      - id
+      title: TeamRequestRead
+      description: Response model for reading a team request.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2
