@@ -1,0 +1,27 @@
+slug: popsink
+provider: Popsink
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Pipelines
+  spec_file: popsink-pipelines-api-openapi.yml
+  capability_id: BC-610
+  capability_id_l1: BC-610
+  capability_name: Information & Data Management
+  confidence: 0.75
+  evidence: POST /pipelines/ "Create a new pipeline"; "Start pipeline execution"; "Pause pipeline execution";
+    "Get pipeline status"; schemas PipelineCreate, MapperFunctionConfiguration, EncryptConfiguration
+  reason: These operations define and operate the vendor's data replication/CDC pipelines — creation,
+    configuration, start/pause, logs and status of data movement between systems. That realises enterprise
+    information and data management (data integration/architecture) rather than any industry-specific
+    capability. No single L2 cleanly covers data pipeline operations, so only the L1 is asserted.
