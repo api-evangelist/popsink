@@ -233,6 +233,134 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    EnvRequestUpdate:
+      properties:
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/RequestStatus'
+          - type: 'null'
+          description: New status for the request
+          examples:
+          - ACCEPTED
+          - DECLINED
+        admin:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Admin
+          description: Whether the invited user will be admin if they accept
+          examples:
+          - true
+      type: object
+      title: EnvRequestUpdate
+      description: Request model for updating an env request.
+    Page_EnvRequestListAsMember_:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/EnvRequestListAsMember'
+          type: array
+          title: Items
+        total:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Total
+        page:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Page
+        size:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Size
+        pages:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Pages
+      type: object
+      required:
+      - items
+      - total
+      - page
+      - size
+      title: Page[EnvRequestListAsMember]
+    EnvRequestListAsAdmin:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: ID of the env request
+        env_id:
+          type: string
+          format: uuid
+          title: Env Id
+          description: ID of the target environment
+        from_user_id:
+          type: string
+          format: uuid
+          title: From User Id
+          description: ID of the user who created the request
+        to_user_id:
+          type: string
+          format: uuid
+          title: To User Id
+          description: ID of the invited user
+        to_user_email:
+          type: string
+          title: To User Email
+          description: Email of the invited user
+          examples:
+          - user@example.com
+        status:
+          $ref: '#/components/schemas/RequestStatus'
+          description: Current request status
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the invited user is granted admin rights
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+          description: Creation timestamp
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+          description: Last update timestamp
+      type: object
+      required:
+      - id
+      - env_id
+      - from_user_id
+      - to_user_id
+      - to_user_email
+      - status
+      - admin
+      title: EnvRequestListAsAdmin
+      description: Response model for listing env requests (admin view).
     EnvRequestRead:
       properties:
         id:
@@ -286,44 +414,35 @@ components:
       - admin
       title: EnvRequestRead
       description: Response model for reading a single env request.
-    Page_EnvRequestListAsMember_:
+    RequestStatus:
+      type: string
+      enum:
+      - PENDING
+      - ACCEPTED
+      - DECLINED
+      title: RequestStatus
+      description: Status for access requests (team, env, etc.).
+    ValidationError:
       properties:
-        items:
+        loc:
           items:
-            $ref: '#/components/schemas/EnvRequestListAsMember'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Items
-        total:
-          anyOf:
-          - type: integer
-            minimum: 0
-          - type: 'null'
-          title: Total
-        page:
-          anyOf:
-          - type: integer
-            minimum: 1
-          - type: 'null'
-          title: Page
-        size:
-          anyOf:
-          - type: integer
-            minimum: 1
-          - type: 'null'
-          title: Size
-        pages:
-          anyOf:
-          - type: integer
-            minimum: 0
-          - type: 'null'
-          title: Pages
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - items
-      - total
-      - page
-      - size
-      title: Page[EnvRequestListAsMember]
+      - loc
+      - msg
+      - type
+      title: ValidationError
     EnvRequestCreate:
       properties:
         env_id:
@@ -370,15 +489,6 @@ components:
       - to_user_email
       title: EnvRequestCreate
       description: Request model for creating an env invitation request.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     Page_EnvRequestListAsAdmin_:
       properties:
         items:
@@ -417,27 +527,6 @@ components:
       - page
       - size
       title: Page[EnvRequestListAsAdmin]
-    EnvRequestUpdate:
-      properties:
-        status:
-          anyOf:
-          - $ref: '#/components/schemas/RequestStatus'
-          - type: 'null'
-          description: New status for the request
-          examples:
-          - ACCEPTED
-          - DECLINED
-        admin:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Admin
-          description: Whether the invited user will be admin if they accept
-          examples:
-          - true
-      type: object
-      title: EnvRequestUpdate
-      description: Request model for updating an env request.
     EnvRequestListAsMember:
       properties:
         id:
@@ -506,95 +595,6 @@ components:
       - admin
       title: EnvRequestListAsMember
       description: Response model for listing env requests (member view with details).
-    RequestStatus:
-      type: string
-      enum:
-      - PENDING
-      - ACCEPTED
-      - DECLINED
-      title: RequestStatus
-      description: Status for access requests (team, env, etc.).
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    EnvRequestListAsAdmin:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: ID of the env request
-        env_id:
-          type: string
-          format: uuid
-          title: Env Id
-          description: ID of the target environment
-        from_user_id:
-          type: string
-          format: uuid
-          title: From User Id
-          description: ID of the user who created the request
-        to_user_id:
-          type: string
-          format: uuid
-          title: To User Id
-          description: ID of the invited user
-        to_user_email:
-          type: string
-          title: To User Email
-          description: Email of the invited user
-          examples:
-          - user@example.com
-        status:
-          $ref: '#/components/schemas/RequestStatus'
-          description: Current request status
-        admin:
-          type: boolean
-          title: Admin
-          description: Whether the invited user is granted admin rights
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-          description: Creation timestamp
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-          description: Last update timestamp
-      type: object
-      required:
-      - id
-      - env_id
-      - from_user_id
-      - to_user_id
-      - to_user_email
-      - status
-      - admin
-      title: EnvRequestListAsAdmin
-      description: Response model for listing env requests (admin view).
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

@@ -351,6 +351,204 @@ paths:
       - Users
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ExportData-Input:
+      properties:
+        users:
+          items:
+            $ref: '#/components/schemas/UserExport'
+          type: array
+          title: Users
+          description: List of all users in the system
+        envs:
+          items:
+            $ref: '#/components/schemas/EnvExport'
+          type: array
+          title: Envs
+          description: List of all environments in the system
+        teams:
+          items:
+            $ref: '#/components/schemas/TeamExport'
+          type: array
+          title: Teams
+          description: List of all teams in the system
+        env_members:
+          items:
+            $ref: '#/components/schemas/EnvMemberExport'
+          type: array
+          title: Env Members
+          description: List of all user-environment membership relationships
+        team_members:
+          items:
+            $ref: '#/components/schemas/TeamMemberExport'
+          type: array
+          title: Team Members
+          description: List of all user-team membership relationships
+      type: object
+      required:
+      - users
+      - envs
+      - teams
+      - env_members
+      - team_members
+      title: ExportData
+      description: Complete data export model containing all system entities and their relationships.
+    TeamExport:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the team
+          examples:
+          - Data Avengers
+        description:
+          type: string
+          title: Description
+          description: Short description of the team
+          examples:
+          - Team managing data pipelines and infrastructure.
+        env_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Env Id
+          description: Optional environment ID the team is associated with
+          examples:
+          - bfe91314-1234-4c6f-bb0c-01867487cc23
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier for the team
+          examples:
+          - 8c18a0db-3b10-4f9b-a7d3-6e837bafacb0
+      type: object
+      required:
+      - name
+      - description
+      - id
+      title: TeamExport
+      description: Team export data model.
+    EnvExport:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the environment
+          examples:
+          - staging
+        use_retention:
+          type: boolean
+          title: Use Retention
+          description: Whether message retention is enabled for this environment
+          examples:
+          - true
+        retention_configuration:
+          anyOf:
+          - $ref: '#/components/schemas/BrokerConfiguration'
+          - type: 'null'
+          description: Retention policy configuration if retention is enabled
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the environment
+      type: object
+      required:
+      - name
+      - use_retention
+      - id
+      title: EnvExport
+      description: Environment export data model.
+    TeamMemberExport:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: Unique identifier of the user being added
+          examples:
+          - d290f1ee-6c54-4b01-90e6-d701748f0851
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+          description: Unique identifier of the team
+          examples:
+          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the user has admin privileges in the team
+          examples:
+          - true
+      type: object
+      required:
+      - user_id
+      - team_id
+      - admin
+      title: TeamMemberExport
+      description: Team member export data model.
+    UserSafeUpdate:
+      properties:
+        password:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Password
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        is_active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Active
+        is_superuser:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Superuser
+        is_verified:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Verified
+        active_env_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Active Env Id
+      type: object
+      title: UserSafeUpdate
+      description: Update a user without password.
+    UserPasswordChange:
+      properties:
+        old_password:
+          type: string
+          title: Old Password
+        new_password:
+          type: string
+          title: New Password
+      type: object
+      required:
+      - old_password
+      - new_password
+      title: UserPasswordChange
+      description: Change user password.
     BrokerConfiguration:
       properties:
         bootstrap_server:
@@ -392,37 +590,97 @@ components:
       - sasl_password
       title: BrokerConfiguration
       description: Broker configuration.
-    EnvExport:
+    ValidationError:
       properties:
-        name:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
-          title: Name
-          description: Name of the environment
-          examples:
-          - staging
-        use_retention:
-          type: boolean
-          title: Use Retention
-          description: Whether message retention is enabled for this environment
-          examples:
-          - true
-        retention_configuration:
-          anyOf:
-          - $ref: '#/components/schemas/BrokerConfiguration'
-          - type: 'null'
-          description: Retention policy configuration if retention is enabled
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    UserRead:
+      properties:
         id:
           type: string
           format: uuid
           title: Id
-          description: Unique identifier of the environment
+        email:
+          type: string
+          format: email
+          title: Email
+        is_active:
+          type: boolean
+          title: Is Active
+          default: true
+        is_superuser:
+          type: boolean
+          title: Is Superuser
+          default: false
+        is_verified:
+          type: boolean
+          title: Is Verified
+          default: false
+        active_env_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Active Env Id
       type: object
       required:
-      - name
-      - use_retention
       - id
-      title: EnvExport
-      description: Environment export data model.
+      - email
+      - active_env_id
+      title: UserRead
+      description: Read a user.
+    UserExport:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        email:
+          type: string
+          format: email
+          title: Email
+        is_active:
+          type: boolean
+          title: Is Active
+          default: true
+        is_superuser:
+          type: boolean
+          title: Is Superuser
+          default: false
+        is_verified:
+          type: boolean
+          title: Is Verified
+          default: false
+        active_env_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Active Env Id
+      type: object
+      required:
+      - id
+      - email
+      - active_env_id
+      title: UserExport
+      description: User export data model.
     ExportData-Output:
       properties:
         users:
@@ -464,50 +722,6 @@ components:
       - team_members
       title: ExportData
       description: Complete data export model containing all system entities and their relationships.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    UserRead:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        email:
-          type: string
-          format: email
-          title: Email
-        is_active:
-          type: boolean
-          title: Is Active
-          default: true
-        is_superuser:
-          type: boolean
-          title: Is Superuser
-          default: false
-        is_verified:
-          type: boolean
-          title: Is Verified
-          default: false
-        active_env_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Active Env Id
-      type: object
-      required:
-      - id
-      - email
-      - active_env_id
-      title: UserRead
-      description: Read a user.
     ErrorModel:
       properties:
         detail:
@@ -559,148 +773,6 @@ components:
       - page
       - size
       title: Page[UserRead]
-    TeamExport:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: Name of the team
-          examples:
-          - Data Avengers
-        description:
-          type: string
-          title: Description
-          description: Short description of the team
-          examples:
-          - Team managing data pipelines and infrastructure.
-        env_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Env Id
-          description: Optional environment ID the team is associated with
-          examples:
-          - bfe91314-1234-4c6f-bb0c-01867487cc23
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier for the team
-          examples:
-          - 8c18a0db-3b10-4f9b-a7d3-6e837bafacb0
-      type: object
-      required:
-      - name
-      - description
-      - id
-      title: TeamExport
-      description: Team export data model.
-    ExportData-Input:
-      properties:
-        users:
-          items:
-            $ref: '#/components/schemas/UserExport'
-          type: array
-          title: Users
-          description: List of all users in the system
-        envs:
-          items:
-            $ref: '#/components/schemas/EnvExport'
-          type: array
-          title: Envs
-          description: List of all environments in the system
-        teams:
-          items:
-            $ref: '#/components/schemas/TeamExport'
-          type: array
-          title: Teams
-          description: List of all teams in the system
-        env_members:
-          items:
-            $ref: '#/components/schemas/EnvMemberExport'
-          type: array
-          title: Env Members
-          description: List of all user-environment membership relationships
-        team_members:
-          items:
-            $ref: '#/components/schemas/TeamMemberExport'
-          type: array
-          title: Team Members
-          description: List of all user-team membership relationships
-      type: object
-      required:
-      - users
-      - envs
-      - teams
-      - env_members
-      - team_members
-      title: ExportData
-      description: Complete data export model containing all system entities and their relationships.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    UserPasswordChange:
-      properties:
-        old_password:
-          type: string
-          title: Old Password
-        new_password:
-          type: string
-          title: New Password
-      type: object
-      required:
-      - old_password
-      - new_password
-      title: UserPasswordChange
-      description: Change user password.
-    TeamMemberExport:
-      properties:
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-          description: Unique identifier of the user being added
-          examples:
-          - d290f1ee-6c54-4b01-90e6-d701748f0851
-        team_id:
-          type: string
-          format: uuid
-          title: Team Id
-          description: Unique identifier of the team
-          examples:
-          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
-        admin:
-          type: boolean
-          title: Admin
-          description: Whether the user has admin privileges in the team
-          examples:
-          - true
-      type: object
-      required:
-      - user_id
-      - team_id
-      - admin
-      title: TeamMemberExport
-      description: Team member export data model.
     EnvMemberExport:
       properties:
         user_id:
@@ -730,78 +802,6 @@ components:
       - admin
       title: EnvMemberExport
       description: Environment member export data model.
-    UserSafeUpdate:
-      properties:
-        password:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Password
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        is_active:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Active
-        is_superuser:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Superuser
-        is_verified:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Verified
-        active_env_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Active Env Id
-      type: object
-      title: UserSafeUpdate
-      description: Update a user without password.
-    UserExport:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        email:
-          type: string
-          format: email
-          title: Email
-        is_active:
-          type: boolean
-          title: Is Active
-          default: true
-        is_superuser:
-          type: boolean
-          title: Is Superuser
-          default: false
-        is_verified:
-          type: boolean
-          title: Is Verified
-          default: false
-        active_env_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Active Env Id
-      type: object
-      required:
-      - id
-      - email
-      - active_env_id
-      title: UserExport
-      description: User export data model.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

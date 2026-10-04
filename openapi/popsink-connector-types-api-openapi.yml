@@ -87,27 +87,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ValidationError:
+    HTTPValidationError:
       properties:
-        loc:
+        detail:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Detail
       type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      title: HTTPValidationError
     CredentialsResponse:
       properties:
         is_success:
@@ -122,27 +110,6 @@ components:
       - message
       title: CredentialsResponse
       description: Credential response.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Messages:
-      properties:
-        messages:
-          items:
-            type: object
-          type: array
-          title: Messages
-      type: object
-      required:
-      - messages
-      title: Messages
-      description: Messages.
     KafkaSourceCredentials:
       properties:
         topic:
@@ -275,6 +242,39 @@ components:
       - server_id
       title: OracleTargetCredentials
       description: Credentials and connection details for writing to an Oracle target.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Messages:
+      properties:
+        messages:
+          items:
+            type: object
+          type: array
+          title: Messages
+      type: object
+      required:
+      - messages
+      title: Messages
+      description: Messages.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

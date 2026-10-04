@@ -106,93 +106,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    TeamCreate:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: Name of the team
-          examples:
-          - Data Avengers
-        description:
-          type: string
-          title: Description
-          description: Short description of the team
-          examples:
-          - Team managing data pipelines and infrastructure.
-        env_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Env Id
-          description: Optional environment ID the team is associated with
-          examples:
-          - bfe91314-1234-4c6f-bb0c-01867487cc23
-      type: object
-      required:
-      - name
-      - description
-      title: TeamCreate
-      description: Request model for creating a new team.
-    TeamRead:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: Name of the team
-          examples:
-          - Data Avengers
-        description:
-          type: string
-          title: Description
-          description: Short description of the team
-          examples:
-          - Team managing data pipelines and infrastructure.
-        env_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Env Id
-          description: Optional environment ID the team is associated with
-          examples:
-          - bfe91314-1234-4c6f-bb0c-01867487cc23
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier for the team
-          examples:
-          - 8c18a0db-3b10-4f9b-a7d3-6e837bafacb0
-      type: object
-      required:
-      - name
-      - description
-      - id
-      title: TeamRead
-      description: Response model for reading a team.
     HTTPValidationError:
       properties:
         detail:
@@ -240,6 +153,27 @@ components:
       - page
       - size
       title: Page[TeamList]
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     TeamList:
       properties:
         id:
@@ -261,6 +195,72 @@ components:
       - name
       title: TeamList
       description: Response model for listing teams (brief format).
+    TeamRead:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the team
+          examples:
+          - Data Avengers
+        description:
+          type: string
+          title: Description
+          description: Short description of the team
+          examples:
+          - Team managing data pipelines and infrastructure.
+        env_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Env Id
+          description: Optional environment ID the team is associated with
+          examples:
+          - bfe91314-1234-4c6f-bb0c-01867487cc23
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier for the team
+          examples:
+          - 8c18a0db-3b10-4f9b-a7d3-6e837bafacb0
+      type: object
+      required:
+      - name
+      - description
+      - id
+      title: TeamRead
+      description: Response model for reading a team.
+    TeamCreate:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the team
+          examples:
+          - Data Avengers
+        description:
+          type: string
+          title: Description
+          description: Short description of the team
+          examples:
+          - Team managing data pipelines and infrastructure.
+        env_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Env Id
+          description: Optional environment ID the team is associated with
+          examples:
+          - bfe91314-1234-4c6f-bb0c-01867487cc23
+      type: object
+      required:
+      - name
+      - description
+      title: TeamCreate
+      description: Request model for creating a new team.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

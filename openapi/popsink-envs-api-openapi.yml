@@ -141,6 +141,78 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    EnvUpdate:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: Name of the environment
+          examples:
+          - staging
+        use_retention:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Use Retention
+          description: Whether message retention is enabled for this environment
+          examples:
+          - true
+        retention_configuration:
+          anyOf:
+          - $ref: '#/components/schemas/BrokerConfiguration'
+          - type: 'null'
+          description: Retention policy configuration if retention is enabled
+      type: object
+      title: EnvUpdate
+      description: 'Model used to update an existing Env.
+
+
+        All fields are optional to allow partial updates.'
+    EnvRead:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the environment
+          examples:
+          - staging
+        use_retention:
+          type: boolean
+          title: Use Retention
+          description: Whether message retention is enabled for this environment
+          examples:
+          - true
+        retention_configuration:
+          anyOf:
+          - $ref: '#/components/schemas/BrokerConfiguration'
+          - type: 'null'
+          description: Retention policy configuration if retention is enabled
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the environment
+      type: object
+      required:
+      - name
+      - use_retention
+      - id
+      title: EnvRead
+      description: 'Model returned when reading an Env.
+
+
+        Includes all creation fields plus the unique Env identifier.'
     BrokerConfiguration:
       properties:
         bootstrap_server:
@@ -182,6 +254,27 @@ components:
       - sasl_password
       title: BrokerConfiguration
       description: Broker configuration.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     Page_EnvList_:
       properties:
         items:
@@ -220,78 +313,26 @@ components:
       - page
       - size
       title: Page[EnvList]
-    EnvRead:
+    EnvList:
       properties:
-        name:
-          type: string
-          title: Name
-          description: Name of the environment
-          examples:
-          - staging
-        use_retention:
-          type: boolean
-          title: Use Retention
-          description: Whether message retention is enabled for this environment
-          examples:
-          - true
-        retention_configuration:
-          anyOf:
-          - $ref: '#/components/schemas/BrokerConfiguration'
-          - type: 'null'
-          description: Retention policy configuration if retention is enabled
         id:
           type: string
           format: uuid
           title: Id
           description: Unique identifier of the environment
-      type: object
-      required:
-      - name
-      - use_retention
-      - id
-      title: EnvRead
-      description: 'Model returned when reading an Env.
-
-
-        Includes all creation fields plus the unique Env identifier.'
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    EnvUpdate:
-      properties:
         name:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Name
           description: Name of the environment
-          examples:
-          - staging
-        use_retention:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Use Retention
-          description: Whether message retention is enabled for this environment
-          examples:
-          - true
-        retention_configuration:
-          anyOf:
-          - $ref: '#/components/schemas/BrokerConfiguration'
-          - type: 'null'
-          description: Retention policy configuration if retention is enabled
       type: object
-      title: EnvUpdate
-      description: 'Model used to update an existing Env.
+      required:
+      - id
+      - name
+      title: EnvList
+      description: 'Lightweight model used to list environments.
 
 
-        All fields are optional to allow partial updates.'
+        Only includes the basic identifying fields.'
     EnvCreate:
       properties:
         name:
@@ -320,47 +361,6 @@ components:
 
 
         Includes the environment name and optional broker retention configuration.'
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    EnvList:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier of the environment
-        name:
-          type: string
-          title: Name
-          description: Name of the environment
-      type: object
-      required:
-      - id
-      - name
-      title: EnvList
-      description: 'Lightweight model used to list environments.
-
-
-        Only includes the basic identifying fields.'
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

@@ -55,28 +55,6 @@ components:
       - oracle_target
       title: ConnectorType
       description: Define the connector type.
-    SourceConfigRead:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        name:
-          type: string
-          title: Name
-        type:
-          $ref: '#/components/schemas/ConnectorType'
-        config:
-          type: object
-          title: Config
-      type: object
-      required:
-      - id
-      - name
-      - type
-      - config
-      title: SourceConfigRead
-      description: Source configuration read.
     TargetConfigRead:
       properties:
         id:
@@ -99,6 +77,28 @@ components:
       - config
       title: TargetConfigRead
       description: Target configuration read.
+    SourceConfigRead:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        name:
+          type: string
+          title: Name
+        type:
+          $ref: '#/components/schemas/ConnectorType'
+        config:
+          type: object
+          title: Config
+      type: object
+      required:
+      - id
+      - name
+      - type
+      - config
+      title: SourceConfigRead
+      description: Source configuration read.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

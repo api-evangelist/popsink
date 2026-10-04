@@ -50,119 +50,6 @@ paths:
       - OAuth2PasswordBearer: []
 components:
   schemas:
-    BrokerConfiguration:
-      properties:
-        bootstrap_server:
-          type: string
-          title: Bootstrap Server
-        security_protocol:
-          type: string
-          enum:
-          - PLAINTEXT
-          - SASL_PLAINTEXT
-          - SASL_SSL
-          - SSL
-          title: Security Protocol
-        sasl_mechanism:
-          type: string
-          enum:
-          - OAUTHBEARER
-          - PLAIN
-          - SCRAM-SHA-256
-          - SCRAM-SHA-512
-          - GSSAPI
-          title: Sasl Mechanism
-        sasl_username:
-          type: string
-          title: Sasl Username
-        sasl_password:
-          type: string
-          title: Sasl Password
-        ca_cert:
-          type: string
-          title: Ca Cert
-          default: ''
-      type: object
-      required:
-      - bootstrap_server
-      - security_protocol
-      - sasl_mechanism
-      - sasl_username
-      - sasl_password
-      title: BrokerConfiguration
-      description: Broker configuration.
-    EnvExport:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: Name of the environment
-          examples:
-          - staging
-        use_retention:
-          type: boolean
-          title: Use Retention
-          description: Whether message retention is enabled for this environment
-          examples:
-          - true
-        retention_configuration:
-          anyOf:
-          - $ref: '#/components/schemas/BrokerConfiguration'
-          - type: 'null'
-          description: Retention policy configuration if retention is enabled
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier of the environment
-      type: object
-      required:
-      - name
-      - use_retention
-      - id
-      title: EnvExport
-      description: Environment export data model.
-    ExportData-Output:
-      properties:
-        users:
-          items:
-            $ref: '#/components/schemas/UserExport'
-          type: array
-          title: Users
-          description: List of all users in the system
-        envs:
-          items:
-            $ref: '#/components/schemas/EnvExport'
-          type: array
-          title: Envs
-          description: List of all environments in the system
-        teams:
-          items:
-            $ref: '#/components/schemas/TeamExport'
-          type: array
-          title: Teams
-          description: List of all teams in the system
-        env_members:
-          items:
-            $ref: '#/components/schemas/EnvMemberExport'
-          type: array
-          title: Env Members
-          description: List of all user-environment membership relationships
-        team_members:
-          items:
-            $ref: '#/components/schemas/TeamMemberExport'
-          type: array
-          title: Team Members
-          description: List of all user-team membership relationships
-      type: object
-      required:
-      - users
-      - envs
-      - teams
-      - env_members
-      - team_members
-      title: ExportData
-      description: Complete data export model containing all system entities and their relationships.
     HTTPValidationError:
       properties:
         detail:
@@ -172,43 +59,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    TeamExport:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: Name of the team
-          examples:
-          - Data Avengers
-        description:
-          type: string
-          title: Description
-          description: Short description of the team
-          examples:
-          - Team managing data pipelines and infrastructure.
-        env_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Env Id
-          description: Optional environment ID the team is associated with
-          examples:
-          - bfe91314-1234-4c6f-bb0c-01867487cc23
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier for the team
-          examples:
-          - 8c18a0db-3b10-4f9b-a7d3-6e837bafacb0
-      type: object
-      required:
-      - name
-      - description
-      - id
-      title: TeamExport
-      description: Team export data model.
     ExportData-Input:
       properties:
         users:
@@ -250,27 +100,74 @@ components:
       - team_members
       title: ExportData
       description: Complete data export model containing all system entities and their relationships.
-    ValidationError:
+    TeamExport:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        name:
           type: string
-          title: Message
-        type:
+          title: Name
+          description: Name of the team
+          examples:
+          - Data Avengers
+        description:
           type: string
-          title: Error Type
+          title: Description
+          description: Short description of the team
+          examples:
+          - Team managing data pipelines and infrastructure.
+        env_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Env Id
+          description: Optional environment ID the team is associated with
+          examples:
+          - bfe91314-1234-4c6f-bb0c-01867487cc23
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier for the team
+          examples:
+          - 8c18a0db-3b10-4f9b-a7d3-6e837bafacb0
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - name
+      - description
+      - id
+      title: TeamExport
+      description: Team export data model.
+    EnvExport:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of the environment
+          examples:
+          - staging
+        use_retention:
+          type: boolean
+          title: Use Retention
+          description: Whether message retention is enabled for this environment
+          examples:
+          - true
+        retention_configuration:
+          anyOf:
+          - $ref: '#/components/schemas/BrokerConfiguration'
+          - type: 'null'
+          description: Retention policy configuration if retention is enabled
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Unique identifier of the environment
+      type: object
+      required:
+      - name
+      - use_retention
+      - id
+      title: EnvExport
+      description: Environment export data model.
     TeamMemberExport:
       properties:
         user_id:
@@ -300,35 +197,68 @@ components:
       - admin
       title: TeamMemberExport
       description: Team member export data model.
-    EnvMemberExport:
+    BrokerConfiguration:
       properties:
-        user_id:
+        bootstrap_server:
           type: string
-          format: uuid
-          title: User Id
-          description: Unique identifier of the user being added
-          examples:
-          - d290f1ee-6c54-4b01-90e6-d701748f0851
-        env_id:
+          title: Bootstrap Server
+        security_protocol:
           type: string
-          format: uuid
-          title: Env Id
-          description: Unique identifier of the env
-          examples:
-          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
-        admin:
-          type: boolean
-          title: Admin
-          description: Whether the user has admin privileges in the env
-          examples:
-          - true
+          enum:
+          - PLAINTEXT
+          - SASL_PLAINTEXT
+          - SASL_SSL
+          - SSL
+          title: Security Protocol
+        sasl_mechanism:
+          type: string
+          enum:
+          - OAUTHBEARER
+          - PLAIN
+          - SCRAM-SHA-256
+          - SCRAM-SHA-512
+          - GSSAPI
+          title: Sasl Mechanism
+        sasl_username:
+          type: string
+          title: Sasl Username
+        sasl_password:
+          type: string
+          title: Sasl Password
+        ca_cert:
+          type: string
+          title: Ca Cert
+          default: ''
       type: object
       required:
-      - user_id
-      - env_id
-      - admin
-      title: EnvMemberExport
-      description: Environment member export data model.
+      - bootstrap_server
+      - security_protocol
+      - sasl_mechanism
+      - sasl_username
+      - sasl_password
+      title: BrokerConfiguration
+      description: Broker configuration.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     UserExport:
       properties:
         id:
@@ -364,6 +294,76 @@ components:
       - active_env_id
       title: UserExport
       description: User export data model.
+    ExportData-Output:
+      properties:
+        users:
+          items:
+            $ref: '#/components/schemas/UserExport'
+          type: array
+          title: Users
+          description: List of all users in the system
+        envs:
+          items:
+            $ref: '#/components/schemas/EnvExport'
+          type: array
+          title: Envs
+          description: List of all environments in the system
+        teams:
+          items:
+            $ref: '#/components/schemas/TeamExport'
+          type: array
+          title: Teams
+          description: List of all teams in the system
+        env_members:
+          items:
+            $ref: '#/components/schemas/EnvMemberExport'
+          type: array
+          title: Env Members
+          description: List of all user-environment membership relationships
+        team_members:
+          items:
+            $ref: '#/components/schemas/TeamMemberExport'
+          type: array
+          title: Team Members
+          description: List of all user-team membership relationships
+      type: object
+      required:
+      - users
+      - envs
+      - teams
+      - env_members
+      - team_members
+      title: ExportData
+      description: Complete data export model containing all system entities and their relationships.
+    EnvMemberExport:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: Unique identifier of the user being added
+          examples:
+          - d290f1ee-6c54-4b01-90e6-d701748f0851
+        env_id:
+          type: string
+          format: uuid
+          title: Env Id
+          description: Unique identifier of the env
+          examples:
+          - a7d1f2fc-6e92-4dcd-b1f6-4200e4e9f1f3
+        admin:
+          type: boolean
+          title: Admin
+          description: Whether the user has admin privileges in the env
+          examples:
+          - true
+      type: object
+      required:
+      - user_id
+      - env_id
+      - admin
+      title: EnvMemberExport
+      description: Environment member export data model.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

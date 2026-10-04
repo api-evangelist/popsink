@@ -294,6 +294,15 @@ paths:
       - Auth
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     Body_reset_forgot_password_auth_forgot_password_post:
       properties:
         email:
@@ -304,24 +313,60 @@ components:
       required:
       - email
       title: Body_reset_forgot_password_auth_forgot_password_post
-    Body_verify_verify_auth_verify_post:
+    Body_auth_jwt_login_auth_jwt_login_post:
       properties:
-        token:
+        grant_type:
+          anyOf:
+          - type: string
+            pattern: ^password$
+          - type: 'null'
+          title: Grant Type
+        username:
           type: string
-          title: Token
+          title: Username
+        password:
+          type: string
+          title: Password
+        scope:
+          type: string
+          title: Scope
+          default: ''
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+        client_secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Secret
       type: object
       required:
-      - token
-      title: Body_verify_verify_auth_verify_post
-    HTTPValidationError:
+      - username
+      - password
+      title: Body_auth_jwt_login_auth_jwt_login_post
+    ValidationError:
       properties:
-        detail:
+        loc:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Detail
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
-      title: HTTPValidationError
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     UserRead:
       properties:
         id:
@@ -357,6 +402,15 @@ components:
       - active_env_id
       title: UserRead
       description: Read a user.
+    Body_verify_verify_auth_verify_post:
+      properties:
+        token:
+          type: string
+          title: Token
+      type: object
+      required:
+      - token
+      title: Body_verify_verify_auth_verify_post
     ErrorModel:
       properties:
         detail:
@@ -370,19 +424,16 @@ components:
       required:
       - detail
       title: ErrorModel
-    BearerResponse:
+    Body_verify_request_token_auth_request_verify_token_post:
       properties:
-        access_token:
+        email:
           type: string
-          title: Access Token
-        token_type:
-          type: string
-          title: Token Type
+          format: email
+          title: Email
       type: object
       required:
-      - access_token
-      - token_type
-      title: BearerResponse
+      - email
+      title: Body_verify_request_token_auth_request_verify_token_post
     Body_reset_reset_password_auth_reset_password_post:
       properties:
         token:
@@ -396,6 +447,19 @@ components:
       - token
       - password
       title: Body_reset_reset_password_auth_reset_password_post
+    BearerResponse:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+        token_type:
+          type: string
+          title: Token Type
+      type: object
+      required:
+      - access_token
+      - token_type
+      title: BearerResponse
     UserCreate:
       properties:
         email:
@@ -427,70 +491,6 @@ components:
       - password
       title: UserCreate
       description: Create a user.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    Body_auth_jwt_login_auth_jwt_login_post:
-      properties:
-        grant_type:
-          anyOf:
-          - type: string
-            pattern: ^password$
-          - type: 'null'
-          title: Grant Type
-        username:
-          type: string
-          title: Username
-        password:
-          type: string
-          title: Password
-        scope:
-          type: string
-          title: Scope
-          default: ''
-        client_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Id
-        client_secret:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Secret
-      type: object
-      required:
-      - username
-      - password
-      title: Body_auth_jwt_login_auth_jwt_login_post
-    Body_verify_request_token_auth_request_verify_token_post:
-      properties:
-        email:
-          type: string
-          format: email
-          title: Email
-      type: object
-      required:
-      - email
-      title: Body_verify_request_token_auth_request_verify_token_post
     Credentials:
       title: Credentials
       required:

@@ -591,103 +591,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    PipelineLogs:
-      properties:
-        uuid:
-          type: string
-          title: Uuid
-          description: UUID of the pipeline run or worker
-        status:
-          type: string
-          enum:
-          - Running
-          - NotFound
-          - Pending
-          - Succeeded
-          - Failed
-          - Unknown
-          title: Status
-          description: Status of the current pipeline run
-        count_errors:
-          type: string
-          title: Count Errors
-          description: Number of errors encountered during run
-          example: '3'
-        logs:
-          type: string
-          title: Logs
-          description: Logs produced by the pipeline worker
-      type: object
-      required:
-      - uuid
-      - status
-      - count_errors
-      - logs
-      title: PipelineLogs
-      description: Status and logs for a pipeline worker.
-    HashFunctionConfiguration:
-      properties:
-        function_type:
-          type: string
-          const: hash
-          title: Function Type
-        function_config:
-          $ref: '#/components/schemas/HashConfig'
-      type: object
-      required:
-      - function_type
-      - function_config
-      title: HashFunctionConfiguration
-      description: Hash config.
-    PipelinesStatusCounter:
-      properties:
-        all:
-          type: integer
-          title: All
-          description: Total number of pipelines
-          default: 0
-        draft:
-          type: integer
-          title: Draft
-          description: Number of pipelines in draft state
-          default: 0
-        live:
-          type: integer
-          title: Live
-          description: Number of active (live) pipelines
-          default: 0
-        paused:
-          type: integer
-          title: Paused
-          description: Number of paused pipelines
-          default: 0
-        error:
-          type: integer
-          title: Error
-          description: Number of pipelines with errors
-          default: 0
-        building:
-          type: integer
-          title: Building
-          description: Number of pipelines being built
-          default: 0
-      type: object
-      title: PipelinesStatusCounter
-      description: Counts of pipelines by their status.
-    EmptyFunctionConfiguration:
-      properties:
-        function_type:
-          type: 'null'
-          title: Function Type
-        function_config:
-          type: 'null'
-          title: Function Config
-      type: object
-      required:
-      - function_type
-      - function_config
-      title: EmptyFunctionConfiguration
-      description: Empty function config.
     PipelineUpdate:
       properties:
         name:
@@ -716,261 +619,16 @@ components:
       type: object
       title: PipelineUpdate
       description: Request model for updating an existing pipeline.
-    KeysConfiguration:
-      properties:
-        keys:
-          items:
-            type: string
-          type: array
-          title: Keys
-      type: object
-      required:
-      - keys
-      title: KeysConfiguration
-      description: Keys config.
-    SplitterConfiguration:
-      properties:
-        root_table_name:
-          type: string
-          title: Root Table Name
-          default: root
-        popsink_pk:
-          type: string
-          title: Popsink Pk
-        pk:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Pk
-        abbreviate_len:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Abbreviate Len
-      type: object
-      title: SplitterConfiguration
-      description: Splitter config.
-    EncryptConfiguration:
-      properties:
-        encrypt_key:
-          type: string
-          title: Encrypt Key
-        paths:
-          items:
-            type: string
-          type: array
-          title: Paths
-      type: object
-      required:
-      - encrypt_key
-      - paths
-      title: EncryptConfiguration
-      description: Encrypt config.
-    PipelineConfigAsSerializer-Output:
-      properties:
-        source_name:
-          type: string
-          title: Source Name
-          description: Name of the source connector
-          example: postgres-source
-        source_type:
-          anyOf:
-          - $ref: '#/components/schemas/ConnectorType'
-          - type: 'null'
-          description: Type of the source connector
-        source_config:
-          additionalProperties:
-            anyOf:
-            - type: string
-            - type: integer
-            - type: 'null'
-          type: object
-          title: Source Config
-          description: Configuration parameters for the source connector
-        target_name:
-          type: string
-          title: Target Name
-          description: Name of the target connector
-          example: kafka-target
-        target_type:
-          anyOf:
-          - $ref: '#/components/schemas/ConnectorType'
-          - type: 'null'
-          description: Type of the target connector
-        target_config:
-          additionalProperties:
-            anyOf:
-            - type: string
-            - type: integer
-            - type: 'null'
-          type: object
-          title: Target Config
-          description: Configuration parameters for the target connector
-        smt_name:
-          type: string
-          title: Smt Name
-          description: Name of the SMT (Simple Message Transform) applied
-        smt_config:
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/MapperFunctionConfiguration-Output'
-            - $ref: '#/components/schemas/EmptyFunctionConfiguration'
-            - $ref: '#/components/schemas/FlattenerFunctionConfiguration'
-            - $ref: '#/components/schemas/SplitterFunctionConfiguration'
-            - $ref: '#/components/schemas/StringifyListFunctionConfiguration'
-            - $ref: '#/components/schemas/StringifyFunctionConfiguration'
-            - $ref: '#/components/schemas/UnenvelopeFunctionConfiguration'
-            - $ref: '#/components/schemas/KeyFilterFunctionConfiguration'
-            - $ref: '#/components/schemas/KeyMoverFunctionConfiguration'
-            - $ref: '#/components/schemas/DictMoverFunctionConfiguration'
-            - $ref: '#/components/schemas/KeyNormalizerFunctionConfiguration'
-            - $ref: '#/components/schemas/HashFunctionConfiguration'
-            - $ref: '#/components/schemas/EncryptFunctionConfiguration'
-            - $ref: '#/components/schemas/FilteringFunctionConfiguration'
-          type: array
-          title: Smt Config
-          description: List of transformation configurations
-        draft_step:
-          type: string
-          title: Draft Step
-          description: Current draft step of the pipeline (e.g., 'config', 'review')
-      type: object
-      required:
-      - source_name
-      - source_type
-      - source_config
-      - target_name
-      - target_type
-      - target_config
-      - smt_name
-      - smt_config
-      - draft_step
-      title: PipelineConfigAsSerializer
-      description: 'Configuration structure for a pipeline.
-
-
-        Describes connectors and transformation details.'
-    KeyFilterFunctionConfiguration:
-      properties:
-        function_type:
-          type: string
-          const: keyfilter
-          title: Function Type
-        function_config:
-          $ref: '#/components/schemas/KeysConfiguration'
-      type: object
-      required:
-      - function_type
-      - function_config
-      title: KeyFilterFunctionConfiguration
-      description: Key filter config.
-    HTTPValidationError:
+    ResponseModel403:
       properties:
         detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
+          type: string
           title: Detail
       type: object
-      title: HTTPValidationError
-    MapperFunctionConfiguration-Output:
-      properties:
-        function_type:
-          type: string
-          const: mapper
-          title: Function Type
-        function_config:
-          items:
-            $ref: '#/components/schemas/MapperTableConfig'
-          type: array
-          title: Function Config
-      type: object
       required:
-      - function_type
-      - function_config
-      title: MapperFunctionConfiguration
-      description: Mapper config.
-    KeyMoverConfig:
-      properties:
-        key:
-          type: string
-          title: Key
-        key_path:
-          type: string
-          title: Key Path
-      type: object
-      required:
-      - key
-      - key_path
-      title: KeyMoverConfig
-      description: Config for KeyMover function.
-    PipelineStateList:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: Unique identifier of the pipeline
-        name:
-          type: string
-          title: Name
-          description: Name of the pipeline
-        state:
-          $ref: '#/components/schemas/PipelineState'
-          description: Current state of the pipeline
-      type: object
-      required:
-      - id
-      - name
-      - state
-      title: PipelineStateList
-      description: Lightweight model used to list pipelines.
-    MapperFunctionConfiguration-Input:
-      properties:
-        function_type:
-          type: string
-          const: mapper
-          title: Function Type
-        function_config:
-          items:
-            $ref: '#/components/schemas/MapperTableConfig'
-          type: array
-          title: Function Config
-      type: object
-      required:
-      - function_type
-      - function_config
-      title: MapperFunctionConfiguration
-      description: Mapper config.
-    SplitterFunctionConfiguration:
-      properties:
-        function_type:
-          type: string
-          const: splitter
-          title: Function Type
-        function_config:
-          $ref: '#/components/schemas/SplitterConfiguration'
-      type: object
-      required:
-      - function_type
-      - function_config
-      title: SplitterFunctionConfiguration
-      description: Splitter config.
-    KeyNormalizerFunctionConfiguration:
-      properties:
-        function_type:
-          type: string
-          const: sanitizekey
-          title: Function Type
-        function_config:
-          type: 'null'
-          title: Function Config
-      type: object
-      required:
-      - function_type
-      - function_config
-      title: KeyNormalizerFunctionConfiguration
-      description: Sanitize function config.
+      - detail
+      title: ResponseModel403
+      description: Response model for 403 Forbidden.
     PipelineCreate:
       properties:
         name:
@@ -998,6 +656,61 @@ components:
       - json_configuration
       title: PipelineCreate
       description: Request model for creating a new pipeline.
+    EncryptConfiguration:
+      properties:
+        encrypt_key:
+          type: string
+          title: Encrypt Key
+        paths:
+          items:
+            type: string
+          type: array
+          title: Paths
+      type: object
+      required:
+      - encrypt_key
+      - paths
+      title: EncryptConfiguration
+      description: Encrypt config.
+    ConnectorType:
+      type: string
+      enum:
+      - job_smt
+      - kafka_source
+      - oracle_target
+      title: ConnectorType
+      description: Define the connector type.
+    MapperFunctionConfiguration-Input:
+      properties:
+        function_type:
+          type: string
+          const: mapper
+          title: Function Type
+        function_config:
+          items:
+            $ref: '#/components/schemas/MapperTableConfig'
+          type: array
+          title: Function Config
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: MapperFunctionConfiguration
+      description: Mapper config.
+    EncryptFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: encrypt
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/EncryptConfiguration'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: EncryptFunctionConfiguration
+      description: Encrypt function config.
     Page_PipelineStateList_:
       properties:
         items:
@@ -1036,6 +749,71 @@ components:
       - page
       - size
       title: Page[PipelineStateList]
+    StringifyFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: stringifykey
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/KeysConfiguration'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: StringifyFunctionConfiguration
+      description: Stringify config.
+    KeyMoverConfig:
+      properties:
+        key:
+          type: string
+          title: Key
+        key_path:
+          type: string
+          title: Key Path
+      type: object
+      required:
+      - key
+      - key_path
+      title: KeyMoverConfig
+      description: Config for KeyMover function.
+    KeyMoverFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: keymover
+          title: Function Type
+        function_config:
+          items:
+            $ref: '#/components/schemas/KeyMoverConfig'
+          type: array
+          title: Function Config
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: KeyMoverFunctionConfiguration
+      description: Key mover config.
+    HashConfig:
+      properties:
+        hash_type:
+          type: string
+          enum:
+          - MD5
+          - SHA-256
+          - SHA-512
+          title: Hash Type
+        paths:
+          items:
+            type: string
+          type: array
+          title: Paths
+      type: object
+      required:
+      - hash_type
+      - paths
+      title: HashConfig
+      description: Hash key config.
     PipelineRead:
       properties:
         name:
@@ -1156,23 +934,6 @@ components:
 
 
         Describes connectors and transformation details.'
-    KeyMoverFunctionConfiguration:
-      properties:
-        function_type:
-          type: string
-          const: keymover
-          title: Function Type
-        function_config:
-          items:
-            $ref: '#/components/schemas/KeyMoverConfig'
-          type: array
-          title: Function Config
-      type: object
-      required:
-      - function_type
-      - function_config
-      title: KeyMoverFunctionConfiguration
-      description: Key mover config.
     FilteringConfiguration:
       properties:
         operator:
@@ -1196,19 +957,41 @@ components:
       - value
       title: FilteringConfiguration
       description: Filtering config.
-    ConnectorType:
-      type: string
-      enum:
-      - job_smt
-      - kafka_source
-      - oracle_target
-      title: ConnectorType
-      description: Define the connector type.
-    FlattenerFunctionConfiguration:
+    MapperFunctionConfiguration-Output:
       properties:
         function_type:
           type: string
-          const: flattener
+          const: mapper
+          title: Function Type
+        function_config:
+          items:
+            $ref: '#/components/schemas/MapperTableConfig'
+          type: array
+          title: Function Config
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: MapperFunctionConfiguration
+      description: Mapper config.
+    FilteringFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: filtering
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/FilteringConfiguration'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: FilteringFunctionConfiguration
+      description: Filtering function config.
+    EmptyFunctionConfiguration:
+      properties:
+        function_type:
+          type: 'null'
           title: Function Type
         function_config:
           type: 'null'
@@ -1217,40 +1000,23 @@ components:
       required:
       - function_type
       - function_config
-      title: FlattenerFunctionConfiguration
-      description: Flattener function config.
-    MapperColumnConfig:
+      title: EmptyFunctionConfiguration
+      description: Empty function config.
+    KeyNormalizerFunctionConfiguration:
       properties:
-        key:
+        function_type:
           type: string
-          title: Key
-        path:
-          type: string
-          title: Path
-          default: ''
-        static:
-          type: string
-          title: Static
-          default: ''
-        nullable:
-          type: boolean
-          title: Nullable
-          default: true
+          const: sanitizekey
+          title: Function Type
+        function_config:
+          type: 'null'
+          title: Function Config
       type: object
       required:
-      - key
-      title: MapperColumnConfig
-      description: Mapper config part.
-    PipelineState:
-      type: string
-      enum:
-      - draft
-      - building
-      - paused
-      - error
-      - live
-      title: PipelineState
-      description: Handle pipeline states.
+      - function_type
+      - function_config
+      title: KeyNormalizerFunctionConfiguration
+      description: Sanitize function config.
     PipelineList:
       properties:
         id:
@@ -1302,16 +1068,173 @@ components:
       - owner
       title: PipelineList
       description: Lightweight model used to list pipelines.
-    ResponseModel403:
+    KeyFilterFunctionConfiguration:
       properties:
-        detail:
+        function_type:
           type: string
-          title: Detail
+          const: keyfilter
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/KeysConfiguration'
       type: object
       required:
-      - detail
-      title: ResponseModel403
-      description: Response model for 403 Forbidden.
+      - function_type
+      - function_config
+      title: KeyFilterFunctionConfiguration
+      description: Key filter config.
+    MapperColumnConfig:
+      properties:
+        key:
+          type: string
+          title: Key
+        path:
+          type: string
+          title: Path
+          default: ''
+        static:
+          type: string
+          title: Static
+          default: ''
+        nullable:
+          type: boolean
+          title: Nullable
+          default: true
+      type: object
+      required:
+      - key
+      title: MapperColumnConfig
+      description: Mapper config part.
+    SplitterFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: splitter
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/SplitterConfiguration'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: SplitterFunctionConfiguration
+      description: Splitter config.
+    PipelineLogs:
+      properties:
+        uuid:
+          type: string
+          title: Uuid
+          description: UUID of the pipeline run or worker
+        status:
+          type: string
+          enum:
+          - Running
+          - NotFound
+          - Pending
+          - Succeeded
+          - Failed
+          - Unknown
+          title: Status
+          description: Status of the current pipeline run
+        count_errors:
+          type: string
+          title: Count Errors
+          description: Number of errors encountered during run
+          example: '3'
+        logs:
+          type: string
+          title: Logs
+          description: Logs produced by the pipeline worker
+      type: object
+      required:
+      - uuid
+      - status
+      - count_errors
+      - logs
+      title: PipelineLogs
+      description: Status and logs for a pipeline worker.
+    SplitterConfiguration:
+      properties:
+        root_table_name:
+          type: string
+          title: Root Table Name
+          default: root
+        popsink_pk:
+          type: string
+          title: Popsink Pk
+        pk:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Pk
+        abbreviate_len:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Abbreviate Len
+      type: object
+      title: SplitterConfiguration
+      description: Splitter config.
+    KeysConfiguration:
+      properties:
+        keys:
+          items:
+            type: string
+          type: array
+          title: Keys
+      type: object
+      required:
+      - keys
+      title: KeysConfiguration
+      description: Keys config.
+    PipelinesStatusCounter:
+      properties:
+        all:
+          type: integer
+          title: All
+          description: Total number of pipelines
+          default: 0
+        draft:
+          type: integer
+          title: Draft
+          description: Number of pipelines in draft state
+          default: 0
+        live:
+          type: integer
+          title: Live
+          description: Number of active (live) pipelines
+          default: 0
+        paused:
+          type: integer
+          title: Paused
+          description: Number of paused pipelines
+          default: 0
+        error:
+          type: integer
+          title: Error
+          description: Number of pipelines with errors
+          default: 0
+        building:
+          type: integer
+          title: Building
+          description: Number of pipelines being built
+          default: 0
+      type: object
+      title: PipelinesStatusCounter
+      description: Counts of pipelines by their status.
+    DictMoverFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: dictmover
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/KeysConfiguration'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: DictMoverFunctionConfiguration
+      description: Dict mover config.
     MapperTableConfig:
       properties:
         table_name:
@@ -1328,82 +1251,6 @@ components:
       - fields
       title: MapperTableConfig
       description: Mapper config.
-    DictMoverFunctionConfiguration:
-      properties:
-        function_type:
-          type: string
-          const: dictmover
-          title: Function Type
-        function_config:
-          $ref: '#/components/schemas/KeysConfiguration'
-      type: object
-      required:
-      - function_type
-      - function_config
-      title: DictMoverFunctionConfiguration
-      description: Dict mover config.
-    EncryptFunctionConfiguration:
-      properties:
-        function_type:
-          type: string
-          const: encrypt
-          title: Function Type
-        function_config:
-          $ref: '#/components/schemas/EncryptConfiguration'
-      type: object
-      required:
-      - function_type
-      - function_config
-      title: EncryptFunctionConfiguration
-      description: Encrypt function config.
-    StringifyFunctionConfiguration:
-      properties:
-        function_type:
-          type: string
-          const: stringifykey
-          title: Function Type
-        function_config:
-          $ref: '#/components/schemas/KeysConfiguration'
-      type: object
-      required:
-      - function_type
-      - function_config
-      title: StringifyFunctionConfiguration
-      description: Stringify config.
-    HashConfig:
-      properties:
-        hash_type:
-          type: string
-          enum:
-          - MD5
-          - SHA-256
-          - SHA-512
-          title: Hash Type
-        paths:
-          items:
-            type: string
-          type: array
-          title: Paths
-      type: object
-      required:
-      - hash_type
-      - paths
-      title: HashConfig
-      description: Hash key config.
-    UnenvelopeFunctionConfiguration:
-      properties:
-        function_type:
-          type: string
-          const: unenvelope
-          title: Function Type
-        function_config:
-          $ref: '#/components/schemas/KeyConfiguration'
-      type: object
-      required:
-      - function_type
-      - function_config
-      title: UnenvelopeFunctionConfiguration
-      description: Unenvelope config.
     Page_PipelineList_:
       properties:
         items:
@@ -1442,6 +1289,68 @@ components:
       - page
       - size
       title: Page[PipelineList]
+    StringifyListFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: stringifylist
+          title: Function Type
+        function_config:
+          type: 'null'
+          title: Function Config
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: StringifyListFunctionConfiguration
+      description: Stringify list function config.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HashFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: hash
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/HashConfig'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: HashFunctionConfiguration
+      description: Hash config.
+    UnenvelopeFunctionConfiguration:
+      properties:
+        function_type:
+          type: string
+          const: unenvelope
+          title: Function Type
+        function_config:
+          $ref: '#/components/schemas/KeyConfiguration'
+      type: object
+      required:
+      - function_type
+      - function_config
+      title: UnenvelopeFunctionConfiguration
+      description: Unenvelope config.
+    KeyConfiguration:
+      properties:
+        key:
+          type: string
+          title: Key
+      type: object
+      required:
+      - key
+      title: KeyConfiguration
+      description: Key config.
     ValidationError:
       properties:
         loc:
@@ -1463,21 +1372,105 @@ components:
       - msg
       - type
       title: ValidationError
-    KeyConfiguration:
+    PipelineState:
+      type: string
+      enum:
+      - draft
+      - building
+      - paused
+      - error
+      - live
+      title: PipelineState
+      description: Handle pipeline states.
+    PipelineConfigAsSerializer-Output:
       properties:
-        key:
+        source_name:
           type: string
-          title: Key
+          title: Source Name
+          description: Name of the source connector
+          example: postgres-source
+        source_type:
+          anyOf:
+          - $ref: '#/components/schemas/ConnectorType'
+          - type: 'null'
+          description: Type of the source connector
+        source_config:
+          additionalProperties:
+            anyOf:
+            - type: string
+            - type: integer
+            - type: 'null'
+          type: object
+          title: Source Config
+          description: Configuration parameters for the source connector
+        target_name:
+          type: string
+          title: Target Name
+          description: Name of the target connector
+          example: kafka-target
+        target_type:
+          anyOf:
+          - $ref: '#/components/schemas/ConnectorType'
+          - type: 'null'
+          description: Type of the target connector
+        target_config:
+          additionalProperties:
+            anyOf:
+            - type: string
+            - type: integer
+            - type: 'null'
+          type: object
+          title: Target Config
+          description: Configuration parameters for the target connector
+        smt_name:
+          type: string
+          title: Smt Name
+          description: Name of the SMT (Simple Message Transform) applied
+        smt_config:
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/MapperFunctionConfiguration-Output'
+            - $ref: '#/components/schemas/EmptyFunctionConfiguration'
+            - $ref: '#/components/schemas/FlattenerFunctionConfiguration'
+            - $ref: '#/components/schemas/SplitterFunctionConfiguration'
+            - $ref: '#/components/schemas/StringifyListFunctionConfiguration'
+            - $ref: '#/components/schemas/StringifyFunctionConfiguration'
+            - $ref: '#/components/schemas/UnenvelopeFunctionConfiguration'
+            - $ref: '#/components/schemas/KeyFilterFunctionConfiguration'
+            - $ref: '#/components/schemas/KeyMoverFunctionConfiguration'
+            - $ref: '#/components/schemas/DictMoverFunctionConfiguration'
+            - $ref: '#/components/schemas/KeyNormalizerFunctionConfiguration'
+            - $ref: '#/components/schemas/HashFunctionConfiguration'
+            - $ref: '#/components/schemas/EncryptFunctionConfiguration'
+            - $ref: '#/components/schemas/FilteringFunctionConfiguration'
+          type: array
+          title: Smt Config
+          description: List of transformation configurations
+        draft_step:
+          type: string
+          title: Draft Step
+          description: Current draft step of the pipeline (e.g., 'config', 'review')
       type: object
       required:
-      - key
-      title: KeyConfiguration
-      description: Key config.
-    StringifyListFunctionConfiguration:
+      - source_name
+      - source_type
+      - source_config
+      - target_name
+      - target_type
+      - target_config
+      - smt_name
+      - smt_config
+      - draft_step
+      title: PipelineConfigAsSerializer
+      description: 'Configuration structure for a pipeline.
+
+
+        Describes connectors and transformation details.'
+    FlattenerFunctionConfiguration:
       properties:
         function_type:
           type: string
-          const: stringifylist
+          const: flattener
           title: Function Type
         function_config:
           type: 'null'
@@ -1486,22 +1479,29 @@ components:
       required:
       - function_type
       - function_config
-      title: StringifyListFunctionConfiguration
-      description: Stringify list function config.
-    FilteringFunctionConfiguration:
+      title: FlattenerFunctionConfiguration
+      description: Flattener function config.
+    PipelineStateList:
       properties:
-        function_type:
+        id:
           type: string
-          const: filtering
-          title: Function Type
-        function_config:
-          $ref: '#/components/schemas/FilteringConfiguration'
+          format: uuid
+          title: Id
+          description: Unique identifier of the pipeline
+        name:
+          type: string
+          title: Name
+          description: Name of the pipeline
+        state:
+          $ref: '#/components/schemas/PipelineState'
+          description: Current state of the pipeline
       type: object
       required:
-      - function_type
-      - function_config
-      title: FilteringFunctionConfiguration
-      description: Filtering function config.
+      - id
+      - name
+      - state
+      title: PipelineStateList
+      description: Lightweight model used to list pipelines.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

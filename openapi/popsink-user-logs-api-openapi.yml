@@ -102,23 +102,22 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ActionType:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    UserType:
       type: string
       enum:
-      - login
-      - logout
-      - change_password
-      - pipeline_created
-      - pipeline_updated
-      - pipeline_deleted
-      - pipeline_started
-      - environment_created
-      - environment_updated
-      - team_created
-      - team_updated
-      - team_deleted
-      title: ActionType
-      description: Action types.
+      - real_user
+      - system
+      title: UserType
+      description: User types.
     Page_UserLogList_:
       properties:
         items:
@@ -208,15 +207,6 @@ components:
       - action
       title: UserLogList
       description: User log list serializer.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -238,13 +228,23 @@ components:
       - msg
       - type
       title: ValidationError
-    UserType:
+    ActionType:
       type: string
       enum:
-      - real_user
-      - system
-      title: UserType
-      description: User types.
+      - login
+      - logout
+      - change_password
+      - pipeline_created
+      - pipeline_updated
+      - pipeline_deleted
+      - pipeline_started
+      - environment_created
+      - environment_updated
+      - team_created
+      - team_updated
+      - team_deleted
+      title: ActionType
+      description: Action types.
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2
