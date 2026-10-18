@@ -99,9 +99,10 @@ apis:
   humanURL: https://docs.popsink.com/public/public-api.json
   baseURL: https://app.popsink.com
   tags:
-  - Brokers
+  - Brokerage
   tags_raw:
   - brokers
+  - Brokers
   properties:
   - type: OpenAPI
     url: openapi/popsink-brokers-api-openapi.yml
