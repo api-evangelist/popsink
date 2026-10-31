@@ -64,6 +64,161 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Popsink is a company surfaced as a portfolio company of seedcamp and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Popsink is a real-time data replication and change data capture (CDC) platform that continuously moves data out of mission-critical and legacy systems into cloud data platforms with low latency and minimal production impact. It offers a broad catalog of source and target connectors (Postgres, MySQL, Oracle, MSSQL, MongoDB, Kafka, IBM Z / IBMi (AS/400), SAP, Salesforce, HubSpot, Snowflake, BigQuery, Databricks, ClickHouse, Iceberg, and more) and flexible deployment options spanning SaaS, bring-your-own-cloud, self-hosted Kubernetes, single-VM, on-premises, and air-gapped installs. Popsink exposes a public REST API and an on-prem control-plane REST API (OAuth2 password / JWT bearer, with SAML SSO) for managing pipelines, connectors, environments, teams, schemas, and transforms. Backed by Seedcamp.
 
-Backed by: seedcamp — http://popsink.com
+**Areas:** Company · Change Data Capture · Data Replication · Data Integration · Real-Time Data · Streaming · ETL · Database · Data Platform
+
+## Popsink on APIs.io
+
+Everything profiled for Popsink is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/popsink/](https://apis.io/providers/popsink/)** — or go straight to one of the APIs or properties below.
+
+### APIs (21)
+
+- [Popsink Admin API](https://apis.io/apis/popsink/popsink-admin-api/) — The admin API from Popsink — 2 operation(s) for admin.
+- [Popsink Auth API](https://apis.io/apis/popsink/popsink-auth-api/) — The auth API from Popsink — 8 operation(s) for auth.
+- [Popsink Brokers API](https://apis.io/apis/popsink/popsink-brokers-api/) — The brokers API from Popsink — 1 operation(s) for brokers.
+- [Popsink connector types API](https://apis.io/apis/popsink/popsink-connector-types-api/) — The connector types API from Popsink — 3 operation(s) for connector types.
+- [Popsink Connectors API](https://apis.io/apis/popsink/popsink-connectors-api/) — The connectors API from Popsink — 2 operation(s) for connectors.
+- [Popsink Env Member API](https://apis.io/apis/popsink/popsink-env-member-api/) — The env_member API from Popsink — 2 operation(s) for env_member.
+- [Popsink Env Request API](https://apis.io/apis/popsink/popsink-env-request-api/) — The env_request API from Popsink — 3 operation(s) for env_request.
+- [Popsink Envs API](https://apis.io/apis/popsink/popsink-envs-api/) — The envs API from Popsink — 2 operation(s) for envs.
+- [Popsink Jobs Smt API](https://apis.io/apis/popsink/popsink-jobs-smt-api/) — The jobs-smt API from Popsink — 13 operation(s) for jobs-smt.
+- [Popsink Organizations API](https://apis.io/apis/popsink/popsink-organizations-api/) — The organizations API from Popsink — 2 operation(s) for organizations.
+- [Popsink Pipelines API](https://apis.io/apis/popsink/popsink-pipelines-api/) — The pipelines API from Popsink — 9 operation(s) for pipelines.
+- [Popsink Public API](https://apis.io/apis/popsink/popsink-popsink-public-api-api/) — The Popsink Public API API from Popsink — 1 operation(s) for popsink public api.
+- [Popsink Probes API](https://apis.io/apis/popsink/popsink-probes-api/) — The probes API from Popsink — 2 operation(s) for probes.
+- [Popsink Saml API](https://apis.io/apis/popsink/popsink-saml-api/) — The saml API from Popsink — 4 operation(s) for saml.
+- [Popsink Schemas API](https://apis.io/apis/popsink/popsink-schemas-api/) — The schemas API from Popsink — 1 operation(s) for schemas.
+- [Popsink Team Member API](https://apis.io/apis/popsink/popsink-team-member-api/) — The team_member API from Popsink — 3 operation(s) for team_member.
+- [Popsink Team Request API](https://apis.io/apis/popsink/popsink-team-request-api/) — The team_request API from Popsink — 3 operation(s) for team_request.
+- [Popsink Teams API](https://apis.io/apis/popsink/popsink-teams-api/) — The teams API from Popsink — 2 operation(s) for teams.
+- [Popsink User Logs API](https://apis.io/apis/popsink/popsink-user-logs-api/) — The user-logs API from Popsink — 1 operation(s) for user-logs.
+- [Popsink Users API](https://apis.io/apis/popsink/popsink-users-api/) — The users API from Popsink — 7 operation(s) for users.
+- [Popsink Health Checks API](https://apis.io/apis/popsink/popsink-health-checks-api/) — The Health Checks API from Popsink — 4 operation(s) for health checks.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [popsink](https://apis.io/servers/popsink/popsink/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Popsink Agentic Access](https://apis.io/agentic-access/popsink/popsink-agentic-access/)
+
+#### Collections (21)
+
+Postman and Open Collection request collections.
+
+- [Fast admin API](https://apis.io/collections/popsink/open-popsink-admin-api/)
+- [Fast admin auth API](https://apis.io/collections/popsink/open-popsink-auth-api/)
+- [Fast admin brokers API](https://apis.io/collections/popsink/open-popsink-brokers-api/)
+- [Fast admin connector types API](https://apis.io/collections/popsink/open-popsink-connector-types-api/)
+- [Fast admin connectors API](https://apis.io/collections/popsink/open-popsink-connectors-api/)
+- [Fast admin env_member API](https://apis.io/collections/popsink/open-popsink-env-member-api/)
+- [Fast admin env_request API](https://apis.io/collections/popsink/open-popsink-env-request-api/)
+- [Fast admin envs API](https://apis.io/collections/popsink/open-popsink-envs-api/)
+- [Fast admin healthchecks API](https://apis.io/collections/popsink/open-popsink-healthchecks-api/)
+- [Fast admin jobs-smt API](https://apis.io/collections/popsink/open-popsink-jobs-smt-api/)
+- [Fast admin organizations API](https://apis.io/collections/popsink/open-popsink-organizations-api/)
+- [Fast admin pipelines API](https://apis.io/collections/popsink/open-popsink-pipelines-api/)
+- [Fast admin Popsink Public API API](https://apis.io/collections/popsink/open-popsink-popsink-public-api-api/)
+- [Fast admin probes API](https://apis.io/collections/popsink/open-popsink-probes-api/)
+- [Fast admin saml API](https://apis.io/collections/popsink/open-popsink-saml-api/)
+- [Fast admin schemas API](https://apis.io/collections/popsink/open-popsink-schemas-api/)
+- [Fast admin team_member API](https://apis.io/collections/popsink/open-popsink-team-member-api/)
+- [Fast admin team_request API](https://apis.io/collections/popsink/open-popsink-team-request-api/)
+- [Fast admin teams API](https://apis.io/collections/popsink/open-popsink-teams-api/)
+- [Fast admin user-logs API](https://apis.io/collections/popsink/open-popsink-user-logs-api/)
+- [Fast admin users API](https://apis.io/collections/popsink/open-popsink-users-api/)
+
+#### Overlays (2)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Popsink Onprem Api Overlay](https://apis.io/overlays/popsink/popsink-onprem-api-overlay/)
+- [Popsink Public Api Overlay](https://apis.io/overlays/popsink/popsink-public-api-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Popsink Authentication](https://apis.io/security/popsink/popsink-authentication/)
+- [Popsink Domain Security](https://apis.io/security/popsink/popsink-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://popsink.com)
+- [Documentation](https://docs.popsink.com)
+- [Getting started](https://docs.popsink.com/quickstart)
+- [API reference](https://docs.popsink.com/public/public-api.json)
+- [Pricing](https://popsink.com/pricing)
+- [Sign up](https://app.popsink.com)
+- [Support](https://popsink.com/contact)
+- [Blog](https://popsink.com/blog)
+- [Terms of service](https://popsink.com/terms-of-use)
+- [Privacy policy](https://popsink.com/privacy-policy)
+- [Status](https://status.popsink.com)
+
+## API Evangelist rating
+
+**Kin Score 41.2** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 43.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 58.9 |
+| Access clarity | 31.6 |
+
+**Agent readiness 27.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | mostly |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/popsink/](https://apis.io/providers/popsink/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Popsink: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/popsink/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
